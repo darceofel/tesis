@@ -1,0 +1,229 @@
+\section{Prevalencia de \texorpdfstring{$\mathbf{\mathcal{ND}[0,1]}$}{ND[0,1]}}
+
+En esta última sección nos dedicaremos a lograr un solo objetivo: demostrar la prevalencia de $\mathcal{ND}[0,1]$ en $\mathcal{C}[0,1]$. Como se expuso en la sección anterior, existen ejemplos de espacios para los que no es tan difícil encontrar una sonda. Sin embargo, para $\mathcal{ND}[0,1]$ no es el caso, viéndonos así obligados a introducir más notación y algunos resultados bastante técnicos.
+
+
+Complicando aún más nuestro objetivo, en 1936 Stephan Mazurkiewicz probó que $\mathcal{ND}[0,1]$ no es un subconjunto de Borel de $C[0,1]$ (ver \cite{Mauldin_Non_Borel}). Por esta razón, trabajaremos con otro conjunto un poco más fácil de manejar:
+\begin{definition}
+    Sea $M>0$. Decimos que una función $f\in C[a,b]$ es \textit{$M$-Lipschitz en $x\in[a,b]$} si para todo $y\in[a,b]$ se cumple que:
+    \[|f(x)-f(y)|\leq M|x-y|.\]
+    Por otro lado, definimos $\mathcal{NL}_M[a,b]$ como el conjunto de todas las funciones nunca $M$-Lipschitz en $[a,b]$, es decir,
+    \[\mathcal{NL}_M[a,b] = \{f\in C[a,b]:\forall x\in[a,b],\; f \text{ no es $M$-Lpischitz en } x\}.\]
+    Finalmente, definimos
+    \[\mathcal{NL}[a,b] = \bigcap_{n\in\mathbb{N}}\mathcal{NL}_n[a,b].\]
+\end{definition}
+\begin{observation*}
+    $\mathcal{NL}[a,b]$ es el conjunto de las funciones nunca-$M$-Lipschitz en $[a,b]$, para toda constante $M>0$.  
+\end{observation*}
+
+Encontremos algunas propiedades de estos espacios:
+\begin{proposition}
+    Si $M>0$, entonces
+    \begin{enumerate}[label = (\arabic*{)}]
+        \item $\mathcal{NL}_M[a,b]$ es abierto en $C[a,b]$,
+        \item $\mathcal{NL}[a,b]$ es un conjunto boreliano, y
+        \item $\mathcal{NL}[a,b] \subseteq \mathcal{ND}[a,b]$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}\mbox{}\\*
+    1) Llamemos \[F = C[a,b]\setminus \mathcal{NL}_M[a,b]\] y tomemos $f \in \cerradura (F)$. Entonces existe $\{f_n\}_{n\in\mathbb{N}}\subseteq F$ tal que $f_n\xrightarrow{u} f$. Como $f_n\notin \mathcal{NL}_M[a,b]$, entonces para cada $n\in\mathbb{N}$ existe $x_n\in [a,b]$ tal que $f_n$ es $M$-Lipschitz en $x_n$. Es decir, para toda $y\in[a,b]$, 
+    \[|f_n(x_n)-f_n (y)|\leq M|x_n-y|.\]
+    Ahora, como $\{x_n\}_{n\in\mathbb{N}}\subseteq [a,b]$, entonces, por el teorema de Bolzano-Weierstrass, tiene una subsucesión convergente, digamos $x_{n_k}\to x$. Observemos que, para cualesquiera $k\in \mathbb{N}$ y $y\in[a,b]$,
+    \begin{align*}
+        |f(x)-f(y)| \leq& \, |f(x)-f(x_{n_k})| + |f(x_{n_k})-f_{n_k}(x_{n_k})| \\
+        &\quad + |f_{n_k}(x_{n_k})-f_{n_k}(y)|+ |f_{n_k}(y)-f(y)|\\[6pt]
+        \leq&\, |f(x)-f(x_{n_k})| + 2||f-f_{n_k}|| + M|x_{n_k} - x| + M|x - y|.
+    \end{align*}
+    Por tanto, tomando límites, tenemos que 
+    \[|f(x)-f(y)| \leq M|x-y|\]
+    para todo $y\in[a,b]$. Es decir, $f$ es $M$-Lipschitz en $x\in[a,b]$, de donde $f\in F$.\\\\
+    2) Por el inciso anterior, cada $\mathcal{NL}_n[a,b]$ es abierto y, por lo tanto, $\mathcal{NL}[a,b]$ es un conjunto boreliano.\\\\
+    3) Sean $f\in \mathcal{NL}[a,b]$ y $x\in[a,b]$. Veamos que $f$ no es derivable en $x$. Como $f$ es continua en $[a,b]$, existe $L>0$ tal que, para toda $y\in[a,b]$ 
+    \[|f(x)-f(y)|\leq L.\]
+    Por otro lado, como $f\in \mathcal{NL}[a,b]$, entonces, para cada $n\in\mathbb{N}$, existe $y_n\in[a,b]$ tal que
+    \[n|x-y_n|<|f(x)-f(y_n)|\leq L.\]
+    Por lo tanto $y_n \to x$, de donde $f$ no es derivable en $x$, es decir, $f\in \mathcal{ND}[a,b]$. 
+\end{proof}
+
+Considerando el tercer inciso de la proposición anterior, una pregunta que surge naturalmente es la siguiente:
+\begin{center}
+    ¿Existen funciones continuas y no derivables que sean\\Lipschitz en algún punto de su dominio?
+\end{center}
+O, más aún,
+\begin{center}
+    ¿Existen funciones Lipschitz continuas que no sean derivables?
+\end{center}
+Gracias al teorema de Rademacher (ver \cite{rademacher}) sabemos que la respuesta es afirmativa únicamente en el sentido local. En el caso undimensional, este teorema se enuncia de la siguiente forma:
+\begin{theorem}
+    Si $U\subseteq\mathbb{R}$ es abierto y $f:U\to\mathbb{R}$ es Lipschitz continua, entonces es derivable en casi todo punto de $U$.
+\end{theorem}
+Ahora bien, un ejemplo de una función $T\in\mathcal{ND}[0,1]$ que es Lipschitz en algunos puntos es la siguiente (ver \cite{Takagi}):
+\begin{theorem}
+    La función $T:[0,1]\to\mathbb{R}$ de Waerden-Takagi, definida como 
+    \[T(x) = \sum_{n = 0}^\infty \frac{\text{dist}(2^nx,\mathbb{Z})}{2^n},\]
+    es continua, nunca derivable, y Lipschitz en algunos puntos, es decir,
+    \[T\in\mathcal{ND}[0,1]\setminus\mathcal{NL}[0,1].\]
+\end{theorem}
+
+
+%%%%%%%%% Comentando ejemplo de construcción (reemplazar por la función de Takagi)
+\iffalse
+La respuesta es afirmativa en el caso local, es decir, existen funciones continuas y no derivables que son Lipschitz en algunos puntos. Sin embargo, no pueden existir funciones continuas no derivables que sean Lipschitz en todo su dominio, pues el conjunto de los puntos de no-derivabilidad de cualquier función Lipschitz tiene medida cero. La prueba de este hecho se sale del enfoque del capítulo, pero se puede consultar en \cite{rademacher}. 
+\begin{example}
+    Tomemos una función $g:[0,1]\to\mathbb{R}$ $M$-Lipschitz en $0$, para alguna constante $M>0$, y tal que, o bien no es derivable en $0$, o su derivada en $0$ no es nula. Sin pérdida de generalidad, supongamos que
+    \[|g(x)-g(0)|<Mx,\]
+    para todo $x\in(0,1]$. Además, tomemos $\{a_n:n\in\mathbb{N}\}$ alguna sucesión estrictamente decreciente tal que $a_1 = 1$ y $a_n\to 0$, y definamos
+    \[\varepsilon_n = \min\left\{\frac{Ma_k - |g(a_k)-g(0)|}{2}\,: k\in\{n, n+1\}\right\}>0.\]
+    Ahora definamos $\{b_n:n\in\mathbb{N}\}\subseteq\mathbb{R}^2$ como sigue:
+     \[b_n = \begin{cases}
+         (a_n,\,g(a_n)),\quad&\text{si $n$ es impar},\\
+         (a_n,\,g(0)),\quad&\text{si $n$ es par.}
+     \end{cases}\]
+     Con esto, llamemos $P_n$ al segmento que une a los puntos $b_n$ y $b_{n+1}$. Nuestra sucesión de segmentos se podría ver algo así:
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=9cm]{Cap3/NL_example.png}
+        \caption{Sucesión de los segmentos $P_n$.}
+        \label{fig:sucesion_ejemplo}
+    \end{figure}
+    \noindent Sea $g_n:[a_{n+1}, a_n]\to\mathbb{R}$ la recta tal que $G(g_n) = P_n$. Usando el \cref{thm:implica_densidad_lynch} podemos construir una sucesión de funciones continuas y no derivables en cada intervalo $[a_{n+1}, a_n]$, digamos $\{f_n\in\mathcal{ND}[a_{n+1}, a_n]\,:\,n\in\mathbb{N}\}$,
+     tal que, para cada $n\in\mathbb{N}$, 
+     \[||f_n-g_n||<\varepsilon_n.\]
+     Más aún, usando ese mismo teorema podemos demostrar que, en realidad, se puede exigir que cada $f_n$ coincida con $g_n$ en los extremos de su dominio, es decir,
+     \[g_n(a_n) =f_n(a_n)\quad \text{y}\quad g_n(a_{n+1}) = f_n (a_{n+1}).\]
+     Teniendo eso, y notando que 
+     \[\bigcup_{n\in\mathbb{N}} [a_{n+1}, a_n] = (0,1],\]
+     podemos definir $f:(0,1]\to\mathbb{R}$ como 
+     $f(x) = f_n(x)$, donde $n\in\mathbb{N}$ es tal que $x\in [a_{n+1}, a_n]$. De este modo, siguiendo un argumento análogo al que dimos en el \cref{theorem:ND_denso}, podemos ver que $f\in\mathcal{ND}(0,1]$. \\[8pt]
+     Ahora veamos que $f$ es $M$-Lipschitz en $0$. Para esto, primero notemos que el conjunto
+     \[\{(x,y)\in\mathbb{R}^2\,:\,0\leq x\leq 1, \;|y-g(0)|<Mx\}\]
+     es convexo, y por tanto, como cada $g_n$ es una recta mayor o menor igual que $g(0)$, $|g_n(x)-g(0)|+\varepsilon_n<Mx$
+     para todo $x\in[a_{n+1},\,a_n]$. Así, 
+     \[|f_n(x)-g(0)|\leq |g_n(x) -g(0)| + \varepsilon_n<Mx,\] para todo $x\in[a_{n+1},a_n]$.
+     Por tanto, definiendo $f(0) = 0$, podemos extender continuamente a $f$ a todo el intervalo $[0,1]$. Finalmente, como $f(a_{2n-1}) = g(a_{2n-1})$ y $f(a_{2n}) = g(0)$ para todo $n\in\mathbb{N}$, y $g'(0) \neq 0$, entonces $f$ no es derivable en $0$. En síntesis, $f\in\mathcal{ND}[0,1]\,\setminus\,\mathcal{NL}[0,1]$.
+\end{example}
+\fi
+%%%%%%%% Termina comentario
+
+Regresando al objetivo de este capítulo, consideremos los siguientes enunciados que, siendo de carácter más técnico, nos ayudarán a demostrar la existencia de una sonda 2-dimensional para $\mathcal{NL }[0,1]$.
+
+\begin{lemma}
+    Sean $m\in \mathbb{N}$ e $I\subseteq [0,1]$ un intervalo cerrado de longitud $2^{-m}$. Entonces, para cualesquiera $f:I\to \mathbb{R}$ continua, $\theta\in[0,2\pi)$, y $j\in\mathbb{N}$,
+    \[\sup f[I] - \inf f[I]\geq 2^m\pi\int_{I}f(x)\cos (2^{m+j}\pi x + \theta)\,\text{d}x.\]
+\end{lemma}
+\begin{proof}
+    Sean $m\in \mathbb{N}$, $\theta\in[0,2\pi)$ e $I\subseteq [0,1]$ un intervalo cerrado de longitud $2^{-m}$.  Observemos que, para cualquier $j\in\mathbb{N}$,
+    \[\int_{I}\cos (2^{m+j}\pi x + \theta)\,\text{d}x = 0.\]
+    Por tanto, sumar constantes a $f$ no afecta la desigualdad, de donde podemos suponer, sin pérdida de generalidad, que \[\sup f[I] = - \inf f[I].\] 
+    Llamemos $K = \sup f[I]$. Así, si $I = [a, a+2^{-m}]$,
+    \begin{align*}
+        2^m\pi\int_{I}f(x)\cos (2^{m+j}\pi x + \theta)\,\text{d}x &\leq 2^mK\pi\int_{I}|\cos (2^{m+j}\pi x + \theta)|\,\text{d}x\\[6pt]
+        & = 2^mK\pi\int_{a}^{a + 2^{-m}}|\cos (2^{m+j}\pi x + \theta)|\,\text{d}x\\[6pt]
+        & = 2^{-j}K\int_{0}^{2^j\pi}|\cos (u)|\,\text{d}u\\[8pt]
+        &= 2K.
+    \end{align*}
+    Y esto demuestra la desigualdad.
+\end{proof}
+
+\begin{lemma}\label{lem:tecnico_prev_ND}
+    Si $g,h:[0,1]\to\mathbb{R}$ están dadas por
+    \[g(x) = \sum_{k = 1}^\infty\frac{1}{k^2}\cos(2^k\pi x)\quad\text{y}\quad
+    h(x) = \sum_{k = 1}^\infty\frac{1}{k^2}\sin(2^k\pi x), \]
+    entonces son continuas y, además, existe $c>0$ tal que, para todo intervalo cerrado $I\subset[0,1]$ de longitud $\varepsilon \leq 1/2$, y para cualesquiera $\alpha, \beta\in\mathbb{R}$ se cumple que:
+    \[\sup_{x\in I}(\alpha g(x) + \beta h(x)) - \inf_{x\in I}(\alpha g(x) + \beta h(x))\geq \frac{c\sqrt{\alpha^2 + \beta^2}}{\log^2(\varepsilon)}.\]
+\end{lemma}
+\begin{proof}
+    Observemos que, por la prueba M de Weierstrass (\cref{thm:M_Weier}), $g$ y $h$ son continuas. Sean  $\alpha, \beta\in\mathbb{R}$, $r = \sqrt{\alpha^2 + \beta^2}$, y $f = \alpha g + \beta h$. Si $r = 0$, entonces la desigualdad se cumple. Supongamos que $r> 0$. Existe $\theta \in [0,2\pi]$ tal que
+    \[\cos(\theta) = \alpha / r, \;\text{y} \; \sin(\beta) = \beta / r.\]
+    Entonces
+    \[f(x) = \sum_{k = 1}^\infty\frac{1}{k^2}\left(\alpha\cos(2^k\pi x) + \beta\sin(2^k\pi x)\right) = r\sum_{k = 1}^\infty\frac{1}{k^2}\cos(2^k\pi x + \theta).\]
+    Sea $I\subset[0,1]$ un intervalo cerrado de longitud $\varepsilon\leq 1/2$. Tomemos $m\in \mathbb{N}$ tal que $2^{-m}<\varepsilon\leq 2^{1-m}$, y $J\subseteq I$ un intervalo cerrado de longitud $2^{-m}$. Entonces, por el lema anterior, para cualquier $j\in\mathbb{N}$
+    \[\sup f[I] - \inf f[I]\geq\sup f[J] - \inf f[J]\geq 2^m\pi\int_{J}f(x)\cos (2^{m+j}\pi x + \theta)\,\text{d}x.\]
+    Por el teorema de la convergencia dominada de Lebesgue, 
+    \begin{align*}
+        \int_{J}f(x)\cos (2^{m+j}\pi x + \theta)\,\text{d}x &= r\int_{J}\sum_{k = 1}^\infty\frac{1}{k^2}\cos(2^k\pi x + \theta)\cos (2^{m+j}\pi x + \theta)\,\text{d}x\\
+        &= r\sum_{k = 1}^\infty\frac{1}{k^2}\int_{J}\cos(2^k\pi x + \theta)\cos (2^{m+j}\pi x + \theta)\,\text{d}x.
+    \end{align*}
+    Observemos que \[\cos(2^k\pi x + \theta)\cos (2^{m+j}\pi x + \theta) =\frac{\cos((2^{m+j}-2^k)\pi x) + \cos((2^{m+j}+2^k)\pi x + 2
+    \theta)}{2}.\]
+    Por lo tanto, tenemos que
+    \begin{align*}
+        \sup f[I]& - \inf f[I]\geq \sum_{k = 1}^\infty\frac{2^m\pi r}{k^2}\int_{J}\frac{\cos((2^{m+j}-2^k)\pi x) + \cos((2^{m+j}+2^k)\pi x + 2
+    \theta)}{2}\,\text{d}x.
+    \end{align*}
+    Por otro lado, observemos que para todo $k>m$ (con $k\neq m+j$, en el caso del signo negativo), y para cualquier $\varphi\in\mathbb{R}$
+    \[\int_{J}\cos((2^{m+j}+ 2^k)\pi x + \varphi)\,\text{d}x = \int_{J}\cos((2^{m+j}- 2^k)\pi x + \varphi)\,\text{d}x = 0.\]
+    Así, 
+    \begin{align*}\tag{$*$}\label{eq:dif_supremos}
+        \sup f[I] - \inf f[I]&\geq \\
+        \frac{\pi r}{2(m+j)^2} +& \sum_{k = 1}^{m}\frac{2^m\pi r}{k^2}\int_{J}\frac{\cos((2^{m+j}-2^k)\pi x) + \cos((2^{m+j}+2^k)\pi x + 2\theta)}{2}\,\text{d}x.
+    \end{align*}
+    Observemos que, para $a,b\in \mathbb{R}$
+    \[|\sin(a+b)-\sin(a)| = 2\left |\sin\left(\frac{b}{2}\right)\cos\left(a+\frac{b}{2}\right)\right |\leq |b|.\]
+    Ahora, para $k\leq m$, tomemos $\varphi \in \mathbb{R}$, $w \in\{2^{k}, -2^{k}\}$, y supongamos que $J = [y, y+2^{-m}]$. Entonces, usando esta última observación,
+    \begin{align*}
+        \int_{J}\cos&((2^{m+j}+w)\pi x + \varphi)\,\text{d}x\\
+        & = \frac{\sin((2^{m+j}+w)(y+2^{-m})\pi+\varphi)-\sin((2^{m+j}+w)y\pi+\varphi)}{(2^{m+j}+w)\pi}\\
+        & = \frac{\sin((2^{m+j}+w)y\pi+\varphi + 2^{-m}\pi w)-\sin((2^{m+j}+w)y\pi+\varphi)}{(2^{m+j}+w)\pi} \\
+        & \geq -\frac{|w|}{2^{m}(2^{m+j}+w)}.
+    \end{align*}
+    Con esto, de \eqref{eq:dif_supremos} se sigue que
+    \begin{align*}
+        \sup f[I] - \inf f[I]&\geq \frac{\pi r}{2(m+j)^2} - \sum_{k = 1}^{m}\frac{\pi r}{2k^2}\left(\frac{2^k}{2^{m+j}-2^k} + \frac{2^k}{2^{m+j}+2^k}\right)\\
+        %%&= \frac{\pi r}{2(m+j)^2} - \frac{\pi r}{2^{m+j}}\sum_{k = 1}^{m} \frac{2^{k-1}}{k^2}\left(\frac{1}{1-2^{k-m-j}} + \frac{1}{1+2^{k-m-j}}\right)\\
+        &= \frac{\pi r}{2(m+j)^2} - \frac{\pi r}{2^{m+j}}\sum_{k = 1}^{m}\frac{2^k}{k^2(1-2^{2k-2m-2j})}\\\tag{$**$}\label{eq:dif_supremos_2}
+        &\geq \frac{\pi r}{2(m+j)^2} - \frac{\pi r}{2^m(2^j-1)}\sum_{k = 1}^{m}\frac{2^k}{k^2}.
+    \end{align*}
+    \textbf{Afirmación:}
+    \[\sum_{k = 1}^{n}\frac{2^k}{k^2} \leq 5\frac{2^n}{n^2}.\]
+    Haciendo las cuentas, podemos verificar que se cumple para $n=1,2,3,4$. Supongamos que se cumple para algún $n\geq 5$. Entonces
+    \[\sum_{k = 1}^{n+1}\frac{2^k}{k^2} \leq 5\frac{2^n}{n^2} + \frac{2^{n+1}}{(n+1)^2} = \left(\frac{5}{2}\left(1+\frac{1}{n}\right)^2 + 1\right)\frac{2^{n+1}}{(n+1)^2} \leq 5\frac{2^{n+1}}{(n+1)^2},\]
+    y por tanto se cumple para todo $n\in\mathbb{N}$. Usando esto en \eqref{eq:dif_supremos_2}, tenemos que 
+    \[\sup f[I] - \inf f[I] \geq \frac{\pi r}{2(m+j)^2} - \frac{5\pi r}{m^2(2^j-1)}.\]
+    Como $2^{-m}<\varepsilon \leq 1/2$, entonces $m\geq 2$. Tomando $j = 10$, tenemos que
+    \[\sup f[I] - \inf f[I] \geq \frac{\pi r}{2(6m)^2} - \frac{\pi r}{200m^2} = \frac{2\pi r }{225m^2} \geq \frac{\pi r}{450(m-1)^2}\geq \frac{\log^2 (2)\pi r}{450\log^2 (\varepsilon)}.\]
+    Llamando $c =\log^2 (2)\pi/450 $, esto demuestra el lema.
+\end{proof}
+
+\begin{theorem}
+    Existen $g,h\in C[0,1]$ tales que, para toda función $f\in C[0,1]$,
+    \[S_f = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \notin \mathcal{NL}[0,1]\}\]
+    tiene medida de Lebesgue cero.
+\end{theorem}
+\begin{proof}
+    Tomemos $g,h\in C[0,1]$ como en el lema anterior, y $f\in C[0,1]$. Observemos que
+    \[S_f = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \text{ es Lipschitz en algún punto } x\in[0,1]\}.\]
+    Para cada $M>0$, sea
+    \[S_{f,\, M} = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \text{ es $M$-Lipschitz en algún punto } x\in[0,1]\}.\]
+    Así,
+    \[S_f = \bigcup_{n\in\mathbb{N}} S_{f,\, n}.\]
+    Sea $\lambda$ la medida de Lebesgue en $\mathbb{R}^2$.\\\\
+    \textbf{Afirmación:} $\lambda(S_{f,\,n}) = 0$ para todo $n\in\mathbb{N}$.\\\\
+    Sea $n\in\mathbb{N}$. Para cada $m\in\mathbb{N}$, con $m\geq 2$, sea $\varepsilon_{m} = 1/m$. Tomemos $m\geq 2$, y cubramos a $[0,1]$ con intervalos cerrados de longitud $\varepsilon_{m}$. Llamemos $I_1, \dots, I_m$ a cada uno de estos intervalos, y consideremos 
+    \[J_k = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \text{ es $n$-Lipschitz en algún punto } x\in I_k\}.\]
+    Así, $S_{f,\,n} = \bigcup_{k = 1}^m J_k$.\\\\
+    Ahora, tomemos $(a_1,\,b_1),\,(a_2,\,b_2)\in J_k$. Veamos qué tan grande puede llegar a ser la distancia entre estos dos puntos. Llamemos, para $i = 1,2$, 
+    \[f_i = a_i g + b_i h.\]
+    Supongamos que $f_1$ y $f_2$ son $n$-Lipschitz en $x_1$, y $x_2$, respectivamente. Así,
+    \begin{align*}
+        \sup_{x\in I_k}|f_1(x)- f_2(x) - (f_1(x_1)-f_2(x_2))|&\leq \sup_{x\in I_k}|f_1(x)-f_1(x_1)| + \sup_{x\in I_k} |f_2(x)-f_1(x_2)|\\ 
+        &\leq 2n\varepsilon_m,
+    \end{align*}
+    de donde
+    \[ \sup_{x\in I_k}(f_1(x)- f_2(x)) - \inf_{x\in I_k}(f_1(x)- f_2(x))\leq 4n\varepsilon_m.\]
+    Ahora, por el lema anterior, exite $c >0$ tal que 
+    \[\frac{c\sqrt{(\alpha_1 - \alpha_2)^2 + (\beta_1-\beta_2)^2}}{\log^2(\varepsilon_m)}\leq  \sup_{x\in I_k}(f_1(x)- f_2(x)) - \inf_{x\in I_k}(f_1(x)- f_2(x)).\]
+    Por lo tanto, 
+    \[||(\alpha_1,\,\beta_1) - (\alpha_2,\,\beta_2)||\leq \frac{4n\varepsilon_m\log^2(\varepsilon_m)}{c}.\]
+    Es decir, cada $J_k$ está contenido en un rectángulo de lados de longitud $4n\varepsilon_m\log^2(\varepsilon_m)/c$. Entonces 
+    \[\lambda (J_k) \leq \left(\frac{4n\varepsilon_m\log^2(\varepsilon_m)}{c}\right)^2 = \frac{16n^2\log^4(m)}{c^2m^2},\]
+    por lo cual, para toda $m\geq 2$,
+    \[\lambda(S_{f,\,n})\leq \frac{16n^2\log^4(m)}{c^2m} \xrightarrow[m\to\infty]{}0.\]
+\end{proof}
+
+\begin{theorem}
+    Casi toda función continua en $[0,1]$ es nunca derivable.
+\end{theorem}
+\begin{proof}
+    Por el teorema anterior $P = \langle g,\, h\rangle$ es una sonda de $\mathcal{NL}[0,1]$. Como $\mathcal{NL}[0,1]\subseteq \mathcal{ND}[0,1]$, entonces $\mathcal{ND}[0,1]$ es prevalente. Es decir, casi toda función continua en $[0,1]$ es nunca derivable.
+\end{proof}

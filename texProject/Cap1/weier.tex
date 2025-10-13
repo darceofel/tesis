@@ -1,0 +1,171 @@
+\section{Función \texorpdfstring{$W$}{W} de Weierstrass}
+\begin{definition}
+    Dados $a,b\in\mathbb{R}$, con $a<b$, definimos 
+    \[\mathcal{ND}[a,b] = \{f\in C[a,b]\,:\,\forall x\in[a,b],\; f \text{ no es derivable en } x\}.\]
+\end{definition}
+
+Los primeros tres ejemplos que daremos de funciones en $\mathcal{ND}[0,1]$ serán series de funciones; por tanto, es necesario abordar algunos resultados relevantes sobre la convergencia y continuidad de este tipo de funciones. Comenzamos con algunas definiciones y resultados de convergencia:
+\begin{definition}
+    Decimos que una sucesión $\{a_n\}_{n\in\mathbb{N}}$ de números reales es \textit{de Cauchy} si se cumple que para todo $\varepsilon > 0$ existe $N\in\mathbb{N}$ tal que para cualesquiera enteros $n,m> N$ se tiene que 
+    \[|a_n-a_m| <\varepsilon.\]
+\end{definition}
+
+\begin{proposition}\label{prop:conv_cauchy}
+    Sea $\{a_n\}_{n\in\mathbb{N}}\subseteq\mathbb{R}$ una sucesión. $\{a_n\}_{n\in\mathbb{N}}$ converge si y sólo si es de Cauchy.
+\end{proposition}
+
+\begin{definition}\label{def:conv_func} 
+    Sean $I\subseteq \mathbb{R}$, y  $\{f_n:I\to\mathbb{R}\,|\,n\in\mathbb{N}\}$ una sucesión de funciones. Dada $f:I\to\mathbb{R}$, decimos que:
+    \begin{enumerate}
+        \item[(1)]{$f_{n}$ \textit{converge puntualmente} a $f$ en $I$, y lo denotamos por $f_n \xrightarrow{\;p\;} f$, si se cumple que
+        \[\lim_{n\to\infty}f_n(x)= f(x),\quad \text{ para todo }\, x\in I.\]}
+        \item[(2)]{$f_n$ \textit{converge uniformemente} a $f$ en $I$, y lo denotamos por $f_n \xrightarrow{\;u\;} f$, si se cumple que para todo $\varepsilon > 0$ existe $N\in \mathbb{N}$ tal que para todo entero $m > N$ se tiene que
+        \[|f_{m}(x) - f(x)|<\varepsilon,\quad  \text{ para todo }\, x\in I.\]}
+        \item[(3)]{la serie $\sum_{n = 1}^\infty f_n$ \textit{converge (uniformemente)} a $f$, si la sucesión de sumas parciales, $S_m = \sum_{n = 1}^m f_n$, converge (uniformemente) a $f$.}
+        \item[(4)]{$f_n$ \textit{es uniformemente de Cauchy}, si para todo $\varepsilon > 0$ existe $N\in\mathbb{N}$ tal que para cualesquiera enteros $n,m > N$ se tiene que 
+        \[|f_{n}(x) - f_{m}(x)|<\varepsilon,\quad  \text{ para todo }\, x\in I.\]}
+    \end{enumerate}
+\end{definition}
+\begin{proposition}
+    Sean $I\subseteq \mathbb{R}$, y  $\{f_n:I\to\mathbb{R}\,|\,n\in\mathbb{N}\}$ una sucesión de funciones. $f_{n}$ converge uniformemente a $f:I\subseteq\mathbb{R}\to\mathbb{R}$ si y sólo si
+    \[\lim_{n\to\infty}\; \sup_{x\in I}\,|f_n(x)-f(x)| = 0.\]
+\end{proposition}
+
+\newpage
+\begin{theorem}\label{thm:func_cauchy}
+    Sean $I\subseteq \mathbb{R}$, y  $\{f_n:I\to\mathbb{R}\,|\,n\in\mathbb{N}\}$ una sucesión de funciones. $f_n$ converge uniformemente en $I$ si y sólo si $f_{n}$ es uniformemente de Cauchy en $I$.
+\end{theorem}
+\begin{proof} Supongamos que $f_n \xrightarrow{\;u\;} f$ en $I$.     
+    Entonces para todo $\varepsilon> 0$ existe $N\in \mathbb{N}$ tal que para todo entero $m > N$ se tiene que 
+    \[|f_{m}(x)-f(x)|<\frac{\varepsilon}{2}.\]
+    Así, para cualesquiera enteros $n,m>N$ se tiene que
+    \[|f_{n}(x)-f_{m}(x)|\leq |f_{n}(x) - f(x)| + |f_{m}(x)-f(x)| < \varepsilon.\]
+    Por lo tanto, $f_n$ es uniformemente de Cauchy en $I$.\\[8pt]
+    \noindent Ahora supongamos que $f_n$ es uniformemente de Cauchy en $I$.
+    Observemos que, como $\{f_{n}(x)\}_{n\in\mathbb{N}}$ es una sucesión de Cauchy para todo $x\in I$, la \cref{prop:conv_cauchy} nos asegura la existencia de $f:I\to\mathbb{R}$ dada por:
+    \[f(x) = \lim_{n\to\infty}f_{n}(x)\,.\]
+    Veamos que $f_n \xrightarrow{\;u\;} f$. Sea $\varepsilon > 0$. Como $f_n$ es de Cauchy, existe $N\in \mathbb{N}$ tal que para cualesquiera enteros $n,m\in\mathbb{N}$ se tiene que
+    \[|f_{n}(x) - f_{m}(x)|<\frac{\varepsilon}{2},\]
+    para todo $x\in I$. Por otro lado, como $f_n \xrightarrow{\;p\;} f$, para todo $x\in I$ existe $m_{x}\in\mathbb{N}$ tal que $m_{x} > N$ y, si $n \geq m_x$, entonces
+    \[|f_{n}(x) - f(x)|<\frac{\varepsilon}{2}.\]
+    Así, dados $x\in I$ y $n > N$, tenemos que 
+    \[|f_{n}(x)-f(x)|\leq |f_{n}(x) - f_{m_x}(x)| + |f_{m_{x}}(x)-f(x)| < \varepsilon.\]
+    Es decir, $f_n \xrightarrow{\;u\;} f$.
+\end{proof}
+
+El siguiente teorema es de gran utilidad para demostrar la convergencia uniforme (y por tanto, la continuidad, como veremos) de series de funciones.
+\newpage
+\begin{theorem}[Prueba M de Weierstrass]\label{thm:M_Weier}
+     Sean $I\subseteq \mathbb{R}$, y  $\{f_n:I\to\mathbb{R}\,|\,n\in\mathbb{N}\}$ una sucesión de funciones. Supongamos que para todo $k\in\mathbb{N}$ existe $M_k\in \mathbb{R}$ tal que $|f_{k}(x)|\leq M_{k}$ para todo $x\in I$. Si la serie $\sum_{k = 0}^{\infty}M_{k}$ converge, entonces 
+    \[\sum_{k = 0}^{\infty}f_{k}(x) \; \text{ converge uniformemente en  } I.\]
+\end{theorem}
+\begin{proof}[Demostración]
+    Para cada $n\in\mathbb{N}$, sea $S_{n}:I\to\mathbb{R}$ la $n$-ésima suma parcial de la serie, es decir, $S_n(x) = \sum_{k = 0}^{n}f_{k}(x)$. Sean $n,m\in\mathbb{N}$ con $n>m$. Observemos que:
+    \[\sup_{x\in I} |S_{n}(x)-S_{m}(x)| = \sup_{x\in I}\left|\sum_{k = m+1}^{n}f_{k}(x)\right|\leq \sum_{k = m+1}^{n}\sup_{x\in I}\,|f_{k}(x)| \leq \sum_{k=m+1}^{n} M_{k}\,.\]
+    Como $\sum_{k = 0}^{\infty}M_k$ converge, tenemos que 
+    \[\lim_{m\to \infty} \lim_{n\to \infty} \sum_{k=m+1}^{n} M_k = \lim_{m\to \infty} \lim_{n\to \infty} \left(\sum_{k=0}^{n} M_k - \sum_{k=0}^{m} M_k \right) = 0.\]
+    Por lo tanto, $S_n$ es uniformemente de Cauchy. Así, por el \cref{thm:func_cauchy} tenemos que $S_{n}$ converge uniformemente.
+\end{proof} 
+
+\begin{theorem}\label{thm:serie_continua}
+    Sean $I\subseteq \mathbb{R}$, $f:I\to\mathbb{R}$, y  $\{f_n:I\to\mathbb{R}\,|\,n\in\mathbb{N}\}$ una sucesión de funciones. Si $f_{n}$ converge uniformemente a $f$ en $I$, entonces $f$ es continua en $I$.
+\end{theorem}
+\begin{proof}[Demostración] Tomemos $x_{0}\in I$ y $\varepsilon > 0$. Como $f_n \xrightarrow{\;u\;} f$ en $I$, existe $N\in \mathbb{N}$ tal que para cualesquiera  $n\geq N$ y $x\in I$ tenemos que
+\[|f_{n}(x)-f(x)| < \frac{\varepsilon}{3}.\]
+Por otro lado, como $f_{N}$ es continua en $x_0$, existe $\delta > 0$ tal que si $x\in I$ satisface que $|x-x_0|<\delta$, entonces
+\[|f_N(x)-f_N(x_{0})| < \frac{\varepsilon}{3}.\]
+Así, para todo $x\in I$ tal que $|x-x_0|<\delta$ se cumple que
+\[|f(x)-f(x_0)|\leq|f(x)-f_N(x)|+|f_N(x) - f_N(x_0)|+|f_N(x_0)-f(x_0)| < \varepsilon,\]
+es decir, $f$ es continua en $x_0$.
+\end{proof}
+En pocas palabras, este teorema nos dice que la convergencia uniforme preserva la continuidad de una sucesión de funciones. Escribiéndolo de una forma útil para lo que buscamos probar, tenemos el siguiente corolario:
+\begin{corollary}\label{cor:serie_continua}
+    Si $I\subseteq\mathbb{R}$, y $\{f_k:I\to\mathbb{R}\,|\,n\in\mathbb{N}\}$ es una sucesión de funciones continuas tal que $\sum_{k = 0}^{\infty}f_k(x)$ converge uniformemente a $S:I\to\mathbb{R}$, entonces $S$ es continua en $I$.
+\end{corollary}
+
+A pesar de que existen varios ejemplos anteriores a este (ver \cite{Thim2003ContinuousND}), comenzaremos con la primera función que se publicó: la función $W$ de Weierstrass. Está definida como sigue (ver \cite{weier}):
+\begin{definition}\label{def:W} 
+    La función $\,W\!:\mathbb{R}\to\mathbb{R}$ de Weierstrass está dada por
+    \[W(x) = \sum_{k=0}^{\infty}a^{k}\cos(b^{k}\pi x)\]
+    donde $0<a<1$, y $b > 1$ es un entero impar tal que $ab > 1 + \frac{3\pi}{2}$.
+\end{definition}
+
+Teniendo esto en cuenta podemos abordar la demostración de que $W$ es continua y nunca diferenciable.\\
+
+\textbf{Nota}: existe una prueba con hipótesis más débiles que las que usaremos: basta con tener $0<a<1, b>1,$ y $ab\geq 1$ (ver \cite{Hardy}), pero nosotros seguiremos una prueba bastante parecida a la que dio Weierstrass en su tiempo (ver \cite{Thim2003ContinuousND}).
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=10cm]{Cap1/Weierstrass_035_6.png}
+    \caption{Gráfica de $W$ con $a =$ 0.35 y $b = 6$ en $[-3,3]$.}
+    \label{fig:graf_W}
+\end{figure}
+\begin{theorem}
+    La función $W$ de Weierstrass es continua y nunca derivable en $\mathbb{R}$.
+\end{theorem}
+\begin{proof}[Demostración] Primero veamos que esta función es continua. Observemos que, como $0<a<1$, tenemos que 
+\[\sum_{k = 0}^{\infty} a^{k} = \frac{1}{1-a} < \infty.\]
+Además, como $|a^{n}\cos{(b^{n}\pi x)}| \leq a^{n}$, $W$ converge uniformemente por la prueba M de Weierstrass (\cref{thm:M_Weier}). Finalmente, como cada sumando \[f_{k}(x) = a^{k}\cos(b^{k}\pi x)\] es una función continua, $W$ es continua por el \cref{cor:serie_continua}.\\\\
+Pasemos ahora a la parte más técnica de la prueba: veamos que $W$ no es diferenciable en ninguna parte. Sea $x_{0}\in\mathbb{R}$. Para cada $m\in\mathbb{N}$, tomemos \[\alpha_m = \begin{cases}
+    \lfloor{b^{m}x_0}\rfloor,\quad \text{ si }\quad b^mx_0-\lfloor{b^{m}x_0}\rfloor \leq \frac{1}{2}, \\
+    \lceil{b^{m}x_0}\rceil,\quad \text{ en otro caso.}
+\end{cases}\]
+en donde $\lfloor \cdot \rfloor$ y $\lceil \cdot \rceil$ son las funciones piso y techo, respectivamente.  Así, para cada $m\in \mathbb{N}$ tenemos $\alpha_{m}\in\mathbb{Z}$ tal que 
+\[b^mx_{0}-\alpha_{m}\in\left(-\frac{1}{2},\frac{1}{2}\right].\]
+Definimos:
+\[x_{m+1} = b^mx_{0}-\alpha_{m} \quad\text{y}\quad  y_{m} = \frac{\alpha_{m}-1}{b^m}.\]
+Teniendo estas definiciones, observemos que:
+\[y_m-x_0 = -\frac{1+x_{m+1}}{b^m} < 0.\]
+De donde $y_m < x_0$, y, si tendemos $m\to\infty$, como $x_{m+1}\in(-\frac{1}{2},\frac{1}{2}]$, tenemos que  $y_m$ converge a $x_0$ por la izquierda.\\\\
+\textbf{Afirmación:}
+\[\lim_{m\to\infty} \left|\frac{W(y_m)-W(x_0)}{y_m-x_0}\right| = \infty.\]
+Sean 
+\[S_1 = \sum_{n= 0}^{m-1}(ab)^n\frac{\cos(b^n\pi y_m)-\cos(b^n\pi x_0)}{b^n(y_m-x_0)} \;\text{ y }\;S_2 =  \sum_{n=0}^{\infty}a^{n+m}\frac{\cos(b^{n+m}\pi y_m)-\cos(b^{n+m}\pi x_0)}{y_m-x_0}.\]
+Observemos que:
+\begin{align*}
+    \frac{W(y_m)-W(x_0)}{y_m-x_0}& = \frac{1}{y_m-x_0}\left(\sum_{n=0}^{\infty}a^n\cos(b^n\pi y_m) - \sum_{n=0}^{\infty}a^n\cos(b^n\pi x_0)\right) &&\\[8pt]
+    &= \sum_{n=0}^{\infty}a^n\frac{\cos(b^n\pi y_m)-\cos(b^n\pi x_0)}{y_m-x_0} &&\\[8pt]
+    & = \sum_{n= 0}^{m-1}(ab)^n\frac{\cos(b^n\pi y_m)-\cos(b^n\pi x_0)}{b^n(y_m-x_0)} &&\\
+    & \quad\quad\quad + \sum_{n=0}^{\infty}a^{n+m}\frac{\cos(b^{n+m}\pi y_m)-\cos(b^{n+m}\pi x_0)}{y_m-x_0}\\
+    &= S_1 + S_2.
+\end{align*}
+Trabajaremos con estas dos sumas de manera separada. Empecemos con $S_1$: recordando que $\sin(c+d) = \cos(c)\sin(d) + \sin(c)\cos(d)$, tenemos que 
+\[\sin\left(\frac{c+d}{2}\right)\sin\left(\frac{c-d}{2}\right) = \frac{1}{2}(\cos(d)-\cos(c))\]
+(ver \cref{appendix:seno_dory}). Usando esto, y que $|\frac{\sin(x)}{x}| \leq 1$ para todo $x\neq 0$, lo siguiente se cumple:
+\begin{align*}
+    |S_{1}| &= \left|\sum_{n= 0}^{m-1}(ab)^n\frac{\cos(b^n\pi y_m)-\cos(b^n\pi x_0)}{b^n(y_m-x_0)}\right| \\[8pt]
+    & = \left|\sum_{n = 0}^{m-1}(ab)^n(-\pi)\sin\left(\frac{\pi b^n(y_m+x_0)}{2}\right)\frac{\sin\left(\frac{\pi b^n(y_m-x_0)}{2}\right)}{\frac{\pi b^n(y_m-x_0)}{2}}\right| \\[8pt] \tag{$*$}\label{eq:desigualdad_s1}
+    &\leq \sum_{n=0}^{m-1}\pi(ab)^{n} = \pi\frac{(ab)^m-1}{ab-1} \leq \pi\frac{(ab)^m}{ab-1}.
+\end{align*}
+Ahora, para $S_2$ podemos observar lo siguiente:
+\[\cos(\pi b^{m+n}y_m) = \cos\left(\pi b^{m+n}\frac{\alpha_m-1}{b^m}\right) = \cos(\pi b^n (\alpha_m-1)) = -(-1)^{\alpha_m},\]
+pues $b,\alpha_m\in \mathbb{Z}$ y $b$ es impar.\\\\
+Por otro lado, recordando que $\cos(c+d) = \cos(c)\cos(d) - \sin(c)\sin(d)$, tenemos que:
+\begin{align*}
+    \cos(\pi b^{m+n}x_0) &= \cos\left(\pi b^{m+n}\frac{\alpha_m + x_{m+1}}{b^m}\right) = \cos(\pi b^{n}(\alpha_m + x_{m+1}))\\
+    &= \cos(\pi b^n\alpha_m)\cos(\pi b^n x_{m+1}) - \sin(\pi b^n\alpha_m)\sin(\pi b^nx_{m+1})\\
+    &= (-1)^{\alpha_m}\cos(\pi b^n x_{m+1}) - 0\\
+    &= (-1)^{\alpha_m}\cos(\pi b^n x_{m+1}).
+\end{align*}
+Así, podemos reescribir $S_2$ como:
+\begin{align*}
+    S_2 &= \sum_{n = 0}^{\infty} a^{n+m}\frac{-(-1)^{\alpha_m} - (-1)^{\alpha_m}\cos(\pi b^{n}x_{m+1})}{-\frac{1+x_{m+1}}{b^m}}\\
+    &= (ab)^m(-1)^{\alpha_m}\sum_{n = 0}^{\infty}a^n\frac{1+\cos(\pi b^{n}x_{m+1})}{1+x_{m+1}}.
+\end{align*}
+Observemos que, como cada término en la serie anterior es positivo, entonces la serie es mayor o igual a su primer sumando, es decir,
+\[\sum_{n = 0}^{\infty}a^n\frac{1+\cos(\pi b^{n}x_{m+1})}{1+x_{m+1}} \geq \frac{1+\cos(\pi x_{m+1})}{1+x_{m+1}}.\]
+Ahora, como $x_{m+1}\in(-\frac{1}{2},\frac{1}{2}]$, entonces $\cos(\pi x_{m+1}) \geq 0$ y
+\[\frac{1+\cos(\pi x_{m+1})}{1+x_{m+1}} \geq \frac{1}{1+\frac{1}{2}} = \frac{2}{3}.\]
+Uniendo estas últimas dos desigualdades, tenemos que:
+\[|S_2| \geq \left|\frac{2}{3}(ab)^m(-1)^{\alpha_m}\right|.\]
+Observemos que esta última desigualdad implica la existencia de un $\eta_m\in\mathbb{R}$ tal que $|\eta_m|\geq 1$ y
+\[S_2 = \frac{2}{3}(ab)^m(-1)^{\alpha_m}\eta_m.\]
+Como $|\eta_m|\geq 1$, por la desigualdad \eqref{eq:desigualdad_s1} tenemos que:
+\[|S_1|\leq \left|\pi\,\eta_m\frac{(ab)^m}{ab-1}\right| = \left|(-1)^{\alpha_m}\pi\,\eta_m\frac{(ab)^m}{ab-1}\right|.\]
+Por lo tanto, existe $\varepsilon_m\in[-1,1]$ tal que:
+\[S_1 = (-1)^{\alpha_m}\pi\,\varepsilon_m\,\eta_m\frac{(ab)^m}{ab-1}.\]
+Así,
+\[\frac{W(y_m)-W(x_0)}{y_m-x_0} = S_1 + S_2 = (ab)^m(-1)^{\alpha_m}\eta_m \left(\frac{2}{3} + \varepsilon_m \frac{\pi}{ab-1}\right).\]
+y por tanto, como $\delta = \left(\frac{2}{3} - \frac{\pi}{ab-1}\right) > 0$, y $ab > 1$,
+\[\lim_{m\to\infty} \left| \frac{W(y_m)-W(x_0)}{y_m-x_0}\right | \geq \lim_{m\to\infty}  \delta(ab)^m = \infty.\]
+En síntesis, $W$ no es derivable en $x_0$.
+\end{proof}

@@ -1,0 +1,157 @@
+\section{La curva de Peano}
+
+En 1890, Giuseppe Peano publicó la primer curva que rellena el cuadrado unitario (ver \cite{Thim2003ContinuousND}). Antes de llegar a la definición, debemos abordar algunos breves resultados:
+
+\begin{theorem}
+    Dado $t\in[0,1]$, existe una sucesión $\{t_n\}_{n\in\mathbb{N}}\subseteq\{0,1,2\}$ tal que
+    \[t = \sum_{n = 1}^\infty \frac{t_{n}}{3^n}.\]
+    A estas sucesiones la llamaremos \textit{representaciones en base 3} de $t$. 
+\end{theorem}
+
+\begin{observation*}
+    Las representaciones en base 3 no son únicas para todos los $t\in[0,1]$. Por ejemplo, las sucesiones $\{0,2,2,2,\dots\}$ y $\{1,0,0,0,\dots\}$ son dos representaciones distintas de $1/3$. 
+\end{observation*}
+
+\begin{theorem}\label{thm:basetres}
+    Sean $\{t_n\},\,\{s_n\}\subseteq\{0,1,2\}$ dos representaciones en base 3 de $t\in[0,1]$ distintas. Si $m = \min\{n\in\mathbb{N}\,:\,t_n\neq s_n\}$ y $s_m<t_m$, entonces $t_m-s_m = 1$, y para cada $n>m$, $t_n = 2$ y $s_n = 0$.
+\end{theorem}
+\begin{proof}
+    Notemos que $t_m-s_m \in \{1,2\}$ porque $\{t_m,s_m\} \subseteq \{0,1,2\}$ y $s_m<t_m$. Ahora bien, si $t_m - s_m = 2$, obtenemos el absurdo:
+    \[t \geq \sum_{n = 1}^m \frac{t_n}{3^n} = \sum_{n = 1}^{m} \frac{s_n}{3^n} + \frac{2}{3^m} > \sum_{n = 1}^{m} \frac{s_n}{3^n} + \frac{1}{3^m} = \sum_{n = 0}^{m} \frac{s_n}{3^n} + \sum_{n>m}\frac{2}{3^n} \geq \sum_{n = 0}^{\infty} \frac{s_n}{3^n}  =  t.\]
+    Por lo tanto, $t_m - s_m = 1$. Así,
+    \[0 = \sum_{n = 1}^{\infty}\frac{t_n-s_n}{3^n} = \frac{1}{3^m} + \sum_{n>m}\frac{t_n-s_n}{3^n}.\]
+    Por otra parte, si existe algún $n>m$ tal que $s_n-t_n \neq 2$, entonces
+    \[\frac{1}{3^m} = \sum_{n>m}\frac{s_n-t_n}{3^n}<\sum_{n>m}\frac{2}{3^n} = \frac{1}{3^m},\]
+    lo que es otra contradicción. De esta manera, como $t_n,s_n\in\{0,1,2\}$,  $s_n = 2$ y $t_n = 0$ para todo $n>m$.
+\end{proof}
+\begin{corollary}
+    Cualquier $t \in [0,1]$ tiene, a lo sumo, dos representaciones en base 3.
+\end{corollary}
+
+
+\begin{definition}
+    Dado $t\in\{0,1,2\}$ definimos, para $n\in\mathbb{Z},$
+    \[A(n,t) = \begin{cases}
+        t, &\text{ si $n$ es par},\\
+        2-t, & \text{ si $n$ es impar}.
+    \end{cases}\]
+     Ahora, para $t\in[0,1]$, si $\{t_n\}_{n\in\mathbb{N}}$ es una representación en base 3 de $t$, entonces definimos
+    \[B_n(t) = \begin{cases}
+        t_1, & \text{si }n = 1 \\[6pt]
+        A\!\left(\,\sum\limits_{k=1}^{n-1}t_{2k},\, t_{2n-1}\right), &\text{si } n>1.
+        \end{cases}\]
+    Finalmente, definimos $\varphi:[0,1]\to[0,1]$ como 
+    \[\varphi(t) = \sum_{n = 1}^{\infty}\frac{B_n(t)}{3^n}.\]
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.48\linewidth]{Cap1/peano_phi.png}
+        \caption{Gráfica de $\varphi$ en [0,1].}
+    \end{figure}
+\end{definition}
+
+\begin{proposition}
+    La función $\varphi$ está bien definida, es decir, no depende de la representación en base 3 que tomemos.
+\end{proposition}
+\begin{proof}
+    Sean $\{t_n\},\{s_n\}\subseteq\{0,1,2\}$ dos sucesiones distintas pero tales que 
+    \[\sum_{n = 1 }^\infty \frac{t_n}{3^n} = \sum_{n = 1 }^\infty \frac{s_n}{3^n}.\] Además, sean
+    \[m = \min\{n\in \mathbb{N} : t_n \neq s_n\}, \quad t = \sum_{n=1}^{\infty} \frac{t_n}{3^n} \quad \text{y} \quad s = \sum_{n=1}^{\infty} \frac{s_n}{3^n}\]
+    \medskip
+    \textbf{Afirmación:} $\varphi(t) = \varphi(s)$.
+    \medskip
+    
+    \noindent Por el \cref{thm:basetres} podemos suponer, sin pérdida de generalidad, que $t_m-s_m = 1$. Entonces $t_n = 0$ y $s_n = 2$, para todo $n>m$. Consideremos los siguientes casos:\\\\
+    \textbf{Caso 1:} $m$ es par, supongamos $m = 2q$. 
+    Entonces $t_1 = s_1$, y por tanto $B_1(t) = B_1(s)$. Además, para $2\leq n\leq q$:
+    \[B_n(t) =  A\!\left(\,\sum\limits_{k=1}^{n-1}t_{2k},\, t_{2n-1}\right) =  A\!\left(\,\sum\limits_{k=1}^{n-1}s_{2k},\, s_{2n-1}\right) = B_n(s)\,.\]
+    Por otro lado, para $n > q$:
+    \begin{align*}
+        B_n(t) &=  A\!\left(\,\sum\limits_{k=1}^{n-1}t_{2k},\, t_{2n-1}\right) = 
+         A\!\left(\,\sum\limits_{k=1}^{q}t_{2k},\, 0\right) = A\!\left(\,\sum\limits_{k=1}^{q}s_{2k} + 1,\, 0\right)  \\[6pt]
+         & = A\!\left(\,\sum\limits_{k=1}^{q}s_{2k},\, 2\right) = B_n(s) \,.
+    \end{align*}
+    Y por tanto $\varphi(t) = \varphi(s)$.\\\\
+    \textbf{Caso 2:} $m$ es impar, supongamos $m = 2q-1$. Para $2\leq n< q$:
+    \[B_n(t) =  A\!\left(\,\sum\limits_{k=1}^{n-1}t_{2k},\, t_{2n-1}\right) =  A\!\left(\,\sum\limits_{k=1}^{n-1}s_{2k},\, s_{2n-1}\right) = B_n(s)\,.\]
+    Llamemos $\tau = s_2 + s_4 + \dots + s_{m-1}$, y 
+    \[\delta = \begin{cases}
+        1, & \text{ si $\tau$ es par, }\\
+        -1, & \text{ si $\tau$ es impar.}
+    \end{cases}\]Así, para $n = q$,
+    \[B_q(t) =  A\!\left(\,\sum\limits_{k=1}^{q-1}t_{2k},\, t_m\right) =  A\!\left(\,\tau,\, s_m + 1\right) = B_q(s) + \delta \,.\]
+    Finalmente, para $n > q$,
+    \[B_n(t) =  A\!\left(\,\sum\limits_{k=1}^{n-1}t_{2k},\, t_{2n-1}\right) =  A\!\left(\,\tau,\,0\right) = 2-A\!\left(\,\tau,\,2\right)=  2 - B_n(s)= 1 - \delta\,.\]
+    Por lo tanto
+    \[\varphi(t) -\varphi(s) = \frac{\delta}{3^q} - \sum_{n > q} \frac{2\delta}{3^n} = \delta\left(\frac{1}{3^q} - \sum_{n > q} \frac{2}{3^n}\right) = 0\,.\]
+    De donde $\varphi$ está bien definida.
+\end{proof}
+Con esto, podemos finalmente definir la curva $P$ de Peano:
+\begin{definition}
+    La curva $P$ de peano está definida como: $P:[0,1]\to[0,1]^2$ dada por
+        \[P(t) = \left(\varphi(t),\,3\,\varphi\!\left(\frac{t}{3}\right)\right).\]
+\end{definition}
+
+\begin{proposition}
+    La curva $P$ de Peano es sobreyectiva, es decir, rellena el cuadrado unitario.
+\end{proposition}
+\begin{proof}
+    Sea $(\alpha,\;\beta)\in[0,1]\times[0,1]$. Además, sean $\{\alpha_n\},\{\beta_n\}\subseteq\{0,1,2\}$ representaciones en base 3 de $\alpha$ y $\beta$, respectivamente. Ahora bien, sean $t_1 = \alpha_1$, $t_2 = \beta_1$, y definamos recursivamente, para $n>2$
+    \[t_n = \begin{cases}
+        A\!\left(\,\sum\limits_{k=1}^{m}t_{2k-1},\, \beta_{m}\right), & n = 2m \;\,\text{ para algún } m\in\mathbb{N},\\[15pt]
+        A\!\left(\,\sum\limits_{k=1}^{m}t_{2k},\, \alpha_{m+1}\right),  & n = 2m+1 \;\,\text{ para algún } m\in\mathbb{N}.
+    \end{cases}\]
+    Finalmente, sea \[t = \sum_{n = 1}^\infty \frac{t_n}{3^n}.\]
+    \textbf{Afirmación:} $P(t) = (\alpha, \beta)$. 
+    \medskip
+    
+    \noindent Sea $n\in\mathbb{N}$ con $n>1$, y llamemos $r = t_2 + t_4 + \dots + t_{2n-2}$. 
+    Entonces \[B_n(t) = A\!\left(\,r,\, t_{2n-1}\right) =A\!\left(\,r,\, A\!\left(\,r,\, \alpha_{n}\right)\right) =  \alpha_{n},\] 
+    de donde $\varphi(t) = \alpha$. Análogamente, $3\varphi(t/3) = \beta$.
+\end{proof}
+Como dato cultural, cabe mencionar que la curva de Peano también tiene una construcción geométrica iterativa. La demostración de que son la misma curva se sale del enfoque de este capítulo, pero se puede encontrar en \cite{peano_curve}. Su construcción geométrica se ve como sigue:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.23\textwidth]{Cap1/peano_1.png}  
+    \hspace{0.1cm}  % Horizontal space between images
+    \includegraphics[width=0.23\textwidth]{Cap1/peano_2.png}  
+    \hspace{0.1cm}  % Horizontal space between images
+    \includegraphics[width=0.23\textwidth]{Cap1/peano_3.png}
+    \hspace{0.1cm}  % Horizontal space between images
+    \includegraphics[width=0.23\textwidth]{Cap1/peano_4.png}
+    
+    \caption{Primeras cuatro iteraciones de la construcción geométrica de la curva de Peano.}
+\end{figure}
+
+\begin{theorem}
+    $\varphi$ es continua y nunca diferenciable.
+\end{theorem}
+\begin{proof}
+    Sean $t\in[0,1)$, y $\{t_n\}_{n\in\mathbb{N}}$ una representación en base 3 de $t$. Veamos que $\varphi$ es continua en $t$ por la derecha. 
+    Sin pérdida de generalidad, supongamos que $t_n$ no tiene una cola formada por puros 2.\\\\
+    Sea $\varepsilon > 0$ y $n\in\mathbb{N}$ tal que $3^{-n}<\varepsilon$. Sea 
+    \[\delta = \frac{1}{3^{2n}} - \sum_{k > 2n}\frac{t_k}{3^k} > 0.\]
+    Observemos que 
+    \[t + \delta =  \sum_{k = 1}^\infty\frac{t_k}{3^k} + \frac{1}{3^{2n}} - \sum_{k > 2n}\frac{t_k}{3^k} = \sum_{k = 1}^{2n}\frac{t_k}{3^k} + \sum_{k = 2n+1}^\infty\frac{2}{3^k}.\]
+    Es decir, la representación en base 3 de $t + \delta$ coincide con la de $t$ en los primeros $2n$ términos. Por tanto, dado $s\in[t, t+\delta)$ cualquier representación en base $3$ de $s$ debe coincidir con la de $t$ en los primeros $2n$ términos.\\\\
+    Llamemos $r = t_2 + t_4 + \dots + t_{2n}$. Sea $s\in[t, t + \delta)$, y tomemos $\{s_n\}_{n\in\mathbb{N}}$ alguna representación en base 3 de $s$. Como $t_k$ y $s_k$ coinciden en los primeros $2n$ térmions, entonces $B_k(t)$ y $B_k(s)$ coinciden en los primeros $n$ términos, de donde
+    \begin{align*}
+        |\varphi(s) - \varphi(t)| &= \left|\sum_{k = 1}^\infty\frac{B_k(s) -B_k(t)}{3^k}\right| = \left|\sum_{k = n+1}^\infty\frac{B_k(s) -B_k(t)}{3^k}\right| \\
+        &\leq \sum_{k = n+1}^\infty\left|\frac{B_k(s) -B_k(t)}{3^k}\right| \leq
+       \sum_{k = n+1}^\infty\frac{2}{3^k} = \frac{1}{3^n}<\varepsilon\,.
+    \end{align*}
+    Y por tanto $\varphi$ es continua por la derecha en $t$.\\\\
+    Ahora, para ver que es continua por la izquierda en todo $t\in(0,1]$, tomamos una representación en base 3 de $t$ que tenga una infinidad de digitos no nulos, consideramos 
+    \[\delta = \sum_{k = 2n+1}^\infty\frac{t_k}{3^k}\] y repetimos el argumento anterior. Por lo tanto, $\varphi$ es continua en $t$.\\\\
+    Finalmente, tomemos $t\in[0,1]$, y veamos que $\varphi$ no es derivable en $t$. Llamemos 
+    \[\tau_k^n = \begin{cases}
+        |1-t_{2n-1}|, & \text{ si } k = 2n-1, \\
+        t_k, & \text{ en otro caso},
+    \end{cases}\]
+    y definamos
+    \[z_n = \sum_{k = 1}^\infty \frac{\tau_k^n}{3^k}.\]
+    Así, $|t-z_n| = 1/  3^{2n+1}$, de donde $z_n\to t$. Por otro lado, observemos que $B_k(t) =B_k(z_n)$ para todo $k\neq n$, es decir:
+    \[|\varphi(t) - \varphi(z_n)|  = \left|\frac{B_n(t) -B_n(z_n)}{3^n}\right| = \frac{1}{3^n}.\]
+    Así, 
+    \[\left |\frac{\varphi(t) - \varphi(z_n)}{t-z_n}\right| = 3^{n+1} \to \infty.\]
+    De donde $\varphi$ no es derivable en $t$.
+\end{proof}

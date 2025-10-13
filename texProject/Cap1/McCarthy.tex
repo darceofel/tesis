@@ -1,0 +1,83 @@
+\section{Función \texorpdfstring{$M$}{M} de McCarthy}
+Saltando más de 50 años de avance matemático, pasamos al tercer ejemplo; uno que contrastará notablemente con los anteriores no sólo en la construcción en sí, sino también, y principalmente, en la simpleza de la demostración. 
+
+En 1953, un matemático estadounidense llamado John McCarthy publicó un artículo en el que da un ejemplo de una función $M:\mathbb{R}\to\mathbb{R}$ continua y nunca diferenciable (ver \cite{McCarthy}). Está definida como sigue:
+
+\begin{definition}
+    Sea $M:\mathbb{R}\to\mathbb{R}$ definida como:
+    \[M(x) = \sum_{k = 1}^{\infty}\frac{1}{2^{k}}\,g\left(2^{2^{k}}x\right),\]
+    donde $g$ está dada por $g(x) = 1-|x|$, para $x\in[-2,2]$, y $g(x+4) = g(x)$ para todo $x\in \mathbb{R}$.
+\end{definition}
+\vspace*{-1cm}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10cm]{Cap1/McCarthy.png}
+    \caption{Gráfica de $M$ en $[0,1]$.}
+    \label{fig:graf_M}
+\end{figure}
+
+La atracción de este ejemplo radica en la cantidad de resultados necesarios para comprender la demostración; en específico, sólo la definición y algunos resultados previamente abordados son suficientes para enfrentarse al teorema.
+
+\begin{theorem}
+    La función $M$ de McCarthy es continua y nunca diferenciable.
+\end{theorem}
+\begin{proof}
+    Primero veamos que la función es continua en $\mathbb{R}$. 
+    Como $|g(x)|\leq 1$ para todo $x\in\mathbb{R}$ y $g(0) = 1$, entonces \[\sup_{x\in\mathbb{R}} 2^{-k}g(2^{2^{k}}x) = 2^{-k}.\]  Además, por la convergencia de la serie $\sum_{k = 1}^{\infty} 2^{-k}$, una combinación del \cref{thm:M_Weier} con el \cref{thm:serie_continua} permite concluir que $M$ es continua.\\\\
+    Ahora veamos que $M$ no puede ser diferenciable. Sea $x\in \mathbb{R}$. Para cada $n\in\mathbb{N}$ existen únicos $q_n\in\mathbb{Z}$ y  $y_n\in[0,4)$ tales que $2^{2^{n}}x = 4q_n + y_n$. Ahora, para cada $n\in\mathbb{N}$ definimos $h_n = \alpha_n 2^{-2^{n}}$, donde $\alpha_n$ depende de la siguiente regla:
+    \begin{equation*}
+        \alpha_n = 
+        \begin{cases}
+        1, \quad&\text{si }\; y_n\in[0,1)\cup[2,3),\\
+        -1, \quad&\text{si }\; y_n\in[1,2)\cup[3,4).
+        \end{cases}
+    \end{equation*}
+    Observemos que, dado $k > n$, como $g$ tiene periodo $4$, lo siguiente se cumple:
+    \begin{equation}
+        g\left(2^{2^{k}}(x+h_n)\right) - g\left(2^{2^{k}}x\right) = g\left(2^{2^{k}}x\right) - g\left(2^{2^{k}}x\right) = 0\,.
+       \tag{$\ast$}\label{eq:estrella}
+    \end{equation}
+
+    Observemos que para $x\in[0,4]$, $g(x) = |x-2|-1$. Así, como $y_n +\alpha_n \in[0,4)$, tenemos que: 
+    \begin{align*}
+        \left|g\left(2^{2^{n}}(x+h_n)\right) - g\left(2^{2^{n}}x\right)  \right| &= \left|g\left(y_n+\alpha_n\right) - g\left(y_n\right)  \right|  \\
+        &= |\,|y_n+\alpha_n-2| - |y_n-2|\,| = |\alpha_n| = 1\,.
+    \end{align*}
+    pues $y_n$ y $y_n+\alpha_n$ son o ambos mayores que $2$, o ambos menores que $2$.
+    \noindent Afirmamos que, para $0\leq k<n$, se cumple la siguiente desigualdad:
+    \begin{equation}
+       \left| g\left(2^{2^{k}}(x+h_n)\right) - g\left(2^{2^{k}}x\right)\right|\leq 2^{2^{k}}2^{-2^{n}}\leq2^{-2^{n-1}}\,.
+       \tag{$\ast\ast$}\label{eq:doble-estrella}
+    \end{equation}
+    Para demostrarla, primero observemos que para cualesquiera $a,b,c\in\mathbb{R}$,
+    \[||a+b|-|a||\leq |b|.\]
+    Teniendo esto, consideremos los siguientes casos:\\[6pt]
+    \textbf{Caso 1:} $y_k + \alpha_n2^{2^k}2^{-2^{n}}\in[0,4]$. Entonces,
+    \begin{align*}
+        \left| g\left(y_k + \alpha_n2^{2^k}2^{-2^{n}}\right) - g\left(y_k\right)\right| &= 
+        \left|\, |y_k -2+ \alpha_n2^{2^k}2^{-2^{n}}| - |y_k-2|\,\right| \\
+        &\leq \left| \alpha_n2^{2^k}2^{-2^{n}}\right| = 2^{2^k}2^{-2^n}\,.
+    \end{align*}
+    \textbf{Caso 2:} $y_k + \alpha_n2^{2^k}2^{-2^{n}}\notin[0,4]$. De aquí se desprenden dos casos más, pero sólo consideraremos uno pues son análogos. Supongamos que $y_k + \alpha_n2^{2^k}2^{-2^{n}}> 4 $. Entonces, como $2^{2^k}2^{-2^n}\leq \frac{1}{2}$, tenemos que $y_k + \alpha_n2^{2^k}2^{-2^{n}}\in [4,5)$ y $y_k\in[3,4)$. Por tanto:
+    \begin{align*}
+        \left| g\left(y_k + \alpha_n2^{2^k}2^{-2^{n}}\right) - g\left(y_k\right)\right| &= 
+        \left| g\left(y_k + \alpha_n2^{2^k}2^{-2^{n}} - 4\right) - g\left(y_k - 4\right)\right| \\
+        & =  \left|\, |y_k - 4 + \alpha_n2^{2^k}2^{-2^{n}}| - |y_k - 4|\,\right| \\
+        &\leq  \left| \alpha_n2^{2^k}2^{-2^{n}}\right| = 2^{2^k}2^{-2^n}\,.
+    \end{align*}    
+    Así,
+    \begin{flalign}
+        \left|\frac{M(x+h_n)-M(x)}{h_n}\right| 
+        &= 2^{2^{n}}\left|\sum_{k = 1}^{\infty} \frac{1}{2^{k}}\left( g\left(2^{2^{k}}(x+h_n)\right) - g\left(2^{2^{k}}x\right)\right)\right| &&\notag\\[8pt]
+        &= 2^{2^{n}}\left|\sum_{k = 1}^{n} \frac{1}{2^{k}}\left( g\left(2^{2^{k}}(x+h_n)\right) - g\left(2^{2^{k}}x\right)\right)\right| 
+        &&\text{por \eqref{eq:estrella}}\notag\\[8pt]
+        &\geq 2^{2^{n}}\left( 1- \left|\sum_{k = 1}^{n-1} \frac{1}{2^{k}}\left( g\left(2^{2^{k}}(x+h_n)\right) - g\left(2^{2^{k}}x\right)\right)\right|\right) 
+        &&\text{por \eqref{eq:doble-estrella}}\notag\\[8pt]
+        &\geq 2^{2^{n}}\left(1- 2^{n}2^{-2^{n-1}}\right) &&\notag\\[8pt]
+        &= 2^{2^{n-1}}\left(2^{2^{n-1}}- 2^{n}\right) &&\notag
+    \end{flalign}
+
+    De donde 
+    \[\lim_{n\to\infty}\left|\frac{M(x+h_n)-M(x)}{h_n}\right| = \infty,\]
+    y por tanto $M$ no es diferenciable en $x$.
+\end{proof}

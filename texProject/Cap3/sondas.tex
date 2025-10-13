@@ -1,0 +1,155 @@
+\chapter{Prevalencia de \texorpdfstring{$\mathbf{\mathcal{ND}[0,1]}$}{ND[0,1]}}
+
+Este tercer y último capítulo tiene un solo objetivo: demostrar la prevalencia de $\mathcal{ND}[0,1]$ en $\mathcal{C}[0,1]$. Para lograrlo, primero aterrizaremos un poco más la definición de prevalencia, encontrando una forma equivalente de entenderla que nos facilitará demostrar que algún espacio es prevalente; después atacaremos el problema de frente, introduciendo algo más de notación y algunos resultados técnicos necesarios.
+
+\section{Sondas}
+Con la herramienta expuesta hasta ahora, demostrar que un conjunto es prevalente parece ser una tarea muy complicada. En particular, encontrar medidas transversales expone un verdadero reto. El objetivo de esta sección es encontrar formas sencillas, equivalencias o implicaciones que nos faciliten lograrlo.
+
+\begin{definition}
+    Sea $\mu$ una medida de Borel sobre algún espacio topológico $(X, \tau)$. Definimos el \textit{soporte de $\mu$} como
+    \[\supp(\mu) = \medcap\{X\setminus U\,:\, U\in \tau,\, \mu(U) = 0\}.\]
+\end{definition}
+Es decir, el soporte de una medida es la intersección de todos los conjuntos cerrados de medida plena. Por tanto, al ser la intersección de una familia de cerrados, el soporte también es un conjunto cerrado.
+\begin{observation*} La siguiente es una definición equivalente:
+    \[\supp(\mu) = \{x\in X\,:\, \forall V\!\in\mathcal{V}(x),\, \mu(V) \neq 0\}.\]
+    En otras palabras, el soporte de una medida es el conjunto de todos los puntos cuyas vecindades siempre tienen medida positiva.
+\end{observation*} 
+Teniendo estas observaciones en mente, una pregunta que surge naturalmente es: ¿el soporte de una medida también es un conjunto pleno? Es decir, ¿el soporte es el conjunto cerrado y de medida plena más ``chico''? En principio parece que sí, pero no siempre es el caso, veamos:
+\begin{example}
+    Sean $X = \omega_1$ y $\tau_{X}$ la topología de orden. Consideremos la  función: $\mu:\mathcal{B}(X)\to\{0,1\}$ dada por
+    \[\mu(A) = \begin{cases}
+        1, \quad \text{ si existe $F\subseteq A$ cerrado y no acotado},\\
+        0, \quad \text{ en otro caso}.
+    \end{cases}\]
+    \textbf{Afirmación:} $\mu$ es medida de Borel y tiene soporte vacío.
+    \begin{proof}
+        Sea
+        \[\mathcal{M} = \{A\subseteq X\,:\, \exists F\subseteq X \text{ cerrado y no acotado tal que } F\subseteq A \text{ ó } F\subseteq X\setminus A \}.\]
+        Primero demostraremos que $M$ es una $\sigma$-álgebra. Observemos que, por definición, $\mathcal{M}$ es cerrada bajo complementos, y $X\in \mathcal{M}$. Sea $\{A_n\}_{n\in\mathbb{N}}\subseteq \mathcal{M}$. Veamos que
+        \[\bigcup_{n\in\mathbb{N}}A_n\in \mathcal{M}.\]
+        Si existe algún $n\in \mathbb{N}$ tal que $A_n$ contiene a un cerrado y no acotado, entonces la unión de todos también lo contiene. Supongamos que, para todo $n\in\mathbb{N}$, $A_n$ no contiene un cerrado y no acotado. Como $A_n\in \mathcal{M}$, entonces existe $C_n \subseteq X\setminus A_n$ cerrado y no acotado. Observemos que
+        \[\bigcap_{n\in\mathbb{N}} C_n\subseteq\bigcap_{n\in\mathbb{N}} (X\setminus A_n) = X\setminus\bigcup_{n\in\mathbb{N}}A_n.\]
+        Por tanto, como cada $C_n$ es cerrado y $\mathcal{M}$ es cerrada bajo complementos, basta ver que la intersección de los $C_n$ es no acotada. Sea $\alpha\in X$. Consideremos la siguiente sucesión:
+        \[C_1,\,C_2,\,\,C_1,\, C_2,\,C_3,\,\,C_1,\, C_2,\,C_3,\,C_4,\,\,\dots\]
+        Llamemos $B_k$ al $k$-ésimo elemento de tal sucesión. Como cada $B_k$ es no acotado, podemos construir una sucesión creciente, digamos $\{\beta_k\}_{k\in\mathbb{N}}\subseteq X$, tal que $\alpha < \beta_k$ y $\beta_k\in B_k$, para todo $k\in\mathbb{N}$. Sea 
+        \[\beta = \sup_{k\in\mathbb{N}} \beta_k.\]
+        Ahora, como cada $C_n$ se repite una infinidad de veces en la sucesión $B_k$, entonces en cada $C_n$ existe una subsucesión de $\beta_k$, digamos $\beta_{n_k}$. Como $\beta_k \to \beta$, entonces $\beta_{n_k}\to \beta$, de donde $\beta\in C_n$, y en consecuencia
+        \[\beta \in \bigcap_{n\in\mathbb{N}}C_n\tag{$*$}.\]
+        Así, la interesección de los $C_n$ es no acotada, de donde se sigue que $\mathcal{M}$ es cerrada bajo uniones numerables. Con todo esto concluimos que $\mathcal{M}$ es una $\sigma$-álgebra.\\\\
+        Ahora veamos que, en realidad, $\mathcal{M} = \mathcal{B}(X)$.\\\\
+        Sea $E\subseteq X$ cerrado. Si no es acotado, entonces $E\in \mathcal{M}$, de donde $X\setminus E \in \mathcal{M}$. Por otro lado, si $E$ está acotado, existe $\alpha \in X$ tal que $x<\alpha$, para todo $x\in E$. Así, $[\alpha, \xrightarrow{})\subseteq X\setminus E$, y por tanto $X\setminus E\in \mathcal{M}$, lo cual implica que $E\in \mathcal{M}$. En consecuencia, $\mathcal{B}(X) \subseteq \mathcal{M}$.\\\\
+        Ahora consideremos $E\subseteq X$ tal que existe un cerrado y no acotado $F\subseteq E$. Para cada $\alpha < \omega_1$, tomemos $f_\alpha:\alpha \to \mathbb{N}$ una función inyectiva, y definamos $g,h:E\to\mathbb{N}$ dadas por 
+        \[h(\eta) = \min(F\setminus \eta) \quad\text{y}\quad g(\eta) = f_{h(\eta)}(\eta).\]
+        Sea $A_n = g^{-1}[\{n\}]$. Observemos que, dado $\alpha\in\cerradura(A_n)\setminus A_n$, como $\alpha$ es límite (pues es un punto de acumulación de $A_n$), para cualquier $\alpha^\prime<\alpha$ existen $\eta,\eta^\prime\in A_n$ tales que $\alpha^\prime< \eta^\prime<\eta<\alpha $. Ahora, como $f_{h(\eta)}$ es inyectiva y $g(\eta^\prime) = n = g(\eta)$, entonces $h(\eta^\prime) < h(\eta)$, de donde \[h(\eta^\prime)\in F\cap(\eta^\prime, \eta]\subseteq F\cap(\alpha ^\prime, \alpha].\] 
+        Es decir, para todo $\alpha\in\cerradura(A_n)\setminus A_n$, $\alpha \in\cerradura(F) = F$.\\[8pt]
+        En consecuencia, $\cerradura(A_n) \subseteq A_n\cup F$, de donde $A_n = \cerradura(A_n)\setminus F$, lo cual implica que $A_n$ es un conjunto de Borel. Como $E = \bigcup_{n\in\mathbb{N}}A_n$, se sigue que $E$ es un conjunto de Borel, y por tanto $\mathcal{M}\subseteq \mathcal{B}(X)$.\\\\
+        Ahora, teniendo esto, por $(*)$, $\mu$ es numerablemente aditiva. Esto, pues si $(A_n)_{n\in\mathbb{N}}$ es una sucesión de medibles ajenos dos a dos, entonces a lo más existe uno de medida igual a 1, es decir,
+        \[|\{n\in\mathbb{N}\,:\,\mu(A_n) = 1\}|\leq 1,\]
+        de donde
+        \[\mu\left(\;\bigcup_{n = 1}^{\infty}A_n\right) =\sum_{n = 1}^{\infty}\mu(A_n).\]
+        En síntesis, $\mu$ es medida de Borel.
+        Finalmente, observemos que para cualquier $x\in X$, $V_x = [0,x+1)\in \mathcal{V}(x)$ y $\mu(V_x) = 0$, lo cual implica que $\supp(\mu) = \varnothing$.
+    \end{proof}
+\end{example}
+\begin{proposition*}
+    Si $X$ es segundo numerable, entonces el soporte de toda medida de Borel tiene medida plena.
+\end{proposition*}
+\begin{proof}
+    Sean $(X,\tau)$ un espacio topológico y $\mu$ una medida de Borel en $X$. Como $X$ es segundo numerable, existe $\beta  \subseteq \tau$ base numerable para $X$. Observemos que 
+    \[\medcup\{U\in \tau\,:\,\mu(U) = 0\} = \medcup\{U\in \beta\,:\,\mu(U) = 0\}.\]
+    Así,
+    \[X\setminus \supp(\mu) = \medcup\{U\in \beta\,:\,\mu(U) = 0\}.\]
+    De donde $\supp(\mu)$ tiene medida plena.
+\end{proof}
+
+\begin{definition} 
+    Sean $P$ un subespacio dimensionalmente finito de $V$ y $A = \{v_1,\ldots, v_n\}$ una base para $P$. Si $\lambda$ es la medida de Lebesgue en $\mathbb{R}^{n}$ y $p_A : P \to \mathbb{R}^{n}$ es la función determinada mediante 
+    \[p_A(a_1v_1 +\dots+ a_nv_n) = (a_1,\dots,a_n),\] 
+    entonces $\mu_A : \mathcal{B}(V) \to \mathbb{R}$ es la función dada por $$\mu_A(S) = \lambda\left(p_A[S\cap P]\right).$$
+\end{definition}
+
+\begin{proposition}\label{prop:simpl_sonda}
+    Si $P$ es un subespacio dimensionalmente finito de $V$ y $A$ es una base para $P$, entonces $\mu_A$ es una medida de Borel en $V$. Además, si $B$ es una base para $P$, $S\in \mathcal{B}(V)$ y $\mu_A(S) = 0$, entonces $\mu_B(S) = 0$.
+\end{proposition}
+\begin{proof}
+    Primero, notemos que, como $p_A$ es un isomorfismo y $P\in\mathcal{B}(V)$, entonces \[p_A[S\cap P]\in\mathcal{B}(\mathbb{R}^n),\] para todo $S\in\mathcal{B}(V)$. Además, para cualquier familia de borelianos disjuntos dos a dos, digamos $\mathcal{S}\subseteq\mathcal{B}(V)$, 
+    \[\mu_A\left(\bigcup_{S\in\mathcal{S}} S\right) = \lambda\left(\bigcup_{S\in\mathcal{S}} p_A[S\cap P]\right) = \sum_{S\in \mathcal{S}}\lambda(p_A[S\cap P]) = \sum_{S\in \mathcal{S}}\mu_A(S).\]
+    Finalmente, $\mu_A(\varnothing)=0$ y $\mu_A \geq 0$. Por tanto, $\mu_A$ es una medida de Borel en $V$. \\\\
+    Sea $B$ una base para $P$, y supongamos que $\mu_A(S) = 0$, para algún $S\in \mathcal{B}(V)$. Como $p_A(A)$ y $p_B(A)$ son bases en $\mathbb{R}^n$, entonces existe una transformación lineal $C:\mathbb{R}^n\to \mathbb{R}^n$ tal que  \[p_B = C\circ p_A.\] 
+    Entonces, por el teorema de cambio de variable,
+    \begin{align*}
+        \mu_B(S)& = \lambda(p_B[S\cap P])\\[6pt]
+        &= \lambda(C\circ p_A[S\cap P])\\[6pt]
+        &= |\det C|\cdot\lambda( p_A[S\cap P])\\[6pt] 
+        &= |\det C|\cdot \mu_A(S) = 0. \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{definition} 
+    Sean $P$ un subespacio finito-dimensional de $V$ y $T$ un subconjunto de $V$. Decimos que $P$ es una \textit{sonda} de $T$ si existen una base $A$ para $P$ y un conjunto $B\in \mathcal{B}(V)$ con $V\setminus T \subseteq B$ de tal manera que $\mu_A$ está concentrada en $P$ y es transversal a $B$.
+\end{definition}
+
+A partir de la \cref{def:timido} podemos llegar al siguiente teorema que, como veremos, será de gran utilidad al intentar demostrar que un conjunto es prevalente:
+
+\begin{theorem}\label{thm:simp_prev}
+    Si $T\subseteq V$ tiene una sonda entonces es prevalente. 
+\end{theorem}
+
+\begin{observation*}
+    Una sonda para un conjunto boreliano $T$ es un subespacio de dimensión finita $P$ que está casi completamente contenido en cualquier traslación de $T$ (respecto a alguna medida de Lebesgue concentrada en $P$).    
+\end{observation*}  
+
+Teniendo esto en cuenta, veamos algunos ejemplos que muestran cómo este teorema simplifica la demostración de que un conjunto es prevalente.
+\begin{example} 
+    Si definimos 
+    \[L^1[0,1] = \left\{f:[0,1]\to\mathbb{R}\,:\,\int_0^1|f|\;\text{d}\lambda<\infty\right\},\]
+    entonces el conjunto
+    \[T = \left\{f\in L^1[0,1]\,:\,\int_0^1 f\,\text{d}\lambda\neq 0 \right\}\]
+    es prevalente en $L^1[0,1]$. Es decir, casi toda función Lebesgue-integrable en $[0,1]$ tiene integral no nula.
+    \begin{proof}
+        Sea $V = L^1[0,1]$. Primero observemos que, como el operador integral $I:L^1[0,1]\to\mathbb{R}$ dado por 
+        \[I(f) = \int_0^1f\,\text{d}\lambda\]
+        es continuo, entonces $T = I^{-1}[\{0\}]$ es cerrado, y por tanto boreliano.\\\\
+        Encontremos una sonda para $T$: sea $P \subseteq L^1[0,1]$ el subespacio de todas las funciones constantes. Para cualquier $g\in V$, sólo existe una $c_g\in P$ tal que 
+        \[\int_0^1(g + c_g)\,\text{d}\lambda= 0.\]
+        Es decir, para toda $g\in V$, $P\setminus(T-g) = \{c_g\}$. Por tanto, por la observación anterior, $P$ es una sonda de $T$, de donde $T$ es prevalente.
+    \end{proof}
+\end{example}
+
+\newpage
+\begin{example}
+    Sea $p\in (1,\infty]$. Casi toda sucesión $\{a_n\}_{n\in\mathbb{N}}\in \ell^p$ satisface que $\sum_{n=1}^{\infty}a_n$ diverge.
+    \begin{proof}
+        Sea $T$ el conjunto de todas las sucesiones en $\ell^p$ tales que su serie diverge.\\
+        \textbf{Afirmación:} $T$ es boreliano. Llamemos $B = \ell^p\setminus T$.\\\\
+        Para cada $m\in\mathbb{N}$, llamemos $S_m:\ell^p\to\mathbb{R}$ a la función dada por
+        \[S_m(a) = \sum_{k = 1}^{m}a_k.\]
+        Como $B$ es el conjunto de todas las sucesiones cuya serie converge, entonces para cada $a\in B$ existe $N_k\in \mathbb{N}$ tal que, para cuales quiera $n,m>N_k$,
+        \[|S_n(a)-S_m(a)|<\frac{1}{k}.\]
+        A partir de esto podemos ver que
+        \[B = \bigcap_{k\in\mathbb{N}}\bigcup_{N\in\mathbb{N}}\bigcap_{n,m\geq N}\left\{a\in \ell^p:|S_n(a) - S_m(a)|<\frac{1}{k}\right\}.\]
+        Como cada $S_m$ es continua, entonces cada conjunto de la forma 
+        \[\left\{a\in \ell^p:|S_n(a) - S_m(a)|<\frac{1}{k}\right\}\]
+        es abierto, y por tanto $B$ es boreliano, de donde $T$ también lo es.
+        \\\\Ahora, consideremos $b_n = 1/n$. Como $p>1$, entonces $b=\{b_n\}_{n\in\mathbb{N}}\in \ell^p$.\\
+        \textbf{Afirmación:} $P = \langle b\rangle$ es una sonda de $T$.\\\\
+        Sea $\{a_n\}_{n\in\mathbb{N}}\in \ell^p$. Observemos que, a lo más, sólo puede existir una $c\in \mathbb{R}$ tal que
+        \[\sum_{n=1}^{\infty}(a_n + cb_n)<\infty.\]
+        Esto, pues si existen $c_1,c_2\in \mathbb{R}$ distintos y tales que 
+        \[\sum_{n=1}^{\infty}(a_n + c_1b_n)<\infty\quad \text{y}\quad \sum_{n=1}^{\infty}(a_n + c_2b_n)<\infty,\]
+        entonces se tendría que 
+        \[\sum_{n=1}^{\infty}b_n = \frac{1}{c_1-c_2}\left(\sum_{n=1}^{\infty}(a_n + c_1b_n)-\sum_{n=1}^{\infty}(a_n + c_2b_n)\right) < \infty,\]
+        lo que es una contradicción. Por tanto, para cada $a\in \ell^p$, a lo más existe una sucesión convergente en $a + P$. Es decir, para cada $a\in \ell^p$
+        \[|P\setminus(T - a)|\leq 1.\]
+        Y por lo tanto, de manera análoga al ejemplo anterior, $T$ es prevalente.
+    \end{proof}
+\end{example}
+
+En este punto, ya sólo nos queda una pregunta por resolver: 
+\begin{center}
+    ¿Es $\mathcal{ND}[0,1]$ un conjunto prevalente en $(\mathcal{C}[0,1],\; ||\cdot||_{\infty})$?
+\end{center}
+O, dicho de una forma más dramática,
+\begin{center}
+    ¿Casi toda función continua en $[0,1]$ es nunca derivable?
+\end{center}

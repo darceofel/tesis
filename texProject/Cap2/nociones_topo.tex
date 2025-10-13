@@ -1,0 +1,120 @@
+\section{Algunas nociones topológicas}
+A pesar de que el estudio de la topología prescinda de las medidas al estudiar a los espacios, podemos usarla para acercarnos a una noción sensible sobre el tamaño de $\mathcal{ND}[0,1]$. El concepto de densidad, por ejemplo, nos habla de que un espacio está \textit{disperso} en otro. Veamos la definición formal:
+\begin{definition}
+    Sea $(X,\tau)$ un espacio topológico. Decimos que un subespacio $D\subseteq X$ es \textit{denso} en $X$ si se cumple que $U\cap D\neq\varnothing$, para todo $U\in\tau\setminus\{\varnothing\}$.
+\end{definition}
+
+Aterrizando la definición en algo más cercano a nuestro enfoque, tenemos la siguiente proposición que caracteriza la densidad en los espacios métricos. 
+\begin{proposition}
+    Sean $(X,\,d)$ un espacio métrico y $D\subseteq X$. $D$ es denso en $X$ si y sólo si se cumple que, para cualesquiera $x\in X$ y $\varepsilon > 0$, $B(x,\varepsilon)\cap D\neq \varnothing$. 
+\end{proposition}
+
+Es decir, un subespacio $D\subseteq X$ es denso en $X$ si y sólo si todo elemento de $X$ está tan cerca como queramos de un elemento de $D$. Es difícil pensar que toda función continua tenga una vecina nunca derivable tan cerca como la queramos, pero el siguiente teorema desafía esta intuición y nos ofrece otro resultado contraintuitivo:
+
+\begin{theorem}\label{theorem:ND_denso}El espacio $\mathcal{ND}[0,1]$ es denso en $(\mathcal{C}[0,1], \; || \cdot ||_{\infty})$.
+\end{theorem}
+
+\begin{proof}
+    Sean $f\in\mathcal{C}[0,1]$  y $\varepsilon > 0$. Como $f$ es continua en $[0,1]$, entonces es uniformemente continua, por lo que existe $\delta>0$ tal que, para cualesquiera $x,y\in[0,1]$, si $|x-y|<\delta$, entonces 
+    \[|f(x)-f(y)|<\frac{\varepsilon}{4}.\]
+    Sean $N\in\mathbb{N}$ tal que $1/N<\delta$, y $x_k = k/N$, con $k\in\{0,\dots,N\}$. Ahora, para $k\in\{1,\dots,N\}$, llamemos $g_k:[x_{k-1},x_{k}]\to\mathbb{R}$ a la recta que une a \[(x_{k-1}, f(x_{k-1})) \text{ con } (x_{k}, f(x_{k})).\] 
+    De esta forma, $\{x_0,\dots,x_N\}$, es una partición del intervalo $[0,1]$, y 
+    \[|g_k(x)-f(x)|<\frac{\varepsilon}{2}\]
+    para todo $x\in[x_{k-1}, x_k]$. Por el \cref{cor:implica_densidad_lynch}, para cada $k\in\{1,\dots,N\}$ existe una función $\varphi_k\in\mathcal{ND}[x_{k-1}, x_{k}]$ tal que 
+    \[||\varphi_k-g_k||_{\infty}<\frac{\varepsilon}{2}, \quad \varphi(x_{k-1}) = f(x_{k-1})\,\quad\text{y}\quad \varphi(x_{k}) = f(x_{k}).\]
+    Sea $\varphi:[0,1]\to\mathbb{R}$ dada por $\varphi(x) = \varphi_k(x)$, donde $x\in[x_{k-1}, x_k]$. De esta forma, \[\varphi\in\mathcal{ND}[0,1]\; \text{ y } \;||\varphi- f||_{\infty}<\varepsilon.\]
+\end{proof}
+
+En otras palabras, la gráfica de toda función continua en $[0,1]$ tiene, tan cerca como queramos, la gráfica de una función continua y nunca derivable. A pesar de que este resultado sea atractivo por lo contraintuitivo que es, sigue sin responder nuestra pregunta, pues la densidad de un subespacio depende de la topología del espacio que lo contiene. De aquí que, por ejemplo, podemos tener subespacios densos y unipuntuales:
+\begin{example}
+    Sea $X$ un conjunto no vacío equipado con la topología
+    \[\tau = \{A\subseteq X\,|\, p\in A\}\cup\{\varnothing\}\]
+    donde $p\in X$ es algún punto arbitrario. Observemos que, independientemente de la cardinalidad de $X$, el conjunto unitario $D=\{p\}$ es denso en $(X, \,\tau)$. 
+\end{example}
+Dicho de otro modo, la densidad de un subespacio sólo nos habla de cuán disperso está en el espacio dotado de alguna topología en particular. Ahora, esto último sólo nos expone la dificultad de atacar el problema con la densidad por sí sola. Las siguientes definiciones y resultados usan este concepto para construir más herramienta útil para llegar a una respuesta:  
+\begin{definition}
+    Sea $(X, \tau)$ un espacio topológico. Dado $A\subseteq X$, decimos que $A$ es \textit{denso en ninguna parte} si se cumple que
+    \[\interior(\cerradura(A)) = \varnothing.\]
+\end{definition}
+\begin{proposition}
+    Sean $(X, \tau)$  un espacio topológico y $A\subset X$. El conjunto $A$ es denso en ninguna parte si y sólo si $X\setminus \cerradura(A)$ es denso en $X$.
+\end{proposition} 
+La densidad en ninguna parte, como lo dice su nombre, es algo así como el concepto opuesto a la densidad. En cierto sentido, los conjuntos densos en ninguna parte son ``pequeños'' o ``delgados''. 
+
+Observemos que la proposición anterior nos demuestra que, si $A$ es denso en ninguna parte en $X$, entonces todo abierto $U\subseteq X$ tiene un subconjunto abierto $V\subseteq U$ tal que $V\cap A = \varnothing$, es decir, todos los abiertos tienen partes ``separadas'' de $A$. En otras palabras, los conjuntos densos en ninguna parte no pueden ser vecindad de alguno de sus puntos.
+\begin{definition}
+    Sean $(X, \tau)$  un espacio topológico y $A\subset X$. Decimos que $A$ es \textit{de primera categoría} si es unión numerable de conjuntos densos en ninguna parte. Por el contrario, decimos que $A$ es \textit{de segunda categoría} si no es de primera categoría.
+\end{definition}
+\begin{example}
+    El conjunto de los números racionales, $\mathbb{Q}$, como subespacio de los reales con la topología euclideana, es de primera categoría, pues cada conjunto unipuntual $\{x\}\subseteq\mathbb{R}$ es un denso en ninguna parte, y $|\mathbb{Q}| = \omega$. 
+\end{example}
+\begin{observation*}
+    Sea $(X, \tau)$ un espacio topológico. Si $\{A_{n}\subseteq X\,|\,n\in\mathbb{N}\}$ es una sucesión de conjuntos de primera categoría, entonces $\bigcup_{n\in\mathbb{N}} A_n$ es de primera categoría. 
+\end{observation*}
+La observación anterior proporciona una técnica para detectar cuándo un conjunto expresado de manera adecuada es de segunda categoría. En efecto, si $(X,\tau)$ es un espacio topológico, $A$ es de segunda categoría en $X$, $B$ es de primera categoría en $X$ y $A = B\cup C$, entonces $C$ es de segunda categoría en $X$.
+\newpage
+\begin{lemma}
+    Sea $(X, \tau)$ un espacio topológico. Si toda intersección numerable de abiertos densos resulta en un conjunto denso, entonces $X$ es de segunda categoría. 
+\end{lemma}
+\begin{proof}Supongamos que $X$ es de primera categoría. Entonces existe una sucesión de conjuntos densos en ninguna parte, digamos $\{C_n \,|\,n\in\mathbb{N}\}$, tal que
+    \[X = \bigcup_{n\in\mathbb{N}}C_n.\]
+    Sin pérdida de generalidad, supongamos que cada $C_n$ es cerrado. Así, $U_n = X\setminus C_n$ es abierto y denso, pero esto implicaría que 
+    \[\bigcap_{n\in\mathbb{N}} U_n = \bigcap_{n\in\mathbb{N}} (X\setminus C_n) = X\setminus \bigcup_{n\in\mathbb{N}} C_n = \varnothing,\]
+    lo que es una contradicción. Por lo tanto, $X$ es de segunda categoría.
+\end{proof}
+El siguiente teorema (se puede consultar una prueba diferente en \cite{Functional_analysis}) le da aún más peso a la observación anterior:
+\begin{theorem}[Baire]
+    Todo espacio métrico completo es de segunda categoría.
+\end{theorem}
+\begin{proof}
+    Sea $(X,d)$ un espacio métrico completo. Demostraremos que toda intersección numerable de abiertos densos resulta en un conjunto denso. Sea $(U_n)_{n\in\mathbb{N}}$ una sucesión de abiertos densos en $X$. Llamemos
+    \[ G = \bigcap_{n\in\mathbb{N}} U_n.\]
+    Sean $x_0\in X$, $r>0$. Como $U_1$ es abierto y denso, entonces $B(x_0,r)\cap U_1$ es un conjunto abierto no vacío. Tomemos $x_1\in B(x_0,r)\cap U_1$ y $0<r_1<r/2$ tal que 
+    \[B(x_1,r_1)\subseteq\cerradura (B(x_1,r_1)) \subseteq B(x_0,r)\cap U_1.\]
+    Como $U_2$ es abierto y denso, entonces $B(x_1,r_1)\cap U_2$ es un conjunto abierto no vacío. Tomemos $x_2\in B(x_1,r_1)\cap U_2$ y $0<r_2<r_1/2$ tal que
+    \[B(x_2,r_2)\subseteq\cerradura (B(x_2,r_2)) \subseteq B(x_1,r_1)\cap U_2.\]
+    Así, de manera recursiva, logramos construir dos sucesiones, $\{x_n\,|\,n\in\mathbb{N}\}\subseteq X$ y $\{r_n\,|\,n\in\mathbb{N}\}\subseteq\mathbb{R}$, tales que
+    \[r_{n+1}<\frac{r_n}{2},\; \text{ y }\; B(x_{n+1},r_{n+1})\subseteq\cerradura (B(x_{n+1},r_{n+1})) \subseteq B(x_{n},r_{n})\cap U_{n+1}.\]
+    Observemos que, dados $n,m\in\mathbb{N}$, si $n\geq m$, entonces
+    \[x_n\in \cerradura(B(x_m,r_m)),\; \text{ de donde }\; d(x_n,x_m)\leq r_m \mathbb<r/2^{m}. \tag{$*$}\label{eq:cerradura_baire}\]
+    Lo que demuestra que $x_n$ es de Cauchy. Dado que $X$ es completo, existe $y\in X$ tal que $x_n\to y$. Finalmente, por \eqref{eq:cerradura_baire}, $y\in B(x_n,r_n)\subseteq U_n$ para todo $n\in \mathbb{N}$, lo que implica que $y\in B(x_0,r)\cap G$  .
+\end{proof}
+Entre muchos corolarios, el teorema anterior nos demuestra, por ejemplo, que los irracionales, $\mathbb{I}\subseteq\mathbb{R}$, son de segunda categoría, pues $\mathbb{R} = \mathbb{Q}\cup\mathbb{I}$, $\mathbb{R}$ es un métrico completo y $\mathbb{Q}$ es de primera categoría.
+
+Antes de pasar al teorema importante de esta sección observemos que, usando el hecho de que toda función $f\in\mathcal{C}[0,1]$ es uniformemente continua en $[0,1]$, y dando un argumento similar al que dimos en el comienzo de la demostración del  \cref{theorem:ND_denso}, podemos demostrar el iguiente lema:
+\begin{lemma}\label{lema:poligonos_denso}
+    Sea $\mathcal{P} = \{f\in\mathcal{C}[0,1] : \text{la gráfica de $f$ es una poligonal finita\footnotemark}\}$\footnotetext{Recordemos nuestra definición de poligonal, la \cref{def:poligono_raro}. Por poligonal finita, nos referimos a una formada por una cantidad finita de rectas.}. $\mathcal{P}$ es denso en $\mathcal{C}[0,1]$.
+\end{lemma}
+\begin{theorem}[Banach - Mazurkiewicz]
+    $\mathcal{ND}[0,1]$ es de segunda categoría en $\mathcal{C}[0,1]$. 
+\end{theorem}
+\begin{proof} Con el fin de reducir la notación, llamemos $\mathcal{N} = \mathcal{ND}[0,1]$ y $X = \mathcal{C}[0,1]$. Sea 
+\[\mathcal{A} = \{f\in X\,:\, f \text{ tiene \textit{derivada por la derecha} finita en algún } x\in[0,1]\}.\]
+Observemos que $X\setminus \mathcal{A}\subseteq \mathcal{N}$. Además, por el teorema de Baire, $X$ es de segunda categoría. Por tanto, si logramos demostrar que $\mathcal{A}$ es de primera categoría, entonces se seguiría que $\mathcal{N}$ es de segunda categoría. Veamos que $\mathcal{A}$ es de primera categoría. \\\\
+Para cada $n\in\mathbb{N}$, tomemos
+\[E_n = \left\{f\in X : \exists x\in [0,1-1/n] \ \forall h\in (0,1/n)\left(\ \left|\frac{f(x+h)-f(x)}{h}\right|\leq n \right)\right\}.\]
+Notemos que \[\mathcal{A}\subseteq \bigcup _{n\in\mathbb{N}}E_n.\]
+\textbf{Afirmación:} cada $E_n$ es denso en ninguna parte.\\\\
+Para ver esto, primero veamos que cada $E_n$ es cerrado. Tomemos $g\in\cerradura(E_n)$. Entonces existe una sucesión $\{f_k\}_{k\in\mathbb{N}}\subseteq E_n$ tal que $f_k \xrightarrow{\;u\;} g$. Por definición, para cada $k\in\mathbb{N}$ existe un $x_k\in[0,1-1/n]$ tal que 
+\[\left|\frac{f_k(x_k+h)-f_k(x_k)}{h}\right|\leq n,\,\text{ para todo } h\in(0,1/n).\]
+Como $\{x_k\}_{k\in\mathbb{N}}$ es una sucesión acotada, entonces tiene una subsucesión convergente a algún $x_0\in[0,1-1/n]$. Sin pérdida de generalidad, supongamos que toda la sucesión converge a $x_0$. Así, como $g$ es continua y $f_n \xrightarrow{\;u\;} g$, tenemos que para todo $h\in (0,1/n)$ 
+\[\left|\frac{g(x_0+h)-g(x_0)}{h}\right| = \lim_{k\to \infty} \left|\frac{f_k(x_k+h)-f_k(x_k)}{h}\right|\leq n.\]
+En consecuencia, $g\in E_n$ y, por lo tanto $E_n = \cerradura(E_n)$. 
+Entonces, para demostrar que $E_n$ es denso en ninguna parte, basta con ver que $\cerradura(X\setminus E_n) = X$.
+Observemos que 
+\begin{align*}
+  X\setminus E_n = \biggl\{f\in X\,:\,\forall x\in\left[0,1-1/n\right]\;\exists\, h\in(0,1/n) \text{ tal que } \left|\frac{f(x+h)-f(x)}{h}\right| > n\biggr\}.  
+\end{align*}
+Sean $g\in X$ y $\varepsilon> 0$. Por el \cref{lema:poligonos_denso} existe una función $f\in \mathcal{C}[0,1]$ formada por una cantidad finita de rectas con $||f-g||_{\infty}<\varepsilon/2$. Supongamos que las rectas que forman a la gráfica de $f$, $G(f)$, son $R_{1},\dots,R_{m}$.\\\\
+Por la \cref{prop:import2}, para cada $R_{i}$ existe una poligonal finita $P_{i}\subseteq N_{\varepsilon/2}(R_{i})$ tal que:
+\begin{enumerate}
+    \item[(1)] empieza y termina en los mismos puntos que $R_i$, y
+    \item[(2)] las rectas que lo forman tienen pendiente con valor absoluto mayor que $n$.
+\end{enumerate}
+Así
+\[P = \bigcup_{i=1}^{m}P_{i}\]
+es una poligonal tal que la función que lo forma, digamos $p\in \mathcal{C}[0,1]$, cumple que \\$||g-p||_{\infty} < \varepsilon$ y $\forall x\in[0,1)$ 
+\[\lim_{h\to 0^+}\left|\frac{p(x+h)-p(x)}{h}\right| > n.\]
+Por esta razón, $p\in X\setminus E_n$, lo cual implica que $\mathcal{N}$ es de segunda categoría en $X$.
+\end{proof}
+El capítulo anterior nos demostró con cuentas, resultados técnicos y notación inusual, que $\mathcal{ND}[0,1]\neq \varnothing$. Sin embargo, este último teorema, esquivando todas estas incomodidades, logró demostrar un fortalecimiento sustancial de lo anterior, pues las dos categorías de Baire son mutuamente excluyentes, y el conjunto vacío siempre es de primera categoría en cualquier espacio, es decir, el conjunto vacío nunca es de segunda categoría.

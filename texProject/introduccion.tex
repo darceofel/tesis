@@ -1,0 +1,39 @@
+\chapter*{Introducción}
+\addcontentsline{toc}{chapter}{\textbf{Introducción}}
+En el estudio del cálculo real, la derivabilidad de una función es una de las primeras definiciones importantes a las que nos enfrentamos. Con ella, a raíz de sus muchas aplicaciones, llegan una  serie interminable de teoremas, ejemplos y equivalencias que nos hacen olvidarnos de una pregunta que, a pesar de que no es tan importante en la construcción de teoría, sí es igual de interesante:
+\begin{center}
+    ¿Existen funciones continuas que no sean derivables?
+\end{center}
+Un examen rápido responde positivamente la pregunta: tomando, por ejemplo, la función valor absoluto $f(x) = |x|$, podemos ver que esta es continua en $x = 0$, pero no es derivable en tal punto. Sin embargo, los más curiosos se quedarán insatisfechos con esta respuesta, y ahora buscarán responder la siguiente:
+\begin{center}
+    ¿Existen funciones continuas y no derivables en muchos puntos,\\ o en una infinidad de puntos?
+\end{center}
+La pregunta sigue siendo igual de fácil de entender, pero esta vez la respuesta no es tan inmediata. No obstante, un truco ingenioso vuelve a dar una respuesta afirmativa: consideremos la misma función anterior, $f(x) = |x|$, pero ahora restrinjamos su dominio al intervalo $[-1,1]$, y extendamos su comportamiento de manera periódica, con periodo 2, a todos los números reales. La función resultante será continua en todos los números reales, pero no será derivable en ningún entero par. Naturalmente, la siguiente pregunta a resolver es:
+\begin{center}
+    ¿Existen funciones continuas y no derivables en una \\infinidad no numerable de puntos?
+\end{center}
+O, incluso:
+\begin{center}
+    ¿Existen funciones continuas que no tengan puntos de derivabilidad?
+\end{center}
+Es aquí donde se encontraba la comunidad matemática hacia mediados del siglo XIX: muchos apostaban por el orden, la simpleza y la regularidad de las matemáticas, afirmando que era imposible que una función continua pudiera tener un comportamiento tan errático. Sin embargo, en 1872, Karl Wilhelm Theodor Weierstrass, un matemático en gran parte autodidacta, desafió la intuición de la mayoría de sus colegas al presentar el primer ejemplo de una función continua y nunca derivable.
+
+\begin{quote}
+    \emph{Me aparto con temor y horror de la lamentable plaga de funciones continuas que no tienen derivadas...}
+    \vspace{-0.5cm}
+    \begin{flushright}
+        - Hermite en una carta a Stieltjes, 20 de mayo de 1893\footnote{Traducido del inglés, recuperado de \cite{letter_cite}.}.
+    \end{flushright}
+\end{quote}
+
+Este fue el tipo de reacciones que trajo la publicación del ejemplo de Weierstrass. Con los años llegaron más, y con estos nuevos ejemplos llegó un entendimiento general sobre el tamaño del espacio de este tipo de funciones. La comunidad matemática se estaba dando cuenta de algo inesperado: no sólo había algunas cuantas funciones continuas y nunca derivables, más bien, parecía que la mayoría de las funciones continuas no tenían puntos de derivabilidad. 
+
+Ese es, precisamente, el objetivo de esta tesis: demostrar que casi toda función real, continua en un intervalo cerrado, es nunca derivable. De manera más precisa, si definimos $\mathcal{ND}[0,1]$ como el espacio de funciones reales, continuas y nunca derivables en el intervalo $[0,1]$, demostraremos que ``casi toda'' función perteneciente a  $(\mathcal{C}[0,1],\; ||\!\cdot\!||_{\infty})$ también pertenece a $\mathcal{ND}[0,1]$. Se recomienda al lector interesado tener un conocimiento sólido en los temarios de Análisis Real, Teoría de la medida y Topología.\\
+
+\noindent El trabajo lleva la siguiente estructura: 
+
+En el primer capítulo expondremos algunos ejemplos de funciones continuas y nunca derivables, incluyendo la teoría necesaria para entender sus demostraciones, y llevando un orden cronológico que expone la madurez y el cambio en la estructura de las matemáticas a lo largo del tiempo.
+
+El segundo capítulo empieza abordando algunos resultados topológicos sobre el espacio, continúa exponiendo las limitaciones que tienen las medidas en los espacios de Banach dimensionalmente infinitos, y finaliza dando la definición de ``prevalencia'', una noción que generaliza la frase ``casi todo elemento de un conjunto $A$ está en un conjunto $B$'' en este tipo de espacios.
+
+El tercer y útltimo capítulo ataca directamente el problema central de la tesis. En éste se aterrizan las definiciones dadas en el capítulo anterior, y se presenta una forma sencilla de probar que un espacio es prevalente. Finalmente, tras exponer algunos resultados bastante técnicos, y utilizando la herramienta desarrollada anteriormente, se demuestra que casi toda función continua es nunca derivable.

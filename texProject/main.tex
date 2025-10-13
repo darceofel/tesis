@@ -1,0 +1,123 @@
+%%%% Configuración general del archivo
+\documentclass[12pt, letterpaper, twoside]{report}
+\usepackage[top=3cm, bottom=3cm, left=3.5cm, right=2.5cm]{geometry}
+
+%%%% Paquetes de matemáticas
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd, mathtools}
+
+%%%% Vincular teoremas, proposiciones, etc.
+% \usepackage[hidelinks]{hyperref} % Por si se quieren quitar las cajas rojas sobre los links/referencias
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{float}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!80!black},
+    urlcolor={blue!80!black}
+}
+\usepackage[nameinlink]{cleveref}
+
+%%%% Redefinir nombre al vincular teoremas, proposiciones, etc.
+\crefname{lemma}{lema}{lemas}
+\crefname{proposition}{proposición}{proposiciones}
+\crefname{theorem}{teorema}{teoremas}
+\crefname{definition}{definición}{definiciones}
+\crefname{example}{ejemplo}{ejemplos}
+\crefname{corollary}{corolario}{corolarios}
+
+%%%% Enumeración de teoremas
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section] %% Definir a partir de qué tipo de división se enumeran
+\newtheorem{theorem}[definition]{Teorema}
+\newtheorem{proposition}[definition]{Proposición}
+\newtheorem{lemma}[definition]{Lema}
+\newtheorem{corollary}[definition]{Corolario}
+\newtheorem{example}[definition]{Ejemplo}
+\newtheorem*{notation*}{Notación}
+\newtheorem*{observation*}{Observación}
+\newtheorem*{proposition*}{Proposición}
+
+%%%% Cambiar nombre de títulos predefinidos a español.
+\usepackage[spanish]{babel}
+\addtolength{\footnotesep}{2mm}
+
+%%%% bibliografía
+\usepackage[backend=biber, style=ieee]{biblatex}
+\DeclareFieldFormat[article]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat{journaltitle}{\textnormal{#1}}
+\DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}}
+\addbibresource{referencias.bib} 
+\usepackage{csquotes}
+
+%% En la bibliografía, marcar fuentes que no se revisaron directamente
+\DeclareBibliographyCategory{asterisk}
+\renewbibmacro*{begentry}{\ifcategory{asterisk}{*\addspace}{}}
+\addtocategory{asterisk}{weier, Ampere}
+
+%% Para subrayar texto 
+\usepackage{color,soul}
+\setul{0.5ex}{0.3ex}
+\setulcolor{yellow}
+
+%% Para crear texto para rellenar
+\usepackage{lipsum}
+
+%% Para poner más grande el titulo
+\font\myfonttitulo = cmr12 at 25pt
+
+\usepackage[shortlabels]{enumitem} %% Para enumerar
+\usepackage{longfbox} %% caja de ida/regreso en demostraciones
+
+\renewcommand{\qedsymbol}{\raisebox{-\baselineskip}{\llap{\openbox}}} %% bajar una línea el cuadrado al final de las pruebas
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu} %% Definir línea para notación de convergencia
+
+%% Algunas definiciones usuales
+\DeclareMathOperator{\dom}{dom} 
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\cerradura}{cl}
+\DeclareMathOperator{\supp}{supp} 
+
+\usepackage{graphicx}
+\newcommand*{\medcap}{\mathbin{\scalebox{1}{\ensuremath{\bigcap}}}}
+\newcommand*{\medcup}{\mathbin{\scalebox{1}{\ensuremath{\bigcup}}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeindex
+
+\title{\myfonttitulo{Sobre el espacio de funciones \\continuas, nunca derivables}\\{\vspace{1cm}\Large Universidad Panamericana}}
+\author{Diego Arceo Félix}
+\date{Matemáticas Aplicadas }
+
+
+\begin{document}
+
+\maketitle
+\renewcommand{\baselinestretch}{1.25}\normalsize
+\tableofcontents
+\renewcommand{\baselinestretch}{1.0}\normalsize
+
+\include{introduccion}
+
+%%%% Capítulo 1
+\include{Cap1/intro_cap1}
+\include{Cap1/weier}
+\include{Cap1/Peano}
+\include{Cap1/McCarthy}
+\include{Cap1/lynch}
+
+%%%% Capítulo 2
+\include{Cap2/intro_cap2}
+\include{Cap2/nociones_topo}
+\include{Cap2/prevalencia}
+
+%%% Capítulo 3
+\include{Cap3/intro_cap3}
+\include{Cap3/sondas}
+\include{Cap3/prevalencia_ND}
+
+\include{Appendix/appendix}
+
+\printbibliography[title={Bibliografía\let\thefootnote\relax\footnote{* El nombre del autor se presenta con un asterisco para indicar que no revisamos directamente esta fuente. La información se obtuvo a través de su citación en otro trabajo.}}]
+
+
+\end{document}

@@ -1,0 +1,127 @@
+\renewcommand{\thesection}{A.\arabic{section}}
+\chapter*{Apéndice} 
+\addcontentsline{toc}{chapter}{Apéndice}
+
+\setcounter{chapter}{10}
+\setcounter{section}{0}
+\section{Demostraciones del primer capítulo}
+\begin{proposition}\label{appendix:seno_dory}
+    Si $c,d\in\mathbb{R}$, entonces
+    \[\sin\left(\frac{c+d}{2}\right)\sin\left(\frac{c-d}{2}\right) = \frac{1}{2}(\cos(d) - \cos(c)).\]
+\end{proposition}
+\begin{proof}
+    Recordando que el seno de una suma sigue la regla
+    \[\sin(c+d) =\cos(c)\sin(d) + \sin(c)\cos(d),\]
+    tenemos que
+    \begin{align*}
+        \sin(c+d)\sin(c-d) &= (\cos(c)\sin(d) + \sin(c)\cos(d))\cdot(\cos(c)\sin(d) - \sin(c)\cos(d))\\
+        &=\sin^2(c)\cos^2(d) - \cos^2(c)\sin^2(d)\\
+        &= \sin^2(c)(\cos^2(d) + \sin^2(d)) - \sin^2(d)(\cos^2(c) + \sin^2(c))\\
+        &= \sin^2(c)-\sin^2(d) \\
+        &=  \cos^2(d)-\cos^2(c).
+    \end{align*}
+    Ahora, como $2\cos^2(x) = 1 + \cos(2x)$ para todo $x\in\mathbb{R}$, entonces
+    \[\sin(c+d)\sin(c-d) = \frac{1}{2}(\cos(2c) - \cos(2d)).\]
+    Lo que demuestra la igualdad buscada.
+\end{proof}
+
+\begin{proposition}\label{appendix:prop:importante}
+    Sean $n \in \mathbb{N}$, $a,b,m,r\in\mathbb{R}$ con $a<b$, $I = [a,b]$  y $f:I\to \mathbb{R}$ dada por $f(x) = mx + r$, donde $|m|> n$. Para todo $\varepsilon>0$ existe $0<\delta<\varepsilon$ tal que, para cada $x\in I$, existe $y\in I$ con $0<|x-y|<\varepsilon$ y que tiene la siguiente propiedad: 
+\[\text{ si } p\in \overbar{N_{\delta}(f)}\,[x],\; q\in \overbar{N_{\delta}(f)}\,[y]\; \text{ entonces }\; \left|\frac{p-q}{x-y}\right| > n.\]
+\end{proposition}
+\begin{proof}
+Sean $\varepsilon > 0$ y
+\[\delta = \frac{1}{2}\min\left\{\varepsilon, \varepsilon^{2},\, \left(\frac{|m|-n}{2}\right)^2,\, \left(\frac{b-a}{2}\right)^2\right\}.\]
+Llamemos $c = \sqrt{\delta}$. Dado $x\in I$, como \[\max\{a-x, b-x\}\geq \frac{b-a}{2} \geq c,\] entonces $x-c\in I$ ó $x+c\in I$. Sin pérdida de generalidad, supongamos que $x+c\in I$ y definamos $y = x+c$. Así $y\in I$ y $0<y-x<\varepsilon$.\\\\
+Por el \cref{lemma:importante}, para todo $z\in I$ 
+\[\; \overbar{N_{\delta}(f)}\,[z] = [mz+r-\delta,\, mz+r+\delta].\]
+Notemos que, como \[\delta \leq \left(\frac{|m|-n}{2}\right)^2 \leq \left(\frac{m}{2}\right)^2,\] se cumple que $mx+r+\delta \leq my + r-\delta$. Por tanto, para cualesquiera
+\[ p\in \overbar{N_{\delta}(f)}\,[x]\; \text{ y }\; q\in \overbar{N_{\delta}(f)}\,[y]\]
+se tiene que $|p-q| \geq |(mx+r+\delta) - (my+r-\delta)| = |2\delta - mc| = c|2c-m|$, de donde
+\[\left|\frac{p-q}{x-y}\right| = \left|\frac{p-q}{c}\right| \geq |2c - m| \geq |m| - 2c > n .\]
+\end{proof}
+
+\begin{proposition}\label{appendix:prop:import2}
+    Si $a,b\in\mathbb{R}$, con $a<b$, y $f:[a,b]\to\mathbb{R}$ es una recta, entonces para cualesquiera $\varepsilon > 0$ y $n\in \mathbb{N}$ existe una poligonal $P\subseteq \mathbb{R}^{2}$ tal que: 
+    \begin{enumerate}
+        \item[(1)]{$P\subseteq N_\varepsilon(f)$,}
+        \item[(2)]{empieza en $(a,\,f(a))$ y termina en $(b,f(b))$, y}
+        \item[(3)]{es unión finita de rectas con pendiente cuyo valor absoluto es mayor a $n$.}
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Para cada $k\in \mathbb{N}$ tomemos $k$ números equidistantes en $[a,b]$, digamos $\{a_{1},...,a_{k}\}$, tales que 
+    \[a = a_{1} < a_{2} < \dots < a_{k-1} < a_{k} = b.\]
+    Entonces, para cada $i\in \{1,\dots,k\}$, $a_{i+1}-a_{i} = \frac{1}{k-1}(b-a)$. Consideremos $\delta = \frac{1}{2}\varepsilon$ y $g_{k}:\{a_{1},\cdots,a_{k}\} \to N_{\varepsilon}(f)$ la función dada por
+    \[g_k(a_i) = \begin{cases}
+            (a_i,\,f(a_i)), & \text{si } i=1 \text{ o } i = m,\\
+            (a_i,\,f(a_i) + (-1)^{i}\delta), & \text{en otro caso.}
+            \end{cases}\]
+    Sea $R_{i}$ la recta que une a $g(a_{i})$ con $g(a_{i+1})$. Entonces $P = \bigcup_{i=1}^{k-1} R_{i}$ es una poligonal contenida en $N_{\varepsilon}(f)$.\\\\
+    Por otro lado, si $m$ es la pendiente de $f$, y $m_{i}$ es la pendiente de la recta $R_{i}$, entonces para todo $i\in \{1,...,k-1\}$
+    \[m_i = \frac{g(a_{i+1})- g(a_i)}{a_{i+1}-a_i} = m - (-1)^{i}(k-1)\frac{\varepsilon}{b-a},\]
+    de donde
+    \[|m_{i}| \geq (k-1)\frac{\varepsilon}{(b-a)} - |m|.\]
+    Así, para $k$ suficientemente grande, $P = \bigcup_{i=1}^{k-1} R_{i}$ es una poligonal contenida en $N_{\varepsilon}(f)$, donde las pendientes de sus rectas tienen valor absoluto mayor a $n$. 
+\end{proof}
+
+\begin{theorem}\label{appendix:implica_densidad_lynch}
+    Si $f:[0,1]\to\mathbb{R}$ es una recta, entonces para todo $\varepsilon > 0$ existe una función $\varphi\in\mathcal{ND}[0,1]$ tal que 
+    \[\sup_{x\in[0,1]}|f(x)-\varphi(x)| < \varepsilon.\]
+\end{theorem}
+\begin{proof}
+    Sean $\varepsilon >0$ y $f:[0,1]\to\mathbb{R}$ una recta. Por la \cref{appendix:prop:import2}, existe una poligonal $P\subseteq N_{\varepsilon / 2}$ que empieza en $(0,f(0))$, termina en $(1,f(1))$ y es unión finita de rectas con pendiente mayor a $1$. Por el \cref{lem:a_usar_en_appendice}, para cada una de estas rectas, digamos $g_i:[a_i,b_i]\to\mathbb{R}$, $0<i\leq n$, existe $\varphi_{i}\in\mathcal{ND}[a_i,b_i]$ tal que 
+    \[||g_i-\varphi_i||_{\infty}<\frac{\varepsilon}{4n}.\]
+    Sea $\varphi:[0,1]\to\mathbb{R}$ dada por:
+    \[\varphi(x) = \begin{cases}
+        \varphi_{1}(x), \quad &\text{si } \; x\in[a_1, a_{2}], \\
+        \varphi_i(x) + \sum\limits_{k=1}^{i-1}(\varphi_k(a_{k+1}) - \varphi_{k+1}(a_{k+1})), \quad &\text{si } \; \exists \,1<i< k \text{ tal que } x\in(a_i, a_{i+1}].
+    \end{cases}\]
+    Observemos que $\varphi$ no es derivable en ningún punto, pues ninguna $\varphi_i$ lo es. Por otro lado, notemos que $\varphi$ es continua en cada intervalo abierto de la forma $(a_i, a_{i+1})$, y también lo es en $[a_1,a_2]$. De este modo, para ver que es continua en todo el intervalo $[0,1]$ solo falta demostrar que lo es en cada $a_i$, para $i>2$. Veamos, tomando límite por la izquierda tenemos que:
+    \begin{align*}
+        \lim_{x\to a_{i}^{-}}\varphi(x) =\varphi_{i-1}(a_i) +  \sum\limits_{k=1}^{i-2}(\varphi_k(a_{k+1}) - \varphi_{k+1}(a_{k+1})).
+    \end{align*}
+    Ahora, tomando límite por la derecha:
+    \begin{align*}
+        \lim_{x\to a_{i}^{+}}\varphi(x) &= \lim_{x\to a_{i}^{+}} \varphi_{i}(x)+\sum\limits_{k=1}^{i-1}(\varphi_k(a_{k+1}) - \varphi_{k+1}(a_{k+1})) \\
+        &=\varphi_{i}(a_i) +  \sum\limits_{k=1}^{i-1}(\varphi_k(a_{k+1}) - \varphi_{k+1}(a_{k+1})) \\
+        &=\varphi_{i-1}(a_i) +  \sum\limits_{k=1}^{i-2}(\varphi_k(a_{k+1}) - \varphi_{k+1}(a_{k+1})) = \lim_{x\to a_{i}^{-}}\varphi(x),
+    \end{align*}
+    pues $\varphi_{i-1}$ es continua. Por lo tanto, $\varphi\in\mathcal{ND}[0,1]$.
+    \noindent Ahora veamos que $||f-\varphi||_{\infty} \leq \varepsilon$. Sea $x\in[0,1]$ y supongamos que $x\in(a_i,a_{i+1}]$. Entonces,
+    \begin{align*}
+        |\varphi(x)-f(x)| &= \left|\varphi_i(x) + \sum\limits_{k=1}^{i-1}(\varphi_k(a_{k+1}) - \varphi_{k+1}(a_{k+1})) - f(x)\right|\\
+        &\leq |\varphi_i(x)-g_i(x)| +|g_i(x)-f(x)|  \\
+        & \qquad\qquad  + \sum\limits_{k=1}^{i-1}\left|\varphi_k(a_{k+1})-g_k(a_{k+1}) + g_{k}(a_{k+1}) - \varphi_{k+1}(a_{k+1})\right|\\
+        &<\frac{\varepsilon}{4n} + \frac{\varepsilon}{2} + \sum\limits_{k=1}^{i-1}\left|\varphi_k(a_{k+1})-g_k(a_{k+1})|+ |g_{k+1}(a_{k+1}) - \varphi_{k+1}(a_{k+1})\right|\\
+        &<\frac{\varepsilon}{2} + \sum\limits_{k=1}^{i}\frac{\varepsilon}{2n}\\
+        &\leq\varepsilon.
+    \end{align*}
+    Es decir, $||f-\varphi||_{\infty} < \varepsilon$.
+\end{proof}
+
+
+\newpage
+\section{Demostraciones del segundo capítulo}
+
+\begin{proposition}\label{appendix:obs_cap_2}
+    Sea $V$ un $\mathbb{R}$-espacio de Banach dimensionalmente infinito y separable. Si $\mu$ es una medida de borel en $V$ invariante bajo traslaciones, entonces $\mu$ es la constante 0, o todos los abiertos no vacíos en $V$ tienen medida infinita.
+\end{proposition}
+\begin{proof}
+    Supongamos que $\mu$ no es constante, y tomemos $x_0\in V$. Primero, como $V$ es separable y $\mu$ es invariante bajo traslaciones, entonces 
+    \[\text{si existe } s>0 \text{ tal que } \mu(B(x_0,\,s)) = 0, \text{ entonces } \mu \equiv 0 .\]
+     Como $\mu\not\equiv 0$, entonces $\mu(B(x_0,s)) > 0$, para todo $s>0$. Nuestro objetivo es demostrar lo siguiente: para cada $r>0$ existe una sucesión $\{x_{n}\}_{n\in\mathbb{N}}\subseteq V$ tal que todas las bolas de la forma $B(x_{n}, r/4)$ son disjuntas entre sí y están contenidas en $B(x_0,r)$.\\\\
+    Procederemos recursivamente: supongamos que ya encontramos $x_{0},x_{1}, \, \dots ,\,x_{n}$. Observemos que el subespacio  \[F = \langle\{ x_{0}, \, \dots ,\,x_{n}\} \rangle\]
+    es un subconjunto propio de $V$ cerrado, lo cual asegura la existencia de un $y\in V\setminus F$ tal que $\text{d}(y,\,F) > 0$.\\\\
+    Sea $f:\mathbb{R}\to\mathbb{R}$ dada por $f(\lambda) = \text{d}(\lambda y,\, F)$. Observemos que para todo $\lambda \neq 0$ 
+    \[f(\lambda)  = \inf\{||\lambda y - x||\,:\, x\in F\}  = |\lambda|\inf\{ ||y - x/\lambda||\,:\, x\in F\} = |\lambda| f(1).\]
+    Si tomamos
+    \[\lambda_0 = \frac{5}{8}\frac{r}{\text{d}(y,F)},\]
+    entonces, por la observación anterior,
+    \[\frac{r}{2}<f(\lambda_0) <\frac{3r}{4}.\]
+    Así, por la definición de $f$, existe $z\in F$ tal que  
+    \[\frac{r}{2}< ||\lambda_0y-z|| <\frac{3r}{4}.\] Sea $x_{n+1} = x_0+z-\lambda_0y$. De esta manera, \[B(x_{n+1},\,r/4)\subseteq B(x_0,\,r) \;\text{ y } \;||x_{n+1}-x_j||>r/2,\] 
+    para todo $j\leq n$. Por recursión, la sucesión buscada existe, y por construcción se sigue que: 
+    \[\sum_{n=0}^{\infty} \mu(B(x_n, r/4)) = \mu\left(\bigcup_{n=0}^{\infty} B(x_n, r/4) \right)\leq \mu(B(x_0, r)).\]
+    Por tanto, como $\mu(B(x_n,r/4))$ es positivo y constante para todo $n\in \mathbb{N}$, se tiene que $\mu(B(x_0,\,r)) = \infty$. 
+\end{proof}

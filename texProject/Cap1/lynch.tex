@@ -1,0 +1,105 @@
+\section{Funciones de Lynch}
+Llegamos al último (y más bonito, en mi opinión) ejemplo de esta sección: en 1992, un matemático estadounidense llamado Mark Lynch presentó en un artículo una forma general de construir funciones continuas y nunca diferenciables (ver \cite{lynch}). Además de una construcción arbitraria, el poder de este resultado recae, como veremos en el siguiente capítulo, en las conclusiones topológicas que trae sobre el espacio $\mathcal{ND}[0,1]$.
+
+La función de este ejemplo, a diferencia de las anteriores, no tiene una regla de correspondencia explícita. Es decir, usando argumentos topológicos, construiremos una función continua y nunca diferenciable en abstracto. Para lograrlo debemos abordar algunos resultados y definiciones de naturaleza un tanto técnica:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DAR MÁS INTRODUCCION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}\label{theorem:im_compact}
+    Si $a,b\in \mathbb{R}$ cumplen $a<b$ y $f : [a,b] \to \mathbb{R}$, entonces $f$ es continua si y sólo si la gráfica de $f$, $G(f) := \{(x,f(x)) : x\in [a,b]\}$, es un subconjunto compacto de $\mathbb{R}^{2}$.
+\end{theorem}
+\begin{proposition}\label{prop:comp_int}
+    Si $n\in \mathbb{N}$ y $\{C_m : m\in \mathbb{N}\}$ es una familia anidada (es decir, $C_{m+1} \subseteq C_m$ para todo $m\in \mathbb{N}$) formada por subconjuntos compactos y no vacíos de $\mathbb{R}^{n}$, entonces \[C =\bigcap_{m\in \mathbb{N}} C_m\] es un subconjunto compacto y no vacío de $\mathbb{R}^{n}$.
+\end{proposition} 
+
+\begin{definition} Antes de seguir conviene establecer notación auxiliar para simplificar la exposición de los resultados que vienen a continuación.
+
+\begin{enumerate}
+\item[(1)] Si $A \subseteq \mathbb{R}^{2}$ y $x\in \mathbb{R}$, entonces $A[x] = \{y\in \mathbb{R} : (x,y) \in A\}$.
+
+\item[(2)] Para cualquier conjunto acotado y no vacío $C\subseteq \mathbb{R}$, el {\it diámetro} de $C$ es el número real $\text{diam}\, C = \sup\{|x-y| : x,y\in C\}$.
+
+\item[(3)] Si $I \subseteq \mathbb{R}$, $\varepsilon>0$ y $f : I \to \mathbb{R}$ es una función, entonces $$N_\varepsilon(f) = \{(x,f(x)+r) : x\in I \ \wedge \ r\in (-\varepsilon,\varepsilon)\}.$$
+
+\end{enumerate}
+
+\end{definition} 
+
+\begin{proposition}
+    Si $C\subseteq \mathbb{R}^2$ es un compacto, entonces $C[x]$ es un compacto para todo $x\in\mathbb{R}$.
+\end{proposition}
+
+\begin{lemma}\label{lemma:importante}
+    Si $f:[a,b]\to \mathbb{R}$ es continua, entonces
+\[\overbar{N_{\varepsilon}(f)} = \{(x,\,f(x)+r)\,:\, |r|\leq \varepsilon, \, x\in [a,b]\}\]
+\end{lemma}
+
+Como veremos, las rectas serán fundamentales en la construcción de las funciones de Lynch. La importancia de las siguientes proposiciones recae, más que en la relevancia teórica, en la reducción de notación. Sus demostraciones se pueden encontrar en los enunciados \ref{appendix:prop:importante}  y \ref{appendix:prop:import2} del apéndice, respectivamente.
+\begin{proposition}\label{prop:importante}
+    Sean $n \in \mathbb{N}$, $a,b,m,r\in\mathbb{R}$ con $a<b$, $I = [a,b]$  y $f:I\to \mathbb{R}$ dada por $f(x) = mx + r$, donde $|m|> n$. Para todo $\varepsilon>0$ existe $0<\delta<\varepsilon$ tal que, para cada $x\in I$, existe $y\in I$ con $0<|x-y|<\varepsilon$ y que tiene la siguiente propiedad: 
+\[\text{ si } p\in \overbar{N_{\delta}(f)}\,[x],\; q\in \overbar{N_{\delta}(f)}\,[y]\; \text{ entonces }\; \left|\frac{p-q}{x-y}\right| > n.\]
+\end{proposition}
+
+\begin{definition}\label{def:poligono_raro}
+     Decimos que $P\subseteq \mathbb{R}^{2}$ es una \textit{poligonal} si es la gráfica de una función recta a trozos y continua en $\pi_{1}[P]$, donde $\pi_{1}:\mathbb{R}^{2}\to \mathbb{R}$ es la proyección sobre la primera coordenada.
+\end{definition}
+
+\begin{proposition}\label{prop:import2}
+    Si $a,b\in\mathbb{R}$, con $a<b$, y $f:[a,b]\to\mathbb{R}$ es una recta, entonces para cualesquiera $\varepsilon > 0$ y $n\in \mathbb{N}$ existe una poligonal $P\subseteq \mathbb{R}^{2}$ tal que: 
+    \begin{enumerate}
+        \item[(1)]{$P\subseteq N_\varepsilon(f)$,}
+        \item[(2)]{empieza en $(a,\,f(a))$ y termina en $(b,f(b))$, y}
+        \item[(3)]{es unión finita de rectas con pendiente cuyo valor absoluto es mayor a $n$.}
+    \end{enumerate}
+\end{proposition}
+
+Teniendo esta última proposición enunciada, podemos finalmente pasar a construir una función de Lynch. La estrategia es la siguiente: construiremos una sucesión de compactos anidados en $\mathbb{R}^{2}$, digamos $\{C_n\}_{n\in\mathbb{N}}$, tales que, para todo $n\in \mathbb{N}$,
+\begin{enumerate}[label= (\alph*)]
+\setlength\itemsep{0.05cm}
+    \item{$\pi_{1}[C_{n}] = [0,1]$,}
+    \item{diam$\,C_{n}[x]<1/n$, para todo $x\in[0,1]$, y}
+    \item{para cada $x\in[0,1]$ existe $y\in[0,1]$, con $0<|x-y|<1/n$ tal que si $p\in C_n[x]$ y $q\in C_n[y]$, entonces $|(p-q)/(x-y)|>n$.}
+\end{enumerate}
+
+\begin{example}
+    Consideremos $f_{1}:[0,1]\to\mathbb{R}$ una recta con pendiente mayor a 1. Por la \cref{prop:importante}, tenemos que existe una $0 < \delta_{1} < 1$ tal que \[C_{1} = \overbar{N_{\delta_{1}}(f_1)}\] es un compacto no vacío de $\mathbb{R}^{2}$ que cumple (a) -- (c) de la estrategia anterior.
+    Procederemos recursivamente para construir cada $C_n$.
+    Supongamos que hemos construido $C_1,\dots,\, C_n$. Por construcción, existen $\delta_n > 0$ y una función $f_n:[0,1]\to\mathbb{R}$ recta a trozos y continua tal que
+    \[C_n = \overbar{N_{\delta_n}(f_n)}.\]
+    Por la \cref{prop:import2} existe una poligonal \[P = \bigcup_{i=1}^{k} R_{i} = G(f_{n+1})\] contenida en  $N_{\delta_n/2}(f_{n})$ tal que la pendiente de cada recta $R_{i}$ tiene valor absoluto mayor a $n+1$ y $\pi_{1}[P] = [0,1]$. 
+    Sea \[c = \min\left\{\frac{\delta_n}{2},\, \frac{1}{n+1}\right\}.\] Aplicando la \cref{prop:importante} a cada recta $R_{i}$, tenemos que existe $0<\varepsilon_{i} < c$ tal que para todo $x\in \pi_{1}[R_{i}]$ existe un $y\in \pi_{1}[R_{i}]$ tal que $0<|x-y|<c$ y 
+    \[\text{ si } p\in \overbar{N_{c}(R_{i})}\,[x]\;\text{ y }\; q\in \overbar{N_{c}(R_{i})}\,[y]\; \text{ entonces }\; \left|\frac{p-q}{x-y}\right| > n.\]
+    Sea $\delta_{n+1} =  \min\,\{\varepsilon_{i}\,|\,i\leq n\}$ y definamos $C_{n+1} = \overbar{N_{\delta_{n+1}}(f_{n+1})}$. Así, $C_{n+1}$ está contenido en $C_{n}$ y cumple (a) -- (c). 
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\linewidth]{Cap1/Lynch_example.png}
+        \caption{Construcción recursiva de $C_n$}
+        \label{fig:enter-label}
+    \end{figure}
+    
+    \noindent Sea \[C = \bigcap_{n\in\mathbb{N}}C_n.\] Por la \cref{prop:comp_int}, $C$ es un compacto no vacío en $\mathbb{R}^{2}$. Así mismo, para $x\in [0,1]$, como  $\{C_n[x]\}_{n\in \mathbb{N}}$ es una sucesión decreciente de compactos no vacíos en $\mathbb{R}$, 
+    \[C[x] = \bigcap_{n\in\mathbb{N}}C_{n}[x]\neq \emptyset,\]
+    de donde $\pi_{1}[C] = [0,1]$. Ahora, como diam$\,C[x] < 1/n$ para todo $n\in\mathbb{N}$, entonces $|C[x]| = 1$. Es decir, para todo $x\in[0,1]$ existe un único $y_x\in\mathbb{R}$ tal que $C[x] = \{y_x\}.$\\\\
+    Así, si $f:[0,1]\to\mathbb{R}$ es la función dada por $f(x) = y_x$, notemos que la gráfica de $f$ es $C$, que es compacto, lo cual implica, en virtud del \cref{theorem:im_compact}, que es continua. Sin embargo, $f$ no puede ser derivable en ningún $x\in[0,1]$. En efecto, dados $x\in[0,1]$ y $\varepsilon > 0$, si tomamos $N\in\mathbb{N}$ tal que $0<1/N<\varepsilon$, entonces por (c) existe $y\in[0,1]$ tal que $0<|x-y|<1/N$ y, como $f(x) \in C_N[x]$ y $f(y)\in C_N[y]$, tenemos que
+    \[\left|\frac{f(x)-f(y)}{x-y}\right|> N.\]
+    Por lo tanto, $f$ no puede ser derivable en ningún punto $x\in[0,1]$.
+\end{example}
+
+\begin{observation*}
+    El ejemplo anterior nos demuestra que, dada una recta con pendiente mayor a 1, digamos $f_1$, existe una función $f\in\mathcal{ND}[0,1]$ tal que 
+\[\sup_{x\in[0,1]}|f(x)-f_1(x)| < \delta_1\]
+donde esta $\delta_1$ \textit{fue tomada} de tal forma que $C_1$ cumpliera (a) -- (c). Es decir, tenemos suficiente control sobre esta variable para poder generalizar el ejemplo hacia el siguiente lema:
+\end{observation*} 
+\begin{lemma}\label{lem:a_usar_en_appendice}
+    Si $f:[0,1]\to\mathbb{R}$ es una recta con pendiente mayor a 1, entonces para todo $\varepsilon > 0$ existe una función $\varphi\in\mathcal{ND}[0,1]$ tal que 
+    \[\sup_{x\in[0,1]}|f(x)-\varphi(x)| < \varepsilon.\]
+\end{lemma}
+Usando este lema y la \cref{prop:import2}, nos podemos deshacer de la hipótesis \textit{pendiente mayor a 1}, resultando así en el siguiente teorema (su demostración se puede encontrar en el enunciado \ref{appendix:implica_densidad_lynch} del apéndice): 
+\begin{theorem}\label{thm:implica_densidad_lynch}
+    Si $f:[0,1]\to\mathbb{R}$ es una recta, entonces para todo $\varepsilon > 0$ existe una función $\varphi\in\mathcal{ND}[0,1]$ tal que 
+    \[\sup_{x\in[0,1]}|f(x)-\varphi(x)| < \varepsilon.\]
+\end{theorem}
+
+El siguiente corolario sirve un propósito más práctico que teórico, y su formulación se verá justificada en el siguiente capítulo:
+\begin{corollary}\label{cor:implica_densidad_lynch}
+    Si $f:[0,1]\to\mathbb{R}$ es una recta, entonces para todo $\varepsilon>0$ existe una función $\varphi\in\mathcal{ND}[0,1]$ tal que \[\sup_{x\in[0,1]}|f(x)-\varphi(x)| < \varepsilon,\]
+    y además $f(0) = \varphi(0)$, y $f(1) = \varphi(1).$ 
+\end{corollary}

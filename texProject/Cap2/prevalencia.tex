@@ -1,0 +1,216 @@
+\section{Prevalencia y timidez}
+% Cuando uno piensa en medidas sobre algún espacio \textit{parecido} a $\mathbb{R}^n$, usualmente, la primera medida que se le viene a la cabeza es la medida de Lebesgue. Teniendo en cuenta el problema que buscamos resolver, uno se preguntaría si podemos extender esta medida a $C[0,1]$, y con eso ver cuánto mide $\mathcal{ND}[0,1]$. Sin embargo, el siguiente argumento rompe la ilusión de resolver nuestro problema tan fácilmente, veamos:
+Teniendo ya una intuición topológica sobre el tamaño de $\mathcal{ND}[0,1]$, en esta sección buscaremos acercarnos a una definición más precisa de este concepto; en primera instancia abordaremos la siguiente pregunta: ¿podemos definir una medida ``útil'' en $C[0,1]?$
+
+
+Es importante remarcar que ``útil'' es la palabra clave de la pregunta, pues, en general, medidas hay en todos los conjuntos, pero no todas tienen una interpretación natural o intuitiva. 
+Tomando inspiración en la medida de Lebesgue, buscamos una medida tal que, como mínimo, esté definida en todos los abiertos del espacio, sea invariante bajo traslaciones y no sea constante. 
+
+Un primer examen nos empuja a afirmar que esta medida (o al menos una parecida) debe existir en $\mathcal{C}[0,1]$, pero el siguiente argumento rompe esta ilusión (su demostración se puede encontrar en la \cref{appendix:obs_cap_2}).
+\begin{observation*}
+    Sea $V$ un $\mathbb{R}$-espacio de Banach dimensionalmente infinito y separable. Si $\mu$ es una medida de borel en $V$ invariante bajo traslaciones, entonces $\mu$ es la constante 0, o todos los abiertos no vacíos en $V$ tienen medida infinita.
+\end{observation*}
+
+De nuevo nos encontramos con un obstáculo. Buscamos darle una intuición analítica al tamaño de $\mathcal{ND}[0,1]$, pero una de las herramientas más útiles para esto, las medidas, se queda corta en nuestro caso. Sin embargo, la única razón por la cual buscábamos tener una medida en $\mathcal{C}[0,1]$ era para llegar a tener una definición formal para afirmaciones de la forma \textit{casi toda función continua en [0,1] $\dots$} Es decir, para nuestros propósitos no necesitamos de todo el rigor de tal herramienta, sino que nos bastaría con abstraer algunas de sus propiedades y generalizarlas en otro concepto. 
+Puntualmente, considerando a la medida de Lebesgue, algunas de las propiedades que buscamos preservar son las siguientes:
+
+\begin{enumerate}[label = (\arabic*{})]
+    \item Los conjuntos de medida cero no tienen interior,
+    \item Todo subconjunto de un conjunto con medida cero también tiene medida cero,
+    \item Unión numerable de conjuntos de medida cero también tiene medida cero, y
+    \item Traslaciones de conjuntos de medida cero también tienen medida cero.
+\end{enumerate}
+
+En resumen, buscamos un concepto que generalice a los conjuntos que tienen medida de Lebesgue cero, y que preserve las propiedades esenciales de la medida de Lebesgue. A lo largo de este capítulo desarrollaremos la herramienta necesaria para introducir tal abstracción: la ``timidez'' y la ``prevalencia''.
+\begin{notation*}
+    A partir de ahora, $V$ será un espacio de Banach sobre $\mathbb{R}$, y $\mathcal{B}(V)$ será el conjunto de los borelianos de  $V$, esto es, la $\sigma$-álgebra generada por la topología de $V$. 
+\end{notation*}
+\begin{observation*}
+    Notemos que $V$ es Haussdorff, y que las funciones suma, $+:V\times V \to V$, y producto por escalares, $\cdot:\mathbb{R}\times V\to V$, son continuas en sus dominios dotados de la topología producto\footnote{Formalmente, $V$ es un espacio vectorial topológico.}. Además, dados $v\in V$ y $S\in \mathcal{B}(V)$, como la función $f_v(x) = x-v$ es continua, entonces 
+    \[(S+v) = f_{v}^{-1}[S]\in\mathcal{B}(V).\]
+\end{observation*}
+\begin{definition}
+    Decimos que una medida de Borel $\mu$ es \textit{transversal} a $S\in\mathcal{B}(V)$ si se cumplen las siguientes condiciones:
+    \begin{enumerate}
+        \item[(1)] Existe un compacto $K\subseteq V$ tal que $0<\mu(K)<\infty$, y
+        \item[(2)] $\mu(S + v) = 0$ para todo $v\in V$.  
+    \end{enumerate}
+\end{definition}
+\begin{definition}\label{def:timido}
+    Decimos que $B\subseteq V$ es \textit{tímido} si existen $S\in \mathcal{B}(V)$ tal que $B\subseteq S$, y una medida $\mu$ transversal a $S$. Por otro lado, decimos que $B$ es \textit{prevalente} si $V\setminus B$ es tímido.
+\end{definition}
+En otras palabras, los conjuntos tímidos serán nuestra generalización de los conjuntos de medida cero. Observemos que, por definición, los conjuntos tímidos cumplen la segunda de nuestras propiedades a preservar. Veamos que también satisfacen la cuarta y la primera:
+\begin{proposition}
+    Si $S\subseteq V$ es tímido, entonces toda traslación de $S$ también es tímida.
+\end{proposition}
+\begin{proposition}
+    Todo conjunto tímido tiene interior vacío.
+\end{proposition}
+\begin{proof}
+    Sean $B\subseteq V$ tímido, y supongamos que $U = \interior B \neq \varnothing$. Existen $S\in\mathcal{B}(V)$ tal que $B\subseteq S$, una medida de Borel $\mu$ transversal a $S$, y un compacto $K\subseteq V$ tal que $0<\mu(K)<\infty$.\\\\ 
+    Notemos que $\{U+v\,|\,v\in V\}$ es cubierta abierta de $K$, y por tanto existen $v_1,\dots,v_n\in V$ tales que \[K\subseteq \bigcup_{i=1}^{n}\,(U+v_i).\]
+    Como $\mu(K) >0$, entonces existe $i\leq n$ tal que $\mu(U+v_i) > 0$. Sin embargo, como $\mu$ es transversal a $S$, tenemos que $0<\mu(U+v_i)\leq \mu(S+v_i) = 0$, que es absurdo.
+\end{proof}
+\begin{corollary}
+    Todo conjunto prevalente es denso.
+\end{corollary}
+
+Antes de demostrar que los conjuntos tímidos satisfacen la tercera propiedad, debemos dar una vuelta por algunos resultados sobre medidas en espacios producto:
+\begin{definition}
+    Sea $(X,\mathcal{A},\mu)$ un espacio de medida. Decimos que $\mu$ es \textit{$\sigma$-finita} si existe $\{A_{i}\}_{i\in\mathbb{N}}\subseteq\mathcal{A}$ tal que $\mu(A_i)<\infty$ para todo $i\in\mathbb{N}$, y 
+    \[\bigcup_{i\in\mathbb{N}}A_i = X.\] 
+\end{definition}
+\begin{definition}
+    Sean $(X,\mathcal{A})$, y $(Y,\mathcal{B})$ dos espacios medibles. Definimos la \textit{$\sigma$-álgebra producto} $\mathcal{A}\otimes\mathcal{B}$ como la $\sigma$-álgebra generada por la colección de todos los \textit{rectángulos medibles}, es decir,
+    \[\mathcal{A}\otimes\mathcal{B} = \sigma(\{A\times B\,|\,A\in\mathcal{A},\,B\in\mathcal{B}\}).\]
+\end{definition}
+Los siguientes dos teoremas son de gran utilidad para medir en espacios producto. Sus demostraciones se pueden consultar en \cite{Measure_theory_cohn}.
+\begin{theorem}\label{thm:medida_producto}
+    Sean $(X,\mathcal{A},\mu)$, y $(Y,\mathcal{B},\nu)$ dos espacios de medida. Si $\mu$ y $\nu$ son $\sigma$-finitas, entonces existe una única medida $\lambda:\mathcal{A}\otimes\mathcal{B}\to[0,\infty]$ tal que 
+    \[\lambda(A\times B) = \mu(A)\nu(B).\]
+    para cualesquiera $A\in\mathcal{A}$ y $\,B\in\mathcal{B}$. A esta medida la llamaremos la \textit{medida producto} y la denotaremos por $\mu \times \nu$.
+\end{theorem}
+
+El siguiente teorema, un importante antecesor al teorema de Fubini, nos da suficientes herramientas para calcular integrales de funciones medibles en espacios producto. 
+
+\begin{theorem}[Tonelli]\label{thm:Tonelli}
+    Sean $(X,\mathcal{A},\mu)$, y $(Y,\mathcal{B},\nu)$ dos espacios de medida, en donde $\mu$ y $\nu$ son medidas $\sigma$-finitas. Si $f:X\times Y\to [0,\infty)$ es medible respecto a $\mu\times \nu$, y definimos $g_{x}:Y\to[0,\infty)$ y $h_{y}:X\to[0,\infty)$ como  $g_{x}(y) = f(x,y) = h_{y}(x)$, entonces:
+    \begin{enumerate}
+        \item[(1)] Las funciones 
+        \[x\mapsto \int_{Y}g_{x}\;\text{d}\nu\quad \text{y}\quad y\mapsto  \int_{X}h_{y}\;\text{d}\mu\] son $\mathcal{A}$ y $\mathcal{B}$ medibles, respectivamente, y
+        \item[(2)] $f$ cumple que  $\begin{aligned}
+            \;\int_{X\times Y}f \;\text{d}(\mu\times\nu) = \int_{X}\left(\int_{Y}g_x\; \text{d}\nu\right)\text{d} \mu = \int_{Y}\left(\int_{X}h_y\; \text{d}\mu\right)\text{d} \nu.
+        \end{aligned}$ 
+    \end{enumerate}
+\end{theorem}
+Para demostrar la tercer condición de los conjuntos tímidos, antes consideraremos un caso más simple: demostraremos que unión finita de conjuntos tímidos resulta en un conjunto tímido. Para ello, teniendo dos medidas transversales a conjuntos tímidos (o a borelianos que los contienen), debemos encontrar una tercera que también sea transversal a ambos:
+\begin{notation*}
+    Para cada $S\subseteq V$, denotaremos $S^{+} = \{(x,y)\in V\times V\,:\,x+y\in S\}.$
+\end{notation*}
+Importante notar que, como la función suma de vectores es continua en $V\times V$, para todo boreliano $S\subseteq V$, $S^{+}$ es un boreliano de $V\times V$. Con esto podemos definir la medida buscada en este último propósito:
+\begin{definition}
+    Sean $\mu$ y $\nu$ dos medidas de Borel $\sigma$-finitas. Definimos \textit{la convolución} $\mu * \nu: \mathcal{B}(V)\to[0,\infty)$ como:
+    \[(\mu * \nu) (S) = (\mu\times\nu)\,(S^{+}).\]
+\end{definition}
+\begin{observation*}
+     Si $\mu$ y $\nu$ son dos medidas de Borel $\sigma$-finitas en $V$, entonces su convolución también es una medida de Borel en $V$. Además, por el segundo inciso del  \cref{thm:Tonelli}, $\mu * \nu = \nu *\mu$.
+\end{observation*}
+\begin{definition}
+    Decimos que una medida $\mu:\mathcal{A}\to\mathbb{R}$ está \textit{concentrada} en $P\in \mathcal{A}$ si se cumple que, para todo $S\in \mathcal{A}$,
+    \[\mu(S) = \mu(S\cap P).\]
+\end{definition}
+\begin{lemma}\label{lem:conv_transversal}
+    Si $\mu : \mathcal{B}(V) \to [0, \infty)$ es una medida de Borel transversal a $S \in \mathcal{B}(V)$, concentrada en un compacto de medida positiva y finita, entonces para cualquier medida de Borel $\sigma$-finita $\nu : \mathcal{B}(V) \to [0, \infty)$, la convolución $\mu * \nu$ satisface que
+    \[(\mu * \nu)(S+z) = 0\]
+    para cualquier $z\in V$. Si, además, $\nu$ es finita y no nula, entonces $\mu * \nu$ es transversal a $S$.
+\end{lemma}
+\begin{proof}
+    Para cada $z\in V$, tomemos $f_z:V\times V\to[0,\infty)$ dada por $f_z = \chi_{(S+z)^+}$.
+    Por el \cref{thm:Tonelli},
+    \begin{align*}
+        (\mu * \nu) (S+z) &= (\mu\times\nu)(S^+) =  \int_{V\times V}f_z\;\text{d}(\mu\times\nu) = \int_{V}\int_{V} f_z \;\text{d}\mu \;\text{d}\nu \\[8pt]
+        &= \int_{V}\int_{V} \chi_{(S+z-y)^+} \;\text{d}\mu \;\text{d}\nu = \int_{V}\mu(S+z-y)\;\text{d}\nu = 0.
+    \end{align*}
+    Ahora supongamos que $\nu$ es finita y no nula. Sea $K\subseteq V$ el compacto en el que está concentrada $\mu$. Observemos que    
+    \[(\mu*\nu)(K) = (\mu\times\nu)(K^+) \leq \mu(V)\nu(V) = \mu(K)\nu(V).\]
+    Por tanto 
+    \[0<(\mu*\nu)(K)<\infty,\]
+    de donde $\mu*\nu$ es transversal a $S$.
+\end{proof}
+Teniendo esto, y notando que todo conjunto tímido tiene asociada una medida transversal finita y concentrada en un compacto, podemos demostrar lo siguiente:
+\begin{corollary}
+    Unión finita de conjuntos tímidos es tímida.
+\end{corollary}
+Además de acercarnos un poco más a nuestro propósito, este lema responde una importante pregunta que aún no hemos planteado: ¿Quiénes son los conjuntos tímidos en $\mathbb{R}^n$? ¿Qué relación tienen con los conjuntos de medida Lebesgue cero?
+\begin{theorem}\label{thm:Timidos_en_Rn}
+    Un conjunto $S\subseteq \mathbb{R}^{n}$ es tímido si y sólo si tiene medida de Lebesgue cero.
+\end{theorem}
+\begin{proof} Sea $S\subseteq\mathbb{R}^n$ y $\lambda:\mathcal{B}(\mathbb{R}^n)\to[0,\infty)$ la medida de Lebesgue en $\mathbb{R}^n$.\\[8pt]
+Supongamos que $\lambda(S) = 0$. Entonces $S$ está contenido en algún boreliano con medida de Lebesgue cero, y, como $\lambda$ es invariante bajo traslaciones, $\lambda$ es transversal a tal boreliano. Por lo tanto, $S$ es tímido.\\[8pt] 
+Sea $S\subseteq \mathbb{R}^{n}$ tímido, y supongamos sin pérdida de generalidad que es boreliano. Entonces existe una medida de Borel $\mu$ transversal a $S$. Como $\mu$ es transversal a $S$, existe un compacto $K\subseteq \mathbb{R}^{n}$ de medida positiva y finita. Consideremos $\hat{\mu}:\mathcal{B}(\mathbb{R}^n)\to[0,\infty)$ dada por
+    \[\hat{\mu}(A) = \mu(A\cap K) / \mu(K).\]
+    Así, $\hat{\mu}$ es una medida de Borel finita y transversal a $S$. Entonces, por el \cref{lem:conv_transversal}, $(\hat{\mu} * \lambda) (S) = 0$. 
+    Ahora, como $\lambda$ es invariante bajo traslaciones, por el \cref{thm:Tonelli},
+    \begin{align*}
+        \lambda(S) &= \lambda (S)\hat{\mu}(\mathbb{R}^n) 
+        = \int_{\mathbb{R}^n}\lambda(S)\;\text{d}\hat{\mu} = \int_{\mathbb{R}^n}\lambda(S-x)\;\text{d}\hat{\mu} 
+        = \int_{\mathbb{R}^n}\int_{\mathbb{R}^n}\chi_{S-x}\;\text{d}\lambda\;\text{d}\hat{\mu}\\[8pt] 
+        &= \int_{\mathbb{R}^n}\int_{\mathbb{R}^n}\chi_{S^+}\;\text{d}\lambda\;\text{d}\hat{\mu} 
+        = \int_{\mathbb{R}^n\times\mathbb{R}^n}\chi_{S^{+}}\;\text{d}(\hat{\mu}\times\lambda) = (\hat{\mu}*\lambda) (S) = 0.
+    \end{align*}
+    Es decir, $S$ tiene medida Lebesgue cero.
+\end{proof}
+En otras palabras, ser ``tímido'' en $\mathbb{R}^n$ no es una generalización burda de ``tener medida Lebesgue cero'', sino que es una definición equivalente. A partir de este teorema podemos generalizar a los conjuntos de medida de Lebesgue plena (es decir, aquellos cuyo complemento tiene medida de Lebesgue cero):
+\begin{definition}
+    Si $A\subseteq V$ es prevalente, entonces decimos que \textit{casi todo elemento de $V$ pertenece a $A$}.
+\end{definition}
+Existe un último teorema que debemos enunciar antes de demostrar la cuarta propiedad de los conjuntos tímidos. Éste, generalizando al  \cref{thm:medida_producto}, nos habla sobre medidas en espacios producto de tamaño arbitario:
+\begin{definition}
+    Sean $\mathcal{A} = \{(X_{\alpha},\,\mathcal{B}_{\alpha})\,|\, \alpha\in I\}$ una familia de espacios medibles y $X = \prod_{\alpha \in I}X_{\alpha}$. Decimos que $E\subseteq X$ es un \textit{conjunto elemental} si existe $F\subseteq I$ finito tal que 
+    \[E = \bigcap_{\alpha \in F}\pi_{\alpha}^{-1}[B_{\alpha}],\]
+    en donde $\pi_{\alpha}:X\to X_{\alpha}$ es la proyección sobre $X_{\alpha}$, y $B_\alpha\in\mathcal{B}_\alpha$, para cada $\alpha \in I$.  A la familia de todos estos conjuntos la denotaremos por 
+    \[\mathcal{E}(X) = \{E\subseteq X\,|\, E \text{ es elemental}\}.\]
+\end{definition}
+\begin{theorem}\label{thm:medidas_producto_inf}
+    Sea $\mathcal{A} = \{(X_{\alpha},\,\mathcal{B}_{\alpha},\,\mu_{\alpha})\,|\, \alpha\in I\}$ una familia de espacios de medida, con $\mu_{\alpha}(X_{\alpha}) = 1$ para todo $\alpha\in I$, y $\mathcal{B}_\alpha$ la $\sigma$-álgebra de Borel en $X_{\alpha}$. 
+    Llamemos 
+    \[X = \prod_{\alpha\in I}X_{\alpha}.\]
+    Entonces existe una única medida $\mu:\sigma(\mathcal{E}(X))\to[0,1]$ tal que, para todo 
+    \[E = \bigcap_{\alpha \in F}\pi_{\alpha}^{-1}[B_{\alpha}]\in\mathcal{E}(X),\]
+    se cumple que
+    \[\mu(E) = \prod_{\alpha \in F} \mu(B_{\alpha}).\]
+\end{theorem}
+A la medida de este teorema la llamaremos la \textit{medida producto de $X$}. Su demostración se puede consultar en \cite{InfiniteProducts}. Si bien este teorema es intersante por sí mismo, nosotros necesitamos que la medida producto esté definida los borelianos del espacio, no en la $\sigma$-álgebra generada por los elementales.
+
+\begin{proposition}
+    Sea $\mathcal{A} = \{(X_{\alpha},, \mathcal{B}_{\alpha}) \mid \alpha \in I\}$ una familia de espacios medibles, donde $\mathcal{B}_\alpha$ es la $\sigma$-álgebra de Borel de $X_\alpha$, y cada $X_\alpha$ es un espacio segundo numerable. Si $|I|\leq \omega$, y \[X = \prod_{\alpha \in I}X_{\alpha}\]
+    está dotado de la topología producto, entonces la $\sigma$-álgebra de Borel en $X$ coincide con la $\sigma$-álgebra generada por los conjuntos elementales, es decir,
+    \[\mathcal{B}(X) = \sigma(\mathcal{E}(X)).\]
+\end{proposition}
+\begin{proof}
+    Por definición de la topología producto, cada conjunto elemental es un boreliano, de donde $\sigma(\mathcal{E}(X))\subseteq \mathcal{B}(X)$.\\\\
+    Ahora, llamemos $C_\alpha$ a la base numerable de cada $X_\alpha$. Como $|I|\leq \omega$, entonces la familia
+    \[\mathcal{U} = \left\{\bigcap_{\alpha\in F} \pi^{-1}[U_\alpha]\,:\,F\subseteq I \text{ finito},\; U_{\alpha}\in C_\alpha \right\}\]
+    es una base numerable para $X$. Notemos que $\mathcal{U}\subseteq \mathcal{E}(X)$. Por tanto, como $\mathcal{U}$ es numerable, $\mathcal{B}(X)\subseteq \sigma(\mathcal{U})\subseteq \sigma(\mathcal{E}(X))$.
+\end{proof}
+
+Finalmente, demostremos la última de las propiedades de los conjuntos tímidos:
+\begin{theorem}
+    Unión numerable de conjuntos tímidos es tímido.
+\end{theorem}
+\begin{proof}
+    Sea $\{S_n\}_{n\in\mathbb{N}}$ una sucesión de conjuntos tímidos en $V$, y llamemos $\mu_n$ a una medida transversal de cada $S_n$. Sin pérdida de generalidad, supongamos que todo $S_n$ es boreliano. \\\\
+    Cada $\mu_n$ tiene asociado un compacto $K_n\subseteq V$ de medida positiva.
+    Para cada $n\in \mathbb{N}$, la familia \[\mathcal{U}_n=\{B(x, 2^{-n-2}):x\in K_n\}\] es una cubierta abierta de $K_n$, que es compacto. Por tanto, para cada $n\in\mathbb{N}$ existe una subfamilia finita de $\mathcal{U}_n$ que cubre a $K_n$, llamemos $U^n_i$ a los elementos de esta familia. Observemos que 
+    \[K_n = K_n\cap \left(\bigcup_{i = 1}^k\cerradura U^n_i\right) = \bigcup_{i = 1}^kK_n\cap \cerradura U^n_i.\]
+    Como cada $U^n_i$ tiene diametro menor que $2^{-n}$, con esto podemos encontrar un subconjunto compacto $U_n\subseteq K_n$ de medida positiva y diámetro menor que $2^{-n}$. Ahora, notemos que para cualquier $v\in V$, la medida $\mu^v_n$ dada por
+    \[\mu^v_n(A) = \mu_n(A + v)\]
+    también es transversal a $S_n$. Por tanto, sin pérdida de generalidad, podemos suponer que $U_n$ contiene al origen de $V$. Además, por un argumento análogo al que dimos en la ida del \cref{thm:Timidos_en_Rn}, podemos suponer, sin pérdida de generalidad, que $\mu_n(U_n) = \mu_n(V) = 1$. \\\\
+    Consideremos, para $n\in\mathbb{N}\cup\{0\}$,
+    \[W_n = \prod_{m\neq n} U_m.\]
+    Por el teorema de Tychonoff, cada $W_n$ es compacto. Tomemos $f:W_0\to V$ dada por
+    \[f((v_n)_{n\in\mathbb{N}}) = \sum_{n=1}^{\infty}v_n.\]
+    Observemos que $f$ está bien definida, pues cada $v_n$ tiene norma menor que $2^{-n}$, de donde las sumas parciales de la serie forman una sucesión de Cauchy en $V$, que es completo. Veamos que, además, $f$ es continua: sean $(v_n)_{n\in\mathbb{N}}\in W_0$, $\varepsilon>0$ y $N\in\mathbb{N}$ tal que $2^{2-N}<\varepsilon$. Definamos 
+    \[C = \prod_{n=1}^{N}B\left(v_n,\, \frac{\varepsilon}{2N}\right) \times \prod_{n>N}U_n.\]
+    Por definición de la topología producto, $C$ es una vecindad abierta de $(v_n)_{n\in\mathbb{N}}$. Tomemos $(w_n)_{n\in\mathbb{N}}\in C$, entonces
+    \begin{align*}
+        ||f(v_n)-f(w_n)|| &\leq \sum_{n = 1}^{N}\left|\left| v_n - w_n\right|\right| + \sum_{n>N}\left|\left| v_n\right|\right| + \sum_{n>N}\left|\left| w_n\right|\right| \\
+        &\leq \sum_{n = 1}^{N}\frac{\varepsilon}{2N} + 2^{-N} + 2^{-N} < \varepsilon,
+    \end{align*}
+    de donde $f$ es continua. Así, como $W_0$ es compacto, $f[W_0]$ es compacto. \\\\
+    Ahora, por el \cref{thm:medidas_producto_inf} podemos llamar $\hat{\mu}_n$ a la medida producto de $W_n$.  Finalmente, consideremos a la medida $\nu_n:\mathcal{B}(V) \to[0,1]$ dada por\footnote{Intentando ahorrar un poco de notación, en esta definición estamos pensando a cada $W_n$ como subespacio de $W_0$.}
+    \[\nu_n(A) = \hat{\mu}_n(f^{-1}[A]\cap W_n).\]
+    Observemos que, en particular, $\nu_0$ es algo así como la ``convolución infinita'' de todas las $\mu_n$. Además, notemos que, para cualquier $n\in\mathbb{N}$, $\hat{\mu}_0 = \mu_n\times \hat{\mu}_n$, de donde para cualquier boreliano $A \subseteq V$
+    \begin{align*}
+        \nu_0(A) &= \hat{\mu}_0 (f^{-1}[A])\\[7pt]
+        &= (\mu_n\times \hat{\mu}_n)(f^{-1}[A])\\[7pt]
+        &= (\mu_n\times \hat{\mu}_n) \left(\left\{(v_m)_{m\in\mathbb{N}} \in W_0\,:\,\sum_{m\in\mathbb{N}}v_m\in A\right\}\right) \\[7pt]
+        &= (\mu_n\times \hat{\mu}_n) \left(\left\{(v,\, (v_m)_{m_\neq n})\in U_n\times W_n \,:\,v+\sum_{m\neq n}v_m\in A\right\}\right) \\[7pt]
+        &= (\mu_n\times \hat{\mu}_n) \left(\left\{(v,\, w)\in U_n\times  W_n \,:\,v+f|_{W_n}(w) \in A\right\}\right)\\[7pt]
+        &=\int_{U_n}\int_{W_n}\chi_{f^{-1}[A-v]\cap W_n}\; \text{d} \hat{\mu}_n\; \text{d}\mu_n\\[7pt]
+        &=\int_{U_n}\hat{\mu}_n(f^{-1}[A-v]\cap W_n)\;\text{d}\mu_n\\[7pt]
+        &=\int_{U_n}\nu_n(A-v)\;\text{d}\mu_n\\[7pt]    
+        &= (\mu_n * \nu_n)(A),
+    \end{align*}
+     y por tanto, como $\mu_n$ es transversal a cada $S_n$, se tiene que $\nu_0$ es transversal a cada $S_n$. Por lo tanto, $\nu_0$ es transversal a $\bigcup_{n\in\mathbb{N}}S_n$.
+\end{proof}

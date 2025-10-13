@@ -1,0 +1,210 @@
+\documentclass{beamer}
+\usetheme{SimpleDarkBlue}
+
+% ------- Paquetes adicionales -------
+\usepackage{multicol, comment}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{etoolbox}
+
+% ------- Comandos personalizados -------
+\newcommand{\thesisChapter}[1]{%
+    \section{#1}
+    \begin{frame}
+        \centering
+        \Huge
+        \begin{tcolorbox}[
+            colframe=structure.fg, 
+            colback=structure.fg, 
+            coltitle=white, 
+            arc=1mm,
+            boxrule=0.8mm, 
+            width=\textwidth
+        ]
+            \color{white} \centering #1
+        \end{tcolorbox}
+    \end{frame}
+}
+
+\newenvironment{thesisSection}[1]{%
+    \subsection{#1}
+    \def\SectionTitle{#1}%
+}{}
+
+\newcommand{\sectionFrame}[1]{%
+    \begin{frame}
+        \frametitle{\SectionTitle}
+        #1
+    \end{frame}
+}
+
+\newcommand{\contentBlock}[2]{%
+    {%
+        \ifstrequal{#1}{Teorema}{%
+            \setbeamercolor{block title example}{bg=red!70!black, fg=white}%
+            \setbeamercolor{block body example}{bg=red!5!white, fg=black}%
+        }{%
+            \ifstrequal{#1}{Observación}{%
+                \setbeamercolor{block title example}{bg=green!70!black, fg=white}%
+                \setbeamercolor{block body example}{bg=green!5!white, fg=black}%
+            }{%
+                \setbeamercolor{block title example}{bg=structure.fg!75!white, fg=white}%
+                \setbeamercolor{block body example}{bg=structure.fg!5!white, fg=black}%
+            }%
+        }%
+        \begin{exampleblock}{#1}
+            #2
+        \end{exampleblock}
+    }%
+}
+
+
+
+% ------- Información del título -------
+\title{Sobre el espacio de funciones \newline continuas, nunca derivables}
+\author{
+    {\small Presenta:} \\ \normalsize Diego Arceo Félix
+    \vspace{0.2cm} \\
+    {\small Director de tesis:} \\ \normalsize Dr. Alejandro Darío Rojas Sánchez 
+    \vspace{0.5cm}
+}
+\institute
+{
+    Licenciatura en Matemáticas Aplicadas \\
+    Universidad Panamericana 
+}
+\date{31 de octubre 2025}
+
+
+% ------- Inicio del documento -------
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Índice} \tableofcontents \end{frame}
+
+%%%%% Introducción %%%%%
+\thesisChapter{Introducción}
+\begin{frame}
+    \frametitle{Un poco de contexto histórico}
+    \begin{itemize}
+        \item En el siglo XIX, el análisis matemático empezaba a desarrolarse como lo que conocemos hoy en día.
+        \item Nociones como continuidad y derivabilidad estaban siendo formalizadas.
+        \item Se creía que las funciones continuas eran casi siempre derivables.
+        \item En 1872, Weierstrass presentó el primer ejemplo explícito de una función continua pero derivable en ninguna parte.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \centering
+    {\usebeamerfont{normal text}
+    \rmfamily
+    \large
+    \textit{Me aparto con temor y horror de la lamentable plaga de funciones continuas que no tienen derivadas...}
+    
+    \vspace{0.2em}
+    \begin{flushright}
+        \footnotesize
+        --- \textbf{Hermite en una carta a Stieltjes,\\ 20 de mayo de 1893}
+    \end{flushright}
+    }
+\end{frame}
+
+%%%%% Capítulo 1 %%%%%
+\thesisChapter{Algunos Ejemplos}
+
+% Weierstrass
+\thesisSection{Función \texorpdfstring{$W$}{W} de Weierstrass}
+\sectionFrame{
+    \contentBlock{Definición}{
+        Sea $a \in (0,1)$ y $b$ un entero impar tal que $ab > 1+\frac{3\pi}{2}$. La función $W$ de Weierstrass está dada por:
+        \[W(x) = \sum_{n=0}^{\infty} a^n \cos(b^n \pi x)\]
+    }
+}
+
+\sectionFrame{
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/weier.png}
+        \caption{Gráfica de $W$ para $a=0.35$ y $b=6$.}
+    \end{figure}
+}
+
+% Peano
+\thesisSection{La curva de Peano}
+\sectionFrame{
+    La curva $P$ de Peano es una función continua que llena el cuadrado unitario $[0,1] \times [0,1]$. Fue introducida por Giuseppe Peano en 1890 como el primer ejemplo conocido de una curva que llena un área.
+    \newline
+    \contentBlock{Definición}{}
+}
+\sectionFrame{
+    \begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.21\textwidth]{images/peano_1.png}  
+    \hspace{0.1cm}  
+    \includegraphics[width=0.21\textwidth]{images/peano_2.png}  
+    \hspace{0.1cm}  
+    \includegraphics[width=0.21\textwidth]{images/peano_3.png}
+    \hspace{0.1cm}  
+    \includegraphics[width=0.21\textwidth]{images/peano_4.png}
+    
+    \caption{Primeras cuatro iteraciones de la construcción geométrica de la curva de Peano.}   
+    \end{figure}
+}
+
+% Mccarthy
+\thesisSection{Función \texorpdfstring{$M$}{M} de Mccarthy}
+\sectionFrame{
+    Introducida por John Mccarthy en 1953, la función $M:\mathbb{R}\to\mathbb{R}$ es un ejemplo contemporáneo de una función continua en todas partes pero derivable en ninguna parte.
+    \newline 
+    \contentBlock{Definición}{Sea $M:\mathbb{R}\to\mathbb{R}$ definida como:
+    \[
+        M(x) = \sum_{n=0}^{\infty} \frac{g \left(2^{2^n} x \right)}{2^n}
+    \]
+    donde g está dada por $g(x) = 1 - |x|$, para $x\in[-2, 2]$, y $g(x + 4) = g(x)$ para todo $x \in\mathbb{R}$.}
+}
+
+\sectionFrame{
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/McCarthy.png}
+        \caption{Gráfica de $M$ en $[0,1]$.}
+    \end{figure}
+}
+
+
+% Lynch
+\thesisSection{Funciones de Lynch}{}
+
+%%%%% Capítulo 2 %%%%%
+\thesisChapter{¿Qué tan grande es \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}?}
+\thesisSection{Topológicamente...}
+\sectionFrame{}
+
+\thesisSection{Prevalencia y timidez}
+\sectionFrame{}
+
+%%%%% Capítulo 3 %%%%%
+\thesisChapter{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}
+\thesisSection{Sondas}
+\sectionFrame{
+    \contentBlock{Definición}{
+        Sean $P$ un subespacio finito-dimensional de $V$ y $T$ un subconjunto de $V$. Decimos que $P$ es una \textit{sonda} de $T$ si existen una base $A$ para $P$ y un conjunto $B\in \mathcal{B}(V)$ con $V\setminus T \subseteq B$ de tal manera que $\mu_A$ está concentrada en $P$ y es transversal a $B$.
+    }
+}
+
+\sectionFrame{
+    \contentBlock{Teorema}{
+        Si $T\subseteq V$ tiene una sonda entonces es prevalente. 
+    }
+}
+
+\sectionFrame{
+    \contentBlock{Observación}{
+        Una sonda para un conjunto boreliano $T$ es un subespacio de dimensión finita $P$ que está casi completamente contenido en cualquier traslación de $T$ (respecto a alguna medida de Lebesgue concentrada en $P$).    
+    }
+}
+
+\thesisSection{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}{}
+\sectionFrame{}
+
+\end{document}
