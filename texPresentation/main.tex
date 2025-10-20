@@ -2,10 +2,17 @@
 \usetheme{SimpleDarkBlue}
 
 % ------- Paquetes adicionales -------
+\usepackage[spanish]{babel}
 \usepackage{multicol, comment}
 \usepackage[most]{tcolorbox}
 \tcbuselibrary{skins}
 \usepackage{etoolbox}
+
+%% Algunas definiciones usuales
+\DeclareMathOperator{\dom}{dom} 
+\DeclareMathOperator{\interior}{int}
+\DeclareMathOperator{\cerradura}{cl}
+\DeclareMathOperator{\supp}{supp}
 
 % ------- Comandos personalizados -------
 \newcommand{\thesisChapter}[1]{%
@@ -38,29 +45,59 @@
     \end{frame}
 }
 
-\newcommand{\contentBlock}[2]{%
+
+% Bloques de contenido personalizados
+\newcommand{\contentBlock}[4][structure.fg]{%
+    % Parámetros:
+    % #1: Color del bloque (opcional, por defecto structure.fg)
+    % #2: Título del bloque
+    % #3: Subtítulo del bloque (opcional)
+    % #4: Contenido del bloque
+    
     {%
-        \ifstrequal{#1}{Teorema}{%
-            \setbeamercolor{block title example}{bg=red!70!black, fg=white}%
-            \setbeamercolor{block body example}{bg=red!5!white, fg=black}%
-        }{%
-            \ifstrequal{#1}{Observación}{%
-                \setbeamercolor{block title example}{bg=green!70!black, fg=white}%
-                \setbeamercolor{block body example}{bg=green!5!white, fg=black}%
-            }{%
-                \setbeamercolor{block title example}{bg=structure.fg!75!white, fg=white}%
-                \setbeamercolor{block body example}{bg=structure.fg!5!white, fg=black}%
-            }%
-        }%
-        \begin{exampleblock}{#1}
-            #2
-        \end{exampleblock}
+        \setbeamercolor{block title example}{bg=#1!70!black, fg=white}%
+        \setbeamercolor{block body example}{bg=#1!5!white, fg=black}%
+        \if\relax\detokenize{#3}\relax
+            \begin{exampleblock}{#2}
+                #4
+            \end{exampleblock}
+        \else
+            \begin{exampleblock}{#2 (#3)}
+                #4
+            \end{exampleblock}
+        \fi
     }%
+}
+
+\newcommand{\definitionBlock}[2][]{
+    \contentBlock{Definición}{#1}{#2}
+}
+
+\newcommand{\theoremBlock}[2][]{%
+    \contentBlock[red]{Teorema}{#1}{#2}
+}
+
+\newcommand{\exampleBlock}[2][]{%
+    \contentBlock[green!75!black]{Ejemplo}{#1}{#2}
+}
+
+\newcommand{\propositionBlock}[2][]{%
+    \contentBlock[orange]{Proposición}{#1}{#2}
+}
+
+\newcommand{\observationBlock}[2][]{
+    \contentBlock[purple]{Observación}{#1}{#2}
+}
+
+\newcommand{\lemmaBlock}[2][]{
+    \contentBlock[gray]{Lema}{#1}{#2}
 }
 
 
 
 % ------- Información del título -------
+\addtobeamertemplate{title page}{\vspace*{-1cm}}{} % adjust the -1cm to move higher/lower
+
 \title{Sobre el espacio de funciones \newline continuas, nunca derivables}
 \author{
     {\small Presenta:} \\ \normalsize Diego Arceo Félix
@@ -88,7 +125,7 @@
     \frametitle{Un poco de contexto histórico}
     \begin{itemize}
         \item En el siglo XIX, el análisis matemático empezaba a desarrolarse como lo que conocemos hoy en día.
-        \item Nociones como continuidad y derivabilidad estaban siendo formalizadas.
+        \item Nociones como la continuidad y la derivabilidad estaban siendo formalizadas.
         \item Se creía que las funciones continuas eran casi siempre derivables.
         \item En 1872, Weierstrass presentó el primer ejemplo explícito de una función continua pero derivable en ninguna parte.
     \end{itemize}
@@ -115,7 +152,7 @@
 % Weierstrass
 \thesisSection{Función \texorpdfstring{$W$}{W} de Weierstrass}
 \sectionFrame{
-    \contentBlock{Definición}{
+    \definitionBlock{
         Sea $a \in (0,1)$ y $b$ un entero impar tal que $ab > 1+\frac{3\pi}{2}$. La función $W$ de Weierstrass está dada por:
         \[W(x) = \sum_{n=0}^{\infty} a^n \cos(b^n \pi x)\]
     }
@@ -134,29 +171,63 @@
 \sectionFrame{
     La curva $P$ de Peano es una función continua que llena el cuadrado unitario $[0,1] \times [0,1]$. Fue introducida por Giuseppe Peano en 1890 como el primer ejemplo conocido de una curva que llena un área.
     \newline
-    \contentBlock{Definición}{}
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.21\textwidth]{images/peano_1.png}  
+        \hspace{0.1cm}  
+        \includegraphics[width=0.21\textwidth]{images/peano_2.png}  
+        \hspace{0.1cm}  
+        \includegraphics[width=0.21\textwidth]{images/peano_3.png}
+        \hspace{0.1cm}  
+        \includegraphics[width=0.21\textwidth]{images/peano_4.png}
+        
+        \caption{La curva de Peano también tiene una construcción geométrica iterativa, estas son sus primeras cuatro iteraciones.}   
+    \end{figure}
 }
 \sectionFrame{
-    \begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.21\textwidth]{images/peano_1.png}  
-    \hspace{0.1cm}  
-    \includegraphics[width=0.21\textwidth]{images/peano_2.png}  
-    \hspace{0.1cm}  
-    \includegraphics[width=0.21\textwidth]{images/peano_3.png}
-    \hspace{0.1cm}  
-    \includegraphics[width=0.21\textwidth]{images/peano_4.png}
-    
-    \caption{Primeras cuatro iteraciones de la construcción geométrica de la curva de Peano.}   
-    \end{figure}
+    \definitionBlock{
+        Dado $t\in\{0,1,2\}$ definimos, para $n\in\mathbb{Z},$
+        \[A(n,t) = 
+            \begin{cases}
+                t, &\text{ si $n$ es par},\\
+                2-t, & \text{ si $n$ es impar}.
+            \end{cases}
+        \]
+        Ahora, para $t\in[0,1]$, si $\{t_n\}_{n\in\mathbb{N}}$ es una representación en base 3 de $t$, entonces definimos
+        \[B_n(t) = 
+            \begin{cases}
+                t_1, & \text{si }n = 1 \\[6pt]
+                A\!\left(\,\sum\limits_{k=1}^{n-1}t_{2k},\, t_{2n-1}\right), &\text{si } n>1.
+            \end{cases}
+        \]
+    }
+}
+\sectionFrame{
+    \definitionBlock{
+        Definimos $\varphi:[0,1]\to[0,1]$ como 
+        \[\varphi(t) = \sum_{n = 1}^{\infty}\frac{B_n(t)}{3^n}.\]
+    }
+    \theoremBlock{
+        La función $\varphi$ está bien definida, es decir, no depende de la representación en base 3 que tomemos de $t$.
+    }
+}
+\sectionFrame{
+    \definitionBlock{
+        La curva de Peano $P:[0,1]\to[0,1]\times[0,1]$ está dada por
+        \[P(t) = \left(\varphi(t), 3\varphi\left(\frac{t}{3}\right)\right).\]
+    }
+
+    \theoremBlock{
+        $\varphi$ es continua en es continua y nunca derivable.
+    }
 }
 
 % Mccarthy
 \thesisSection{Función \texorpdfstring{$M$}{M} de Mccarthy}
 \sectionFrame{
-    Introducida por John Mccarthy en 1953, la función $M:\mathbb{R}\to\mathbb{R}$ es un ejemplo contemporáneo de una función continua en todas partes pero derivable en ninguna parte.
+    Introducida por John Mccarthy en 1953, la función $M:\mathbb{R}\to\mathbb{R}$ es un ejemplo contemporáneo de una función continua y nunca derivable.
     \newline 
-    \contentBlock{Definición}{Sea $M:\mathbb{R}\to\mathbb{R}$ definida como:
+    \definitionBlock{Sea $M:\mathbb{R}\to\mathbb{R}$ definida como:
     \[
         M(x) = \sum_{n=0}^{\infty} \frac{g \left(2^{2^n} x \right)}{2^n}
     \]
@@ -173,33 +244,117 @@
 
 
 % Lynch
-\thesisSection{Funciones de Lynch}{}
+\thesisSection{Funciones de Lynch}
+\sectionFrame{}
 
 %%%%% Capítulo 2 %%%%%
 \thesisChapter{¿Qué tan grande es \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}?}
 \thesisSection{Topológicamente...}
-\sectionFrame{}
+\sectionFrame{
+    Existen algunos conceptos topológicos que nos acercan a nociones sensibles sobre el tamaño de conjuntos. En particular, en esta sección nos enfocamos en la densidad y la categoría de Baire.
+}
+
+% Densidad
+\sectionFrame{
+    \definitionBlock{
+        Decimos que un conjunto $A\subseteq V$ es \textit{denso} en $V$ si para todo abierto no vacío $U\subseteq V$, se cumple que $A\cap U \neq \emptyset$.
+    }
+    \vspace{0.3cm}
+    O, analíticamente,
+    \propositionBlock{
+        Sean $(X,\,d)$ un espacio métrico y $D\subseteq X$. $D$ es denso en $X$ si y sólo si se cumple que, para cualesquiera $x\in X$ y $\varepsilon > 0$, $B(x,\varepsilon)\cap D\neq \varnothing$. 
+    }
+}
+\sectionFrame{
+    \theoremBlock{
+        $\mathcal{ND}[0,1]$ es denso en $C[0,1]$.
+    }
+}
+\sectionFrame{
+    Ahora bien, la densidad de un conjunto sobre un espacio solo nos habla de cuán disperso está en este:
+    \exampleBlock{
+        Sea $X$ un conjunto no vacío equipado con la topología
+        \[\tau = \{A\subseteq X\,|\, p\in A\}\cup\{\varnothing\}\]
+        donde $p\in X$ es algún punto arbitrario. Observemos que, independientemente de la cardinalidad de $X$, el conjunto unitario $D=\{p\}$ es denso en $(X, \,\tau)$. 
+    }
+}
+
+% Categoría de Baire
+\sectionFrame{
+    \definitionBlock{
+        Sea $(X, \tau)$ un espacio topológico. Dado $A\subseteq X$, decimos que $A$ es \textit{denso en ninguna parte} si se cumple que
+        \[\interior(\cerradura(A)) = \varnothing.\]
+    }
+    \propositionBlock{
+        Sean $(X, \tau)$  un espacio topológico y $A\subseteq X$. El conjunto $A$ es denso en ninguna parte si y sólo si $X\setminus \cerradura(A)$ es denso en $X$.
+    }
+}
+\sectionFrame{
+    \definitionBlock{
+        Sean $(X, \tau)$  un espacio topológico y $A\subseteq X$. Decimos que $A$ es \textit{de primera categoría} si es unión numerable de conjuntos densos en ninguna parte. Por el contrario, decimos que $A$ es \textit{de segunda categoría} si no es de primera categoría.
+    }
+}
+\sectionFrame{
+    \observationBlock{
+        Sea $(X, \tau)$ un espacio topológico. Si $\{A_{n}\subseteq X\,|\,n\in\mathbb{N}\}$ es una sucesión de conjuntos de primera categoría, entonces $\bigcup_{n\in\mathbb{N}} A_n$ es de primera categoría. 
+    }
+
+    \exampleBlock{
+        El conjunto de los números racionales, como subespacio de los reales con la topología euclideana, es de primera categoría. 
+    }
+}
+\sectionFrame{
+    \lemmaBlock{
+        Sea $(X, \tau)$ un espacio topológico. Si toda intersección numerable de abiertos densos resulta en un conjunto denso, entonces $X$ es de segunda categoría. 
+    }
+    \theoremBlock[Baire]{Todo espacio métrico completo es de segunda categoría.}
+}
+\sectionFrame{
+    \theoremBlock[Banach-Marzukiewicz]{
+        $\mathcal{ND}[0,1]$ es de segunda categoría en $\mathcal{C}[0,1]$. 
+    }
+}
+
 
 \thesisSection{Prevalencia y timidez}
-\sectionFrame{}
+\sectionFrame{
+    En esta sección nos intentamos acercar a teoremas de la forma ``casi todo elemento de $V$ tiene la propiedad $P$''. Para esto, antes debemos responder una pregunta fundamental:
+    \newline
+    \begin{center}
+        ¿Existe alguna medida util en $C[0,1]$?
+    \end{center}
+
+    \observationBlock{
+        Sea $V$ un $\mathbb{R}$-espacio de Banach dimensionalmente infinito y separable. Si $\mu$ es una medida de borel en $V$ invariante bajo traslaciones, entonces $\mu$ es la constante 0, o todos los abiertos no vacíos en $V$ tienen medida infinita.
+    }
+}
+
+\sectionFrame{
+}
 
 %%%%% Capítulo 3 %%%%%
 \thesisChapter{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}
 \thesisSection{Sondas}
 \sectionFrame{
-    \contentBlock{Definición}{
-        Sean $P$ un subespacio finito-dimensional de $V$ y $T$ un subconjunto de $V$. Decimos que $P$ es una \textit{sonda} de $T$ si existen una base $A$ para $P$ y un conjunto $B\in \mathcal{B}(V)$ con $V\setminus T \subseteq B$ de tal manera que $\mu_A$ está concentrada en $P$ y es transversal a $B$.
-    }
+    Hasta ahora, demostrar que un conjunto es prevalente presenta un verdadero reto. En esta sección nos enfocamos en encontrar alguna herramienta que nos facilite esta tarea.
 }
 
 \sectionFrame{
-    \contentBlock{Teorema}{
+    \definitionBlock{
+        Sean $P$ un subespacio finito-dimensional de $V$ y $T$ un subconjunto de $V$. Decimos que $P$ es una \textit{sonda} de $T$ si existen una base $A$ para $P$ y un conjunto $B\in \mathcal{B}(V)$ con $V\setminus T \subseteq B$ de tal manera que $\mu_A$ está concentrada en $P$ y es transversal a $B$.
+    }
+    O, analíticamente,
+    \propositionBlock{}
+}
+
+\sectionFrame{
+    \theoremBlock{
         Si $T\subseteq V$ tiene una sonda entonces es prevalente. 
     }
 }
 
 \sectionFrame{
-    \contentBlock{Observación}{
+    \observationBlock{
         Una sonda para un conjunto boreliano $T$ es un subespacio de dimensión finita $P$ que está casi completamente contenido en cualquier traslación de $T$ (respecto a alguna medida de Lebesgue concentrada en $P$).    
     }
 }
