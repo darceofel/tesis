@@ -18,6 +18,14 @@
 }
 \usepackage[nameinlink]{cleveref}
 
+% Incluir páginas PDF (para portada)
+\usepackage{pdfpages}
+
+\usepackage{emptypage} % para páginas en blanco sin número ni encabezado
+% Redefinir \chapter para que inicie en página impar
+\let\oldchapter\chapter
+\renewcommand{\chapter}{\cleardoublepage\oldchapter}
+
 %%%% Redefinir nombre al vincular teoremas, proposiciones, etc.
 \crefname{lemma}{lema}{lemas}
 \crefname{proposition}{proposición}{proposiciones}
@@ -63,9 +71,6 @@
 %% Para crear texto para rellenar
 \usepackage{lipsum}
 
-%% Para poner más grande el titulo
-\font\myfonttitulo = cmr12 at 25pt
-
 \usepackage[shortlabels]{enumitem} %% Para enumerar
 \usepackage{longfbox} %% caja de ida/regreso en demostraciones
 
@@ -81,20 +86,33 @@
 \usepackage{graphicx}
 \newcommand*{\medcap}{\mathbin{\scalebox{1}{\ensuremath{\bigcap}}}}
 \newcommand*{\medcup}{\mathbin{\scalebox{1}{\ensuremath{\bigcup}}}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \makeindex
 
-\title{\myfonttitulo{Sobre el espacio de funciones \\continuas, nunca derivables}\\{\vspace{1cm}\Large Universidad Panamericana}}
+\title{Sobre el espacio de funciones continuas, nunca derivables}
 \author{Diego Arceo Félix}
-\date{Matemáticas Aplicadas }
-
 
 \begin{document}
 
-\maketitle
-\renewcommand{\baselinestretch}{1.25}\normalsize
+% --- Portada ---
+\pagenumbering{gobble} % suprime número de página
+\includepdf[pages=1]{portada.pdf}
+
+% --- Páginas preliminares ---
+\cleardoublepage
+\pagenumbering{roman}  
+\setcounter{page}{1}
+
+\include{agradecimientos}
+
+\cleardoublepage
 \tableofcontents
-\renewcommand{\baselinestretch}{1.0}\normalsize
+
+% --- Cuerpo principal ---
+\cleardoublepage
+\pagenumbering{arabic} % cambia a numeración arábiga
+\setcounter{page}{1}
 
 \include{introduccion}
 
