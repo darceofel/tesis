@@ -8,5 +8,5 @@ Resumen rápido:
 - Presentación (diapositivas): `texPresentation/` (archivo principal: `texPresentation/main.tex`).
 
 Enlaces útiles:
-- [LateX en VsCode](https://www.youtube.com/watch?v=Mty0vHb0knI).
+- [LateX en VsCode](https://www.youtube.com/watch?v=Mty0vHb0knI)
 - [Autenticación/instalación de GitHub CLI (gh)](http://cli.github.com/)
