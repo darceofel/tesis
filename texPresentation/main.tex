@@ -276,10 +276,26 @@
         \item[(c)]{para cada $x\in[0,1]$ existe $y\in[0,1]$, con $0<|x-y|<1/n$ tal que si $p\in C_n[x]$ y $q\in C_n[y]$, entonces $|(p-q)/(x-y)|>n$.}
     \end{itemize}
 }
+\sectionFrame{
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.7\textwidth]{images/Lynch_example.png}
+        \caption{Construcción recursiva de $C_n$.}
+    \end{figure}
+}
+\sectionFrame{
+    A partir de esto,
+    \[
+        C = \bigcap_{n=1}^{\infty} C_n
+    \]
+    es un compacto no vacío en $\mathbb{R}^{2}$ que cumple que $\pi_{1}[C] = [0,1]$. Además, para cada $x\in[0,1]$, $C[x]$ es un conjunto unitario, digamos $C[x] = \{y_x\}$. Así, si definimos $f:[0,1]\to\mathbb{R}$ como $f(x) = y_x$, entonces $G(f) = C$, y por tanto $f$ es continua.
+    Por otro lado, la condición (c) garantiza que $f$ es nunca derivable.
+
+}
 
 %%%%% Capítulo 2 %%%%%
 \thesisChapter{¿Qué tan grande es \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}?}
-\thesisSection{Topológicamente...}
+\thesisSection{Topológicamente}
 \sectionFrame{
     Existen algunos conceptos topológicos que nos acercan a nociones sensibles sobre el tamaño de conjuntos. En particular, en esta sección nos enfocamos en la densidad y la categoría de Baire.
 }
@@ -347,18 +363,42 @@
 
 \thesisSection{Prevalencia y timidez}
 \sectionFrame{
+    A partir de ahora, $V$ será un espacio de Banach sobre $\mathbb{R}$, y $\mathcal{B}(V)$ será el conjunto de los borelianos de  $V$, esto es, la $\sigma$-álgebra generada por la topología de $V$. 
+}
+\sectionFrame{
     En esta sección nos intentamos acercar a teoremas de la forma ``casi todo elemento de $V$ tiene la propiedad $P$''. Para esto, antes debemos responder una pregunta fundamental:
     \newline
     \begin{center}
-        ¿Existe alguna medida util en $C[0,1]$?
+        ¿Existe alguna medida \textit{util} en $C[0,1]$?
     \end{center}
 
     \observationBlock{
-        Sea $V$ un $\mathbb{R}$-espacio de Banach dimensionalmente infinito y separable. Si $\mu$ es una medida de borel en $V$ invariante bajo traslaciones, entonces $\mu$ es la constante 0, o todos los abiertos no vacíos en $V$ tienen medida infinita.
+        Sea $\mu$ una medida de borel en $V$ invariante bajo traslaciones. Si $V$ es dimensionalmente infinito y separable, entonces $\mu$ es la constante 0, o todos los abiertos no vacíos en $V$ tienen medida infinita.
     }
 }
-
 \sectionFrame{
+    Ante la ausencia de una medida de Lebesgue en espacios de Banach infinitamente dimensionales, surge la necesidad de definir una noción alternativa de ``casi todo'' que nos permita trabajar en estos espacios.
+}
+\sectionFrame{
+    Buscamos generalizar las siguientes características de los conjuntos de medida cero:
+    \begin{enumerate}\setlength\itemsep{0.2cm}
+        \item[(1)] Los conjuntos de medida cero no tienen interior,
+        \item[(2)] Todo subconjunto de un conjunto con medida cero también tiene medida cero,
+        \item[(3)] Unión numerable de conjuntos de medida cero también tiene medida cero, y 
+        \item[(4)] Traslaciones de conjuntos de medida cero también tienen medida cero.
+    \end{enumerate}
+}
+\sectionFrame{
+    \definitionBlock[]{
+        Decimos que una medida de Borel $\mu$ es \textit{transversal} a $S\in\mathcal{B}(V)$ si se cumplen las siguientes condiciones:
+        \begin{enumerate}
+            \item[(1)] Existe un compacto $K\subseteq V$ tal que $0<\mu(K)<\infty$, y
+            \item[(2)] $\mu(S + v) = 0$ para todo $v\in V$.  
+        \end{enumerate}
+    }
+    \definitionBlock[]{
+        Decimos que $B\subseteq V$ es \textit{tímido} si existen $S\in \mathcal{B}(V)$ tal que $B\subseteq S$, y una medida $\mu$ transversal a $S$. Por otro lado, decimos que $B$ es \textit{prevalente} si $V\setminus B$ es tímido.
+    }
 }
 
 %%%%% Capítulo 3 %%%%%
