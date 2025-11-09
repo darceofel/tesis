@@ -26,14 +26,6 @@
 \let\oldchapter\chapter
 \renewcommand{\chapter}{\cleardoublepage\oldchapter}
 
-%%%% Redefinir nombre al vincular teoremas, proposiciones, etc.
-\crefname{lemma}{lema}{lemas}
-\crefname{proposition}{proposición}{proposiciones}
-\crefname{theorem}{teorema}{teoremas}
-\crefname{definition}{definición}{definiciones}
-\crefname{example}{ejemplo}{ejemplos}
-\crefname{corollary}{corolario}{corolarios}
-
 %%%% Enumeración de teoremas
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}[section] %% Definir a partir de qué tipo de división se enumeran
@@ -45,6 +37,14 @@
 \newtheorem*{notation*}{Notación}
 \newtheorem*{observation*}{Observación}
 \newtheorem*{proposition*}{Proposición}
+
+%%%% Redefinir nombre al vincular teoremas, proposiciones, etc.
+\crefname{lemma}{lema}{lemas}
+\crefname{proposition}{proposición}{proposiciones}
+\crefname{theorem}{teorema}{teoremas}
+\crefname{definition}{definición}{definiciones}
+\crefname{example}{ejemplo}{ejemplos}
+\crefname{corollary}{corolario}{corolarios}
 
 %%%% Cambiar nombre de títulos predefinidos a español.
 \usepackage[spanish]{babel}

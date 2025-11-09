@@ -5,7 +5,7 @@
 \setcounter{chapter}{10}
 \setcounter{section}{0}
 \section{Demostraciones del primer capítulo}
-\begin{proposition}\label{appendix:seno_dory}
+\begin{proposition}\label[proposition]{appendix:seno_dory}
     Si $c,d\in\mathbb{R}$, entonces
     \[\sin\left(\frac{c+d}{2}\right)\sin\left(\frac{c-d}{2}\right) = \frac{1}{2}(\cos(d) - \cos(c)).\]
 \end{proposition}
@@ -25,7 +25,7 @@
     Lo que demuestra la igualdad buscada.
 \end{proof}
 
-\begin{proposition}\label{appendix:prop:importante}
+\begin{proposition}\label[proposition]{appendix:prop:importante}
     Sean $n \in \mathbb{N}$, $a,b,m,r\in\mathbb{R}$ con $a<b$, $I = [a,b]$  y $f:I\to \mathbb{R}$ dada por $f(x) = mx + r$, donde $|m|> n$. Para todo $\varepsilon>0$ existe $0<\delta<\varepsilon$ tal que, para cada $x\in I$, existe $y\in I$ con $0<|x-y|<\varepsilon$ y que tiene la siguiente propiedad: 
 \[\text{ si } p\in \overbar{N_{\delta}(f)}\,[x],\; q\in \overbar{N_{\delta}(f)}\,[y]\; \text{ entonces }\; \left|\frac{p-q}{x-y}\right| > n.\]
 \end{proposition}
@@ -41,7 +41,7 @@ se tiene que $|p-q| \geq |(mx+r+\delta) - (my+r-\delta)| = |2\delta - mc| = c|2c
 \[\left|\frac{p-q}{x-y}\right| = \left|\frac{p-q}{c}\right| \geq |2c - m| \geq |m| - 2c > n .\]
 \end{proof}
 
-\begin{proposition}\label{appendix:prop:import2}
+\begin{proposition}\label[proposition]{appendix:prop:import2}
     Si $a,b\in\mathbb{R}$, con $a<b$, y $f:[a,b]\to\mathbb{R}$ es una recta, entonces para cualesquiera $\varepsilon > 0$ y $n\in \mathbb{N}$ existe una poligonal $P\subseteq \mathbb{R}^{2}$ tal que: 
     \begin{enumerate}
         \item[(1)]{$P\subseteq N_\varepsilon(f)$,}
@@ -65,7 +65,7 @@ se tiene que $|p-q| \geq |(mx+r+\delta) - (my+r-\delta)| = |2\delta - mc| = c|2c
     Así, para $k$ suficientemente grande, $P = \bigcup_{i=1}^{k-1} R_{i}$ es una poligonal contenida en $N_{\varepsilon}(f)$, donde las pendientes de sus rectas tienen valor absoluto mayor a $n$. 
 \end{proof}
 
-\begin{theorem}\label{appendix:implica_densidad_lynch}
+\begin{theorem}\label[theorem]{appendix:implica_densidad_lynch}
     Si $f:[0,1]\to\mathbb{R}$ es una recta, entonces para todo $\varepsilon > 0$ existe una función $\varphi\in\mathcal{ND}[0,1]$ tal que 
     \[\sup_{x\in[0,1]}|f(x)-\varphi(x)| < \varepsilon.\]
 \end{theorem}
@@ -104,7 +104,7 @@ se tiene que $|p-q| \geq |(mx+r+\delta) - (my+r-\delta)| = |2\delta - mc| = c|2c
 \newpage
 \section{Demostraciones del segundo capítulo}
 
-\begin{proposition}\label{appendix:obs_cap_2}
+\begin{proposition}\label[proposition]{appendix:obs_cap_2}
     Sea $V$ un $\mathbb{R}$-espacio de Banach dimensionalmente infinito y separable. Si $\mu$ es una medida de borel en $V$ invariante bajo traslaciones, entonces $\mu$ es la constante 0, o todos los abiertos no vacíos en $V$ tienen medida infinita.
 \end{proposition}
 \begin{proof}

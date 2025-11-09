@@ -3,10 +3,10 @@ Llegamos al último (y más bonito, en mi opinión) ejemplo de esta sección: en
 
 La función de este ejemplo, a diferencia de las anteriores, no tiene una regla de correspondencia explícita. Es decir, usando argumentos topológicos, construiremos una función continua y nunca diferenciable en abstracto. Para lograrlo debemos abordar algunos resultados y definiciones de naturaleza un tanto técnica:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DAR MÁS INTRODUCCION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{theorem}\label{theorem:im_compact}
+\begin{theorem}\label[theorem]{theorem:im_compact}
     Si $a,b\in \mathbb{R}$ cumplen $a<b$ y $f : [a,b] \to \mathbb{R}$, entonces $f$ es continua si y sólo si la gráfica de $f$, $G(f) := \{(x,f(x)) : x\in [a,b]\}$, es un subconjunto compacto de $\mathbb{R}^{2}$.
 \end{theorem}
-\begin{proposition}\label{prop:comp_int}
+\begin{proposition}\label[proposition]{prop:comp_int}
     Si $n\in \mathbb{N}$ y $\{C_m : m\in \mathbb{N}\}$ es una familia anidada (es decir, $C_{m+1} \subseteq C_m$ para todo $m\in \mathbb{N}$) formada por subconjuntos compactos y no vacíos de $\mathbb{R}^{n}$, entonces \[C =\bigcap_{m\in \mathbb{N}} C_m\] es un subconjunto compacto y no vacío de $\mathbb{R}^{n}$.
 \end{proposition} 
 
@@ -27,22 +27,22 @@ La función de este ejemplo, a diferencia de las anteriores, no tiene una regla 
     Si $C\subseteq \mathbb{R}^2$ es un compacto, entonces $C[x]$ es un compacto para todo $x\in\mathbb{R}$.
 \end{proposition}
 
-\begin{lemma}\label{lemma:importante}
+\begin{lemma}\label[lemma]{lemma:importante}
     Si $f:[a,b]\to \mathbb{R}$ es continua, entonces
 \[\overbar{N_{\varepsilon}(f)} = \{(x,\,f(x)+r)\,:\, |r|\leq \varepsilon, \, x\in [a,b]\}\]
 \end{lemma}
 
 Como veremos, las rectas serán fundamentales en la construcción de las funciones de Lynch. La importancia de las siguientes proposiciones recae, más que en la relevancia teórica, en la reducción de notación. Sus demostraciones se pueden encontrar en los enunciados \ref{appendix:prop:importante}  y \ref{appendix:prop:import2} del apéndice, respectivamente.
-\begin{proposition}\label{prop:importante}
+\begin{proposition}\label[proposition]{prop:importante}
     Sean $n \in \mathbb{N}$, $a,b,m,r\in\mathbb{R}$ con $a<b$, $I = [a,b]$  y $f:I\to \mathbb{R}$ dada por $f(x) = mx + r$, donde $|m|> n$. Para todo $\varepsilon>0$ existe $0<\delta<\varepsilon$ tal que, para cada $x\in I$, existe $y\in I$ con $0<|x-y|<\varepsilon$ y que tiene la siguiente propiedad: 
 \[\text{ si } p\in \overbar{N_{\delta}(f)}\,[x],\; q\in \overbar{N_{\delta}(f)}\,[y]\; \text{ entonces }\; \left|\frac{p-q}{x-y}\right| > n.\]
 \end{proposition}
 
-\begin{definition}\label{def:poligono_raro}
+\begin{definition}\label[definition]{def:poligono_raro}
      Decimos que $P\subseteq \mathbb{R}^{2}$ es una \textit{poligonal} si es la gráfica de una función recta a trozos y continua en $\pi_{1}[P]$, donde $\pi_{1}:\mathbb{R}^{2}\to \mathbb{R}$ es la proyección sobre la primera coordenada.
 \end{definition}
 
-\begin{proposition}\label{prop:import2}
+\begin{proposition}\label[proposition]{prop:import2}
     Si $a,b\in\mathbb{R}$, con $a<b$, y $f:[a,b]\to\mathbb{R}$ es una recta, entonces para cualesquiera $\varepsilon > 0$ y $n\in \mathbb{N}$ existe una poligonal $P\subseteq \mathbb{R}^{2}$ tal que: 
     \begin{enumerate}
         \item[(1)]{$P\subseteq N_\varepsilon(f)$,}
@@ -88,18 +88,18 @@ Teniendo esta última proposición enunciada, podemos finalmente pasar a constru
 \[\sup_{x\in[0,1]}|f(x)-f_1(x)| < \delta_1\]
 donde esta $\delta_1$ \textit{fue tomada} de tal forma que $C_1$ cumpliera (a) -- (c). Es decir, tenemos suficiente control sobre esta variable para poder generalizar el ejemplo hacia el siguiente lema:
 \end{observation*} 
-\begin{lemma}\label{lem:a_usar_en_appendice}
+\begin{lemma}\label[lemma]{lem:a_usar_en_appendice}
     Si $f:[0,1]\to\mathbb{R}$ es una recta con pendiente mayor a 1, entonces para todo $\varepsilon > 0$ existe una función $\varphi\in\mathcal{ND}[0,1]$ tal que 
     \[\sup_{x\in[0,1]}|f(x)-\varphi(x)| < \varepsilon.\]
 \end{lemma}
 Usando este lema y la \cref{prop:import2}, nos podemos deshacer de la hipótesis \textit{pendiente mayor a 1}, resultando así en el siguiente teorema (su demostración se puede encontrar en el enunciado \ref{appendix:implica_densidad_lynch} del apéndice): 
-\begin{theorem}\label{thm:implica_densidad_lynch}
+\begin{theorem}\label[theorem]{thm:implica_densidad_lynch}
     Si $f:[0,1]\to\mathbb{R}$ es una recta, entonces para todo $\varepsilon > 0$ existe una función $\varphi\in\mathcal{ND}[0,1]$ tal que 
     \[\sup_{x\in[0,1]}|f(x)-\varphi(x)| < \varepsilon.\]
 \end{theorem}
 
 El siguiente corolario sirve un propósito más práctico que teórico, y su formulación se verá justificada en el siguiente capítulo:
-\begin{corollary}\label{cor:implica_densidad_lynch}
+\begin{corollary}\label[corollary]{cor:implica_densidad_lynch}
     Si $f:[0,1]\to\mathbb{R}$ es una recta, entonces para todo $\varepsilon>0$ existe una función $\varphi\in\mathcal{ND}[0,1]$ tal que \[\sup_{x\in[0,1]}|f(x)-\varphi(x)| < \varepsilon,\]
     y además $f(0) = \varphi(0)$, y $f(1) = \varphi(1).$ 
 \end{corollary}

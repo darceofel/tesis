@@ -65,46 +65,6 @@ Ahora bien, un ejemplo de una función $T\in\mathcal{ND}[0,1]$ que es Lipschitz 
     \[T\in\mathcal{ND}[0,1]\setminus\mathcal{NL}[0,1].\]
 \end{theorem}
 
-
-%%%%%%%%% Comentando ejemplo de construcción (reemplazar por la función de Takagi)
-\iffalse
-La respuesta es afirmativa en el caso local, es decir, existen funciones continuas y no derivables que son Lipschitz en algunos puntos. Sin embargo, no pueden existir funciones continuas no derivables que sean Lipschitz en todo su dominio, pues el conjunto de los puntos de no-derivabilidad de cualquier función Lipschitz tiene medida cero. La prueba de este hecho se sale del enfoque del capítulo, pero se puede consultar en \cite{rademacher}. 
-\begin{example}
-    Tomemos una función $g:[0,1]\to\mathbb{R}$ $M$-Lipschitz en $0$, para alguna constante $M>0$, y tal que, o bien no es derivable en $0$, o su derivada en $0$ no es nula. Sin pérdida de generalidad, supongamos que
-    \[|g(x)-g(0)|<Mx,\]
-    para todo $x\in(0,1]$. Además, tomemos $\{a_n:n\in\mathbb{N}\}$ alguna sucesión estrictamente decreciente tal que $a_1 = 1$ y $a_n\to 0$, y definamos
-    \[\varepsilon_n = \min\left\{\frac{Ma_k - |g(a_k)-g(0)|}{2}\,: k\in\{n, n+1\}\right\}>0.\]
-    Ahora definamos $\{b_n:n\in\mathbb{N}\}\subseteq\mathbb{R}^2$ como sigue:
-     \[b_n = \begin{cases}
-         (a_n,\,g(a_n)),\quad&\text{si $n$ es impar},\\
-         (a_n,\,g(0)),\quad&\text{si $n$ es par.}
-     \end{cases}\]
-     Con esto, llamemos $P_n$ al segmento que une a los puntos $b_n$ y $b_{n+1}$. Nuestra sucesión de segmentos se podría ver algo así:
-     \begin{figure}[H]
-        \centering
-        \includegraphics[width=9cm]{Cap3/NL_example.png}
-        \caption{Sucesión de los segmentos $P_n$.}
-        \label{fig:sucesion_ejemplo}
-    \end{figure}
-    \noindent Sea $g_n:[a_{n+1}, a_n]\to\mathbb{R}$ la recta tal que $G(g_n) = P_n$. Usando el \cref{thm:implica_densidad_lynch} podemos construir una sucesión de funciones continuas y no derivables en cada intervalo $[a_{n+1}, a_n]$, digamos $\{f_n\in\mathcal{ND}[a_{n+1}, a_n]\,:\,n\in\mathbb{N}\}$,
-     tal que, para cada $n\in\mathbb{N}$, 
-     \[||f_n-g_n||<\varepsilon_n.\]
-     Más aún, usando ese mismo teorema podemos demostrar que, en realidad, se puede exigir que cada $f_n$ coincida con $g_n$ en los extremos de su dominio, es decir,
-     \[g_n(a_n) =f_n(a_n)\quad \text{y}\quad g_n(a_{n+1}) = f_n (a_{n+1}).\]
-     Teniendo eso, y notando que 
-     \[\bigcup_{n\in\mathbb{N}} [a_{n+1}, a_n] = (0,1],\]
-     podemos definir $f:(0,1]\to\mathbb{R}$ como 
-     $f(x) = f_n(x)$, donde $n\in\mathbb{N}$ es tal que $x\in [a_{n+1}, a_n]$. De este modo, siguiendo un argumento análogo al que dimos en el \cref{theorem:ND_denso}, podemos ver que $f\in\mathcal{ND}(0,1]$. \\[8pt]
-     Ahora veamos que $f$ es $M$-Lipschitz en $0$. Para esto, primero notemos que el conjunto
-     \[\{(x,y)\in\mathbb{R}^2\,:\,0\leq x\leq 1, \;|y-g(0)|<Mx\}\]
-     es convexo, y por tanto, como cada $g_n$ es una recta mayor o menor igual que $g(0)$, $|g_n(x)-g(0)|+\varepsilon_n<Mx$
-     para todo $x\in[a_{n+1},\,a_n]$. Así, 
-     \[|f_n(x)-g(0)|\leq |g_n(x) -g(0)| + \varepsilon_n<Mx,\] para todo $x\in[a_{n+1},a_n]$.
-     Por tanto, definiendo $f(0) = 0$, podemos extender continuamente a $f$ a todo el intervalo $[0,1]$. Finalmente, como $f(a_{2n-1}) = g(a_{2n-1})$ y $f(a_{2n}) = g(0)$ para todo $n\in\mathbb{N}$, y $g'(0) \neq 0$, entonces $f$ no es derivable en $0$. En síntesis, $f\in\mathcal{ND}[0,1]\,\setminus\,\mathcal{NL}[0,1]$.
-\end{example}
-\fi
-%%%%%%%% Termina comentario
-
 Regresando al objetivo de este capítulo, consideremos los siguientes enunciados que, siendo de carácter más técnico, nos ayudarán a demostrar la existencia de una sonda 2-dimensional para $\mathcal{NL }[0,1]$.
 
 \begin{lemma}
@@ -125,7 +85,7 @@ Regresando al objetivo de este capítulo, consideremos los siguientes enunciados
     Y esto demuestra la desigualdad.
 \end{proof}
 
-\begin{lemma}\label{lem:tecnico_prev_ND}
+\begin{lemma}\label[lemma]{lem:tecnico_prev_ND}
     Si $g,h:[0,1]\to\mathbb{R}$ están dadas por
     \[g(x) = \sum_{k = 1}^\infty\frac{1}{k^2}\cos(2^k\pi x)\quad\text{y}\quad
     h(x) = \sum_{k = 1}^\infty\frac{1}{k^2}\sin(2^k\pi x), \]

@@ -36,7 +36,7 @@ En resumen, buscamos un concepto que generalice a los conjuntos que tienen medid
         \item[(2)] $\mu(S + v) = 0$ para todo $v\in V$.  
     \end{enumerate}
 \end{definition}
-\begin{definition}\label{def:timido}
+\begin{definition}\label[definition]{def:timido}
     Decimos que $B\subseteq V$ es \textit{tímido} si existen $S\in \mathcal{B}(V)$ tal que $B\subseteq S$, y una medida $\mu$ transversal a $S$. Por otro lado, decimos que $B$ es \textit{prevalente} si $V\setminus B$ es tímido.
 \end{definition}
 En otras palabras, los conjuntos tímidos serán nuestra generalización de los conjuntos de medida cero. Observemos que, por definición, los conjuntos tímidos cumplen la segunda de nuestras propiedades a preservar. Veamos que también satisfacen la cuarta y la primera:
@@ -65,7 +65,7 @@ Antes de demostrar que los conjuntos tímidos satisfacen la tercera propiedad, d
     \[\mathcal{A}\otimes\mathcal{B} = \sigma(\{A\times B\,|\,A\in\mathcal{A},\,B\in\mathcal{B}\}).\]
 \end{definition}
 Los siguientes dos teoremas son de gran utilidad para medir en espacios producto. Sus demostraciones se pueden consultar en \cite{Measure_theory_cohn}.
-\begin{theorem}\label{thm:medida_producto}
+\begin{theorem}\label[theorem]{thm:medida_producto}
     Sean $(X,\mathcal{A},\mu)$, y $(Y,\mathcal{B},\nu)$ dos espacios de medida. Si $\mu$ y $\nu$ son $\sigma$-finitas, entonces existe una única medida $\lambda:\mathcal{A}\otimes\mathcal{B}\to[0,\infty]$ tal que 
     \[\lambda(A\times B) = \mu(A)\nu(B).\]
     para cualesquiera $A\in\mathcal{A}$ y $\,B\in\mathcal{B}$. A esta medida la llamaremos la \textit{medida producto} y la denotaremos por $\mu \times \nu$.
@@ -73,7 +73,7 @@ Los siguientes dos teoremas son de gran utilidad para medir en espacios producto
 
 El siguiente teorema, un importante antecesor al teorema de Fubini, nos da suficientes herramientas para calcular integrales de funciones medibles en espacios producto. 
 
-\begin{theorem}[Tonelli]\label{thm:Tonelli}
+\begin{theorem}[Tonelli]\label[theorem]{thm:Tonelli}
     Sean $(X,\mathcal{A},\mu)$, y $(Y,\mathcal{B},\nu)$ dos espacios de medida, en donde $\mu$ y $\nu$ son medidas $\sigma$-finitas. Si $f:X\times Y\to [0,\infty)$ es medible respecto a $\mu\times \nu$, y definimos $g_{x}:Y\to[0,\infty)$ y $h_{y}:X\to[0,\infty)$ como  $g_{x}(y) = f(x,y) = h_{y}(x)$, entonces:
     \begin{enumerate}
         \item[(1)] Las funciones 
@@ -99,7 +99,7 @@ Importante notar que, como la función suma de vectores es continua en $V\times 
     Decimos que una medida $\mu:\mathcal{A}\to\mathbb{R}$ está \textit{concentrada} en $P\in \mathcal{A}$ si se cumple que, para todo $S\in \mathcal{A}$,
     \[\mu(S) = \mu(S\cap P).\]
 \end{definition}
-\begin{lemma}\label{lem:conv_transversal}
+\begin{lemma}\label[lemma]{lem:conv_transversal}
     Si $\mu : \mathcal{B}(V) \to [0, \infty)$ es una medida de Borel transversal a $S \in \mathcal{B}(V)$, concentrada en un compacto de medida positiva y finita, entonces para cualquier medida de Borel $\sigma$-finita $\nu : \mathcal{B}(V) \to [0, \infty)$, la convolución $\mu * \nu$ satisface que
     \[(\mu * \nu)(S+z) = 0\]
     para cualquier $z\in V$. Si, además, $\nu$ es finita y no nula, entonces $\mu * \nu$ es transversal a $S$.
@@ -122,7 +122,7 @@ Teniendo esto, y notando que todo conjunto tímido tiene asociada una medida tra
     Unión finita de conjuntos tímidos es tímida.
 \end{corollary}
 Además de acercarnos un poco más a nuestro propósito, este lema responde una importante pregunta que aún no hemos planteado: ¿Quiénes son los conjuntos tímidos en $\mathbb{R}^n$? ¿Qué relación tienen con los conjuntos de medida Lebesgue cero?
-\begin{theorem}\label{thm:Timidos_en_Rn}
+\begin{theorem}\label[theorem]{thm:Timidos_en_Rn}
     Un conjunto $S\subseteq \mathbb{R}^{n}$ es tímido si y sólo si tiene medida de Lebesgue cero.
 \end{theorem}
 \begin{proof} Sea $S\subseteq\mathbb{R}^n$ y $\lambda:\mathcal{B}(\mathbb{R}^n)\to[0,\infty)$ la medida de Lebesgue en $\mathbb{R}^n$.\\[8pt]
@@ -151,7 +151,7 @@ Existe un último teorema que debemos enunciar antes de demostrar la cuarta prop
     en donde $\pi_{\alpha}:X\to X_{\alpha}$ es la proyección sobre $X_{\alpha}$, y $B_\alpha\in\mathcal{B}_\alpha$, para cada $\alpha \in I$.  A la familia de todos estos conjuntos la denotaremos por 
     \[\mathcal{E}(X) = \{E\subseteq X\,|\, E \text{ es elemental}\}.\]
 \end{definition}
-\begin{theorem}\label{thm:medidas_producto_inf}
+\begin{theorem}\label[theorem]{thm:medidas_producto_inf}
     Sea $\mathcal{A} = \{(X_{\alpha},\,\mathcal{B}_{\alpha},\,\mu_{\alpha})\,|\, \alpha\in I\}$ una familia de espacios de medida, con $\mu_{\alpha}(X_{\alpha}) = 1$ para todo $\alpha\in I$, y $\mathcal{B}_\alpha$ la $\sigma$-álgebra de Borel en $X_{\alpha}$. 
     Llamemos 
     \[X = \prod_{\alpha\in I}X_{\alpha}.\]

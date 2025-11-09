@@ -11,7 +11,7 @@ Aterrizando la definición en algo más cercano a nuestro enfoque, tenemos la si
 
 Es decir, un subespacio $D\subseteq X$ es denso en $X$ si y sólo si todo elemento de $X$ está tan cerca como queramos de un elemento de $D$. Es difícil pensar que toda función continua tenga una vecina nunca derivable tan cerca como la queramos, pero el siguiente teorema desafía esta intuición y nos ofrece otro resultado contraintuitivo:
 
-\begin{theorem}\label{theorem:ND_denso}El espacio $\mathcal{ND}[0,1]$ es denso en $(\mathcal{C}[0,1], \; || \cdot ||_{\infty})$.
+\begin{theorem}\label[theorem]{theorem:ND_denso}El espacio $\mathcal{ND}[0,1]$ es denso en $(\mathcal{C}[0,1], \; || \cdot ||_{\infty})$.
 \end{theorem}
 
 \begin{proof}
@@ -82,7 +82,7 @@ El siguiente teorema (se puede consultar una prueba diferente en \cite{Functiona
 Entre muchos corolarios, el teorema anterior nos demuestra, por ejemplo, que los irracionales, $\mathbb{I}\subseteq\mathbb{R}$, son de segunda categoría, pues $\mathbb{R} = \mathbb{Q}\cup\mathbb{I}$, $\mathbb{R}$ es un métrico completo y $\mathbb{Q}$ es de primera categoría.
 
 Antes de pasar al teorema importante de esta sección observemos que, usando el hecho de que toda función $f\in\mathcal{C}[0,1]$ es uniformemente continua en $[0,1]$, y dando un argumento similar al que dimos en el comienzo de la demostración del  \cref{theorem:ND_denso}, podemos demostrar el iguiente lema:
-\begin{lemma}\label{lema:poligonos_denso}
+\begin{lemma}\label[lemma]{lema:poligonos_denso}
     Sea $\mathcal{P} = \{f\in\mathcal{C}[0,1] : \text{la gráfica de $f$ es una poligonal finita\footnotemark}\}$\footnotetext{Recordemos nuestra definición de poligonal, la \cref{def:poligono_raro}. Por poligonal finita, nos referimos a una formada por una cantidad finita de rectas.}. $\mathcal{P}$ es denso en $\mathcal{C}[0,1]$.
 \end{lemma}
 \begin{theorem}[Banach - Mazurkiewicz]
