@@ -74,30 +74,30 @@
 % #1: Subtítulo (opcional)
 % #2: Contenido
 \newcommand{\theoremBlock}[2][]{%
-    \contentBlock[structure.fg!90!gray]{Teorema}{#1}{#2}
+    \contentBlock[purple!45!black]{Teorema}{#1}{#2}
 }
-
 \newcommand{\definitionBlock}[2][]{%
     \contentBlock[teal!55!black]{Definición}{#1}{#2}
 }
-
 \newcommand{\propositionBlock}[2][]{%
-    \contentBlock[cyan!25!black]{Proposición}{#1}{#2}
+    \contentBlock[structure.fg!90!gray]{Proposición}{#1}{#2}
 }
-
 \newcommand{\lemmaBlock}[2][]{%
-    \contentBlock[gray!95!black]{Lema}{#1}{#2}
+    \contentBlock[cyan!25!black]{Lema}{#1}{#2}
 }
-
 \newcommand{\exampleBlock}[2][]{%
-    \contentBlock[green!25!black]{Ejemplo}{#1}{#2}
+    \contentBlock[gray!95!black]{Ejemplo}{#1}{#2}
 }
-
 \newcommand{\observationBlock}[2][]{%
-    \contentBlock[NavyBlue!35!gray]{Observación}{#1}{#2}
+    \contentBlock[green!25!black]{Observación}{#1}{#2}
+}
+\newcommand{\notationBlock}[2][]{%
+    \contentBlock[NavyBlue!35!gray]{Notación}{#1}{#2}
 }
 
-
+% Poniendo de color negro todos los bullet points
+\setbeamercolor{itemize item}{fg=normal text.fg}
+\setbeamercolor{enumerate item}{fg=normal text.fg}
 
 % ------- Información del título -------
 \addtobeamertemplate{title page}{\vspace*{-1cm}}{} % adjust the -1cm to move higher/lower
@@ -161,6 +161,7 @@
     \definitionBlock[]{}
     \observationBlock[]{}
     \lemmaBlock[]{}
+    \notationBlock[]{}
 }
 \sectionFrame{
     \definitionBlock{
@@ -398,6 +399,47 @@
     }
     \definitionBlock[]{
         Decimos que $B\subseteq V$ es \textit{tímido} si existen $S\in \mathcal{B}(V)$ tal que $B\subseteq S$, y una medida $\mu$ transversal a $S$. Por otro lado, decimos que $B$ es \textit{prevalente} si $V\setminus B$ es tímido.
+    }
+}
+\sectionFrame{
+    Los conjuntos tímidos serán nuestra generalización de los conjuntos de de medida lebesgue cero. 
+    \propositionBlock[]{
+        Si $S\subseteq V$ es tímido, entonces toda traslación de $S$ también es tímida.
+    }
+    \propositionBlock[]{
+        Todo conjunto tímido tiene interior vacío.
+    }
+}
+\sectionFrame{
+    Para continuar con las otras características, antes debemos dar una breve vuelta por resultados sobre medidas en espacios producto.
+    \notationBlock[]{
+        Sean $(X,\mathcal{A})$, y $(Y,\mathcal{B})$ dos espacios medibles. Definimos la \textit{$\sigma$-álgebra producto} $\mathcal{A}\otimes\mathcal{B}$ como la $\sigma$-álgebra generada por la colección de todos los \textit{rectángulos medibles}, es decir,
+        \[\mathcal{A}\otimes\mathcal{B} = \sigma(\{A\times B\,|\,A\in\mathcal{A},\,B\in\mathcal{B}\}).\]
+    }
+}
+\sectionFrame{
+    \definitionBlock[]{
+        Sea $(X,\mathcal{A},\mu)$ un espacio de medida. Decimos que $\mu$ es \textit{$\sigma$-finita} si existe $\{A_{i}\}_{i\in\mathbb{N}}\subseteq\mathcal{A}$ tal que $\mu(A_i)<\infty$ para todo $i\in\mathbb{N}$, y 
+        \[\bigcup_{i\in\mathbb{N}}A_i = X.\] 
+    }
+}
+\sectionFrame{
+    \theoremBlock[]{
+        Sean $(X,\mathcal{A},\mu)$, y $(Y,\mathcal{B},\nu)$ dos espacios de medida. Si $\mu$ y $\nu$ son $\sigma$-finitas, entonces existe una única medida $\lambda:\mathcal{A}\otimes\mathcal{B}\to[0,\infty]$ tal que 
+    \[\lambda(A\times B) = \mu(A)\nu(B).\]
+    para cualesquiera $A\in\mathcal{A}$ y $\,B\in\mathcal{B}$. A esta medida la llamaremos la \textit{medida producto} y la denotaremos por $\mu \times \nu$.
+    }
+}
+\sectionFrame{
+    \theoremBlock[Tonelli]{
+        Sean $(X,\mathcal{A},\mu)$, y $(Y,\mathcal{B},\nu)$ dos espacios de medida, en donde $\mu$ y $\nu$ son medidas $\sigma$-finitas. Si $f:X\times Y\to [0,\infty)$ es medible respecto a $\mu\times \nu$, y definimos $g_{x}:Y\to[0,\infty)$ y $h_{y}:X\to[0,\infty)$ como  $g_{x}(y) = f(x,y) = h_{y}(x)$, entonces:
+        \begin{enumerate}
+            \item[(1)] Las funciones 
+            \[x\mapsto \int_{Y}g_{x}\;\text{d}\nu\quad \text{y}\quad y\mapsto  \int_{X}h_{y}\;\text{d}\mu\] son $\mathcal{A}$ y $\mathcal{B}$ medibles, respectivamente, y
+            \item[(2)] $f$ cumple que  $\begin{aligned}
+                \;\int_{X\times Y}f \;\text{d}(\mu\times\nu) = \int_{X}\left(\int_{Y}g_x\; \text{d}\nu\right)\text{d} \mu = \int_{Y}\left(\int_{X}h_y\; \text{d}\mu\right)\text{d} \nu.
+            \end{aligned}$ 
+        \end{enumerate}
     }
 }
 
