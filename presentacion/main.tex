@@ -39,13 +39,14 @@
     \def\SectionTitle{#1}%
 }{}
 
-\newcommand{\sectionFrame}[1]{%
+\newcommand{\sectionFrame}[2][0]{%
     \begin{frame}
-        \frametitle{\SectionTitle}
-        #1
+        \ifnum#1=1
+            \frametitle{\SectionTitle}
+        \fi
+        #2
     \end{frame}
 }
-
 
 % Bloques de contenido personalizados
 \newcommand{\contentBlock}[4][structure.fg]{%
@@ -84,6 +85,9 @@
 }
 \newcommand{\lemmaBlock}[2][]{%
     \contentBlock[cyan!25!black]{Lema}{#1}{#2}
+}
+\newcommand{\corollaryBlock}[2][]{%
+    \contentBlock[RoyalBlue!50!black]{Corolario}{#1}{#2}
 }
 \newcommand{\exampleBlock}[2][]{%
     \contentBlock[gray!95!black]{Ejemplo}{#1}{#2}
@@ -152,18 +156,19 @@
 
 %%%%% Capítulo 1 %%%%%
 \thesisChapter{Algunos Ejemplos}
-
-% Weierstrass
-\thesisSection{Función \texorpdfstring{$W$}{W} de Weierstrass}
 \sectionFrame{
     \theoremBlock[]{}
     \propositionBlock[]{}
     \definitionBlock[]{}
     \observationBlock[]{}
+    \corollaryBlock[]{}
     \lemmaBlock[]{}
     \notationBlock[]{}
 }
-\sectionFrame{
+
+% Weierstrass
+\thesisSection{Función \texorpdfstring{$W$}{W} de Weierstrass}
+\sectionFrame[1]{
     \definitionBlock{
         Sea $a \in (0,1)$ y $b$ un entero impar tal que $ab > 1+\frac{3\pi}{2}$. La función $W$ de Weierstrass está dada por:
         \[W(x) = \sum_{n=0}^{\infty} a^n \cos(b^n \pi x)\]
@@ -180,7 +185,7 @@
 
 % Peano
 \thesisSection{La curva de Peano}
-\sectionFrame{
+\sectionFrame[1]{
     La curva $P$ de Peano es una función continua que llena el cuadrado unitario $[0,1] \times [0,1]$. Fue introducida por Giuseppe Peano en 1890 como el primer ejemplo conocido de una curva que llena un área.
     \newline
     \begin{figure}[h!]
@@ -236,7 +241,7 @@
 
 % Mccarthy
 \thesisSection{Función \texorpdfstring{$M$}{M} de Mccarthy}
-\sectionFrame{
+\sectionFrame[1]{
     Introducida por John Mccarthy en 1953, la función $M:\mathbb{R}\to\mathbb{R}$ es un ejemplo contemporáneo de una función continua y nunca derivable.
     \newline 
     \definitionBlock{Sea $M:\mathbb{R}\to\mathbb{R}$ definida como:
@@ -257,7 +262,7 @@
 
 % Lynch
 \thesisSection{Funciones de Lynch}
-\sectionFrame{
+\sectionFrame[1]{
     Este último ejemplo no tiene una regla de correspondencia explícita, sino que presenta una forma recursiva de construir funciones continuas y nunca derivables.
     \newline
     \theoremBlock[]{
@@ -296,9 +301,9 @@
 
 %%%%% Capítulo 2 %%%%%
 \thesisChapter{¿Qué tan grande es \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}?}
-\thesisSection{Topológicamente}
-\sectionFrame{
-    Existen algunos conceptos topológicos que nos acercan a nociones sensibles sobre el tamaño de conjuntos. En particular, en esta sección nos enfocamos en la densidad y la categoría de Baire.
+\thesisSection{Densidad}
+\sectionFrame[1]{
+    Existen algunos conceptos topológicos que nos acercan a nociones sensibles sobre el tamaño de conjuntos. En particular, en estas secciones nos enfocamos en la densidad y las categorías de Baire.
 }
 
 % Densidad
@@ -327,7 +332,8 @@
 }
 
 % Categoría de Baire
-\sectionFrame{
+\thesisSection{Categorías de Baire}
+\sectionFrame[1]{
     \definitionBlock{
         Sea $(X, \tau)$ un espacio topológico. Dado $A\subseteq X$, decimos que $A$ es \textit{denso en ninguna parte} si se cumple que
         \[\interior(\cerradura(A)) = \varnothing.\]
@@ -361,9 +367,9 @@
     }
 }
 
-
+% Prevalencia y timidez
 \thesisSection{Prevalencia y timidez}
-\sectionFrame{
+\sectionFrame[1]{
     A partir de ahora, $V$ será un espacio de Banach sobre $\mathbb{R}$, y $\mathcal{B}(V)$ será el conjunto de los borelianos de  $V$, esto es, la $\sigma$-álgebra generada por la topología de $V$. 
 }
 \sectionFrame{
@@ -381,7 +387,7 @@
     Ante la ausencia de una medida de Lebesgue en espacios de Banach infinitamente dimensionales, surge la necesidad de definir una noción alternativa de ``casi todo'' que nos permita trabajar en estos espacios.
 }
 \sectionFrame{
-    Buscamos generalizar las siguientes características de los conjuntos de medida cero:
+    Buscamos generalizar las siguientes propiedades de los conjuntos de medida cero:
     \begin{enumerate}\setlength\itemsep{0.2cm}
         \item[(1)] Los conjuntos de medida cero no tienen interior,
         \item[(2)] Todo subconjunto de un conjunto con medida cero también tiene medida cero,
@@ -402,16 +408,21 @@
     }
 }
 \sectionFrame{
-    Los conjuntos tímidos serán nuestra generalización de los conjuntos de de medida lebesgue cero. 
+    Los conjuntos tímidos serán nuestra generalización de los conjuntos de de medida lebesgue cero. Observemos que, por definición, cumplen la segunda propiedad. Además,
     \propositionBlock[]{
         Si $S\subseteq V$ es tímido, entonces toda traslación de $S$ también es tímida.
     }
+}
+\sectionFrame{
     \propositionBlock[]{
         Todo conjunto tímido tiene interior vacío.
     }
+    \corollaryBlock[]{
+        Todo conjunto prevalente es denso.
+    }
 }
 \sectionFrame{
-    Para continuar con las otras características, antes debemos dar una breve vuelta por resultados sobre medidas en espacios producto.
+    Para poder demostrar la tercer propiedad, antes debemos dar una breve vuelta por resultados sobre medidas en espacios producto.
     \notationBlock[]{
         Sean $(X,\mathcal{A})$, y $(Y,\mathcal{B})$ dos espacios medibles. Definimos la \textit{$\sigma$-álgebra producto} $\mathcal{A}\otimes\mathcal{B}$ como la $\sigma$-álgebra generada por la colección de todos los \textit{rectángulos medibles}, es decir,
         \[\mathcal{A}\otimes\mathcal{B} = \sigma(\{A\times B\,|\,A\in\mathcal{A},\,B\in\mathcal{B}\}).\]
@@ -442,11 +453,50 @@
         \end{enumerate}
     }
 }
+\sectionFrame{
+    \notationBlock[]{
+        Para cada $S\subseteq V$, denotaremos $S^{+} = \{(x,y)\in V\times V\,:\,x+y\in S\}.$
+    }
+    Importante notar que, como la función suma de vectores es continua en $V\times V$, para todo boreliano $S\subseteq V$, $S^{+}$ es un boreliano de $V\times V$. 
+    \definitionBlock[]{
+        Sean $\mu$ y $\nu$ dos medidas de Borel $\sigma$-finitas. Definimos \textit{la convolución} $\mu * \nu: \mathcal{B}(V)\to[0,\infty)$ como:
+        \[(\mu * \nu) (S) = (\mu\times\nu)\,(S^{+}).\]
+    }
+}
+\sectionFrame{
+    \observationBlock[]{
+        Si $\mu$ y $\nu$ son dos medidas de Borel $\sigma$-finitas en $V$, entonces su convolución también es una medida de Borel en $V$. Además, por el segundo inciso del teorema de Tonelli, $\mu * \nu = \nu *\mu$.
+    }
+    \definitionBlock[]{
+        Decimos que una medida $\mu:\mathcal{A}\to\mathbb{R}$ está \textit{concentrada} en $P\in \mathcal{A}$ si se cumple que, para todo $S\in \mathcal{A}$,
+        \[\mu(S) = \mu(S\cap P).\]
+    }
+}
+\sectionFrame{
+    \lemmaBlock[]{
+        Si $\mu : \mathcal{B}(V) \to [0, \infty)$ es una medida de Borel transversal a $S \in \mathcal{B}(V)$, concentrada en un compacto de medida positiva y finita, entonces para cualquier medida de Borel $\sigma$-finita $\nu : \mathcal{B}(V) \to [0, \infty)$, la convolución $\mu * \nu$ satisface que
+        \[(\mu * \nu)(S+z) = 0\]
+        para cualquier $z\in V$. Si, además, $\nu$ es finita y no nula, entonces $\mu * \nu$ es transversal a $S$.
+    }
+    \corollaryBlock[]{
+        Unión finita de conjuntos tímidos es tímida.
+    }
+}
+\sectionFrame{
+    \theoremBlock[]{
+        Un conjunto $S\subseteq \mathbb{R}^{n}$ es tímido si y sólo si tiene medida de Lebesgue cero.
+    }
+    En otras palabras, ser ``tímido'' en $\mathbb{R}^n$ no es una generalización burda de ``tener medida Lebesgue cero'', sino que es una definición equivalente. A partir de este teorema podemos generalizar a los conjuntos de medida de Lebesgue plena:
+    \definitionBlock[]{
+        Si $A\subseteq V$ es prevalente, entonces decimos que \textit{casi todo elemento de $V$ pertenece a $A$}.
+    }
+}
+
 
 %%%%% Capítulo 3 %%%%%
 \thesisChapter{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}
 \thesisSection{Sondas}
-\sectionFrame{
+\sectionFrame[1]{
     Hasta ahora, demostrar que un conjunto es prevalente presenta un verdadero reto. En esta sección nos enfocamos en encontrar alguna herramienta que nos facilite esta tarea.
 }
 
@@ -471,6 +521,8 @@
 }
 
 \thesisSection{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}{}
-\sectionFrame{}
+\sectionFrame[1]{
+
+}
 
 \end{document}
