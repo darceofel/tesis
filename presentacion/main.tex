@@ -8,6 +8,7 @@
 \usepackage[most]{tcolorbox}
 \tcbuselibrary{skins}
 \usepackage{etoolbox}
+\usepackage[nameinlink]{cleveref}
 
 %% Algunas definiciones usuales
 \DeclareMathOperator{\dom}{dom} 
@@ -48,55 +49,65 @@
     \end{frame}
 }
 
+% Contador para bloques con formato jerárquico
+\newcounter{blockcounter}[subsection]
+\renewcommand{\theblockcounter}{\arabic{section}.\arabic{subsection}.\arabic{blockcounter}}
+
 % Bloques de contenido personalizados
-\newcommand{\contentBlock}[4][structure.fg]{%
+\newcommand{\contentBlock}[5][structure.fg]{%
     % Parámetros:
     % #1: Color del bloque (opcional, por defecto structure.fg)
     % #2: Título del bloque
     % #3: Subtítulo del bloque (opcional)
     % #4: Contenido del bloque
+    % #5: Etiqueta para referencia (opcional)
+
+    \refstepcounter{blockcounter}% 
+    \ifx\relax#5\relax\else\label{#5}\fi%
 
     {%
         \setbeamercolor{block title example}{bg=#1, fg=white}%
         \setbeamercolor{block body example}{bg=#1!5!white, fg=black}%
         \if\relax\detokenize{#3}\relax
-            \begin{exampleblock}{#2}
+            \begin{exampleblock}{#2~\theblockcounter}
                 #4
             \end{exampleblock}
         \else
-            \begin{exampleblock}{#2 (#3)}
+            \begin{exampleblock}{#2~\theblockcounter~(#3)}
                 #4
             \end{exampleblock}
         \fi
     }%
 }
 
+
 % Parámetros de los bloques:
 % #1: Subtítulo (opcional)
 % #2: Contenido
-\newcommand{\theoremBlock}[2][]{%
-    \contentBlock[purple!45!black]{Teorema}{#1}{#2}
+% #3: Etiqueta para referencia (opcional)
+\newcommand{\theoremBlock}[3][]{%
+    \contentBlock[purple!45!black]{Teorema}{#1}{#2}{#3}%
 }
-\newcommand{\definitionBlock}[2][]{%
-    \contentBlock[teal!55!black]{Definición}{#1}{#2}
+\newcommand{\definitionBlock}[3][]{%
+    \contentBlock[teal!55!black]{Definición}{#1}{#2}{#3}
 }
-\newcommand{\propositionBlock}[2][]{%
-    \contentBlock[structure.fg!90!gray]{Proposición}{#1}{#2}
+\newcommand{\propositionBlock}[3][]{%
+    \contentBlock[structure.fg!90!gray]{Proposición}{#1}{#2}{#3}
 }
-\newcommand{\lemmaBlock}[2][]{%
-    \contentBlock[cyan!25!black]{Lema}{#1}{#2}
+\newcommand{\lemmaBlock}[3][]{%
+    \contentBlock[cyan!25!black]{Lema}{#1}{#2}{#3}
 }
-\newcommand{\corollaryBlock}[2][]{%
-    \contentBlock[RoyalBlue!50!black]{Corolario}{#1}{#2}
+\newcommand{\corollaryBlock}[3][]{%
+    \contentBlock[RoyalBlue!50!black]{Corolario}{#1}{#2}{#3}
 }
-\newcommand{\exampleBlock}[2][]{%
-    \contentBlock[gray!95!black]{Ejemplo}{#1}{#2}
+\newcommand{\exampleBlock}[3][]{%
+    \contentBlock[gray!95!black]{Ejemplo}{#1}{#2}{#3}
 }
-\newcommand{\observationBlock}[2][]{%
-    \contentBlock[green!25!black]{Observación}{#1}{#2}
+\newcommand{\observationBlock}[3][]{%
+    \contentBlock[green!25!black]{Observación}{#1}{#2}{#3}
 }
-\newcommand{\notationBlock}[2][]{%
-    \contentBlock[NavyBlue!35!gray]{Notación}{#1}{#2}
+\newcommand{\notationBlock}[3][]{%
+    \contentBlock[NavyBlue!35!gray]{Notación}{#1}{#2}{#3}
 }
 
 % Poniendo de color negro todos los bullet points
@@ -123,6 +134,10 @@
 
 % ------- Inicio del documento -------
 \begin{document}
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+\setcounter{blockcounter}{0}
+
 \frame{\titlepage}
 
 \begin{frame}{Índice} \tableofcontents \end{frame}
@@ -156,15 +171,16 @@
 
 %%%%% Capítulo 1 %%%%%
 \thesisChapter{Algunos Ejemplos}
+\iffalse
 \sectionFrame{
-    \theoremBlock[]{}
-    \propositionBlock[]{}
-    \definitionBlock[]{}
-    \observationBlock[]{}
-    \corollaryBlock[]{}
-    \lemmaBlock[]{}
-    \notationBlock[]{}
-}
+    \theoremBlock[]{}{}
+    \propositionBlock[]{}{}
+    \definitionBlock[]{}{}
+    \observationBlock[]{}{}
+    \corollaryBlock[]{}{}
+    \lemmaBlock[]{}{}
+    \notationBlock[]{}{}
+}\fi
 
 % Weierstrass
 \thesisSection{Función \texorpdfstring{$W$}{W} de Weierstrass}
@@ -172,7 +188,7 @@
     \definitionBlock{
         Sea $a \in (0,1)$ y $b$ un entero impar tal que $ab > 1+\frac{3\pi}{2}$. La función $W$ de Weierstrass está dada por:
         \[W(x) = \sum_{n=0}^{\infty} a^n \cos(b^n \pi x)\]
-    }
+    }{}
 }
 
 \sectionFrame{
@@ -217,26 +233,25 @@
                 A\!\left(\,\sum\limits_{k=1}^{n-1}t_{2k},\, t_{2n-1}\right), &\text{si } n>1.
             \end{cases}
         \]
-    }
+    }{}
 }
 \sectionFrame{
     \definitionBlock{
         Definimos $\varphi:[0,1]\to[0,1]$ como 
         \[\varphi(t) = \sum_{n = 1}^{\infty}\frac{B_n(t)}{3^n}.\]
-    }
+    }{}
     \theoremBlock{
         La función $\varphi$ está bien definida, es decir, no depende de la representación en base 3 que tomemos de $t$.
-    }
+    }{}
 }
 \sectionFrame{
     \definitionBlock{
         La curva de Peano $P:[0,1]\to[0,1]\times[0,1]$ está dada por
         \[P(t) = \left(\varphi(t), 3\varphi\left(\frac{t}{3}\right)\right).\]
-    }
-
+    }{}
     \theoremBlock{
         $\varphi$ es continua en es continua y nunca derivable.
-    }
+    }{}
 }
 
 % Mccarthy
@@ -244,13 +259,14 @@
 \sectionFrame[1]{
     Introducida por John Mccarthy en 1953, la función $M:\mathbb{R}\to\mathbb{R}$ es un ejemplo contemporáneo de una función continua y nunca derivable.
     \newline 
-    \definitionBlock{Sea $M:\mathbb{R}\to\mathbb{R}$ definida como:
-    \[
-        M(x) = \sum_{n=0}^{\infty} \frac{g \left(2^{2^n} x \right)}{2^n}
-    \]
-    donde g está dada por $g(x) = 1 - |x|$, para $x\in[-2, 2]$, y $g(x + 4) = g(x)$ para todo $x \in\mathbb{R}$.}
+    \definitionBlock{
+        Sea $M:\mathbb{R}\to\mathbb{R}$ definida como:
+        \[
+            M(x) = \sum_{n=0}^{\infty} \frac{g \left(2^{2^n} x \right)}{2^n}
+        \]
+        donde g está dada por $g(x) = 1 - |x|$, para $x\in[-2, 2]$, y $g(x + 4) = g(x)$ para todo $x \in\mathbb{R}$.
+    }{}
 }
-
 \sectionFrame{
     \begin{figure}[h!]
         \centering
@@ -267,12 +283,12 @@
     \newline
     \theoremBlock[]{
         Si $a,b\in \mathbb{R}$ cumplen $a<b$ y $f : [a,b] \to \mathbb{R}$, entonces $f$ es continua si y sólo si la gráfica de $f$, $G(f) := \{(x,f(x)) : x\in [a,b]\}$, es un subconjunto compacto de $\mathbb{R}^{2}$.
-    }
+    }{}
 }
 \sectionFrame{
     \definitionBlock[]{
         Decimos que $P\subseteq \mathbb{R}^{2}$ es una \textit{poligonal} si es la gráfica de una función recta a trozos y continua en $\pi_{1}[P]$, donde $\pi_{1}:\mathbb{R}^{2}\to \mathbb{R}$ es la proyección sobre la primera coordenada.
-    }
+    }{}
 }
 \sectionFrame{
     Con lo anterior en mente, podemos finalmente abordar la construcción de las funciones de Lynch. La estrategia es la siguiente: construiremos una sucesión de compactos anidados en $\mathbb{R}^{2}$, digamos $\{C_n\}_{n\in\mathbb{N}}$, tales que, para todo $n\in \mathbb{N}$,
@@ -296,7 +312,6 @@
     \]
     es un compacto no vacío en $\mathbb{R}^{2}$ que cumple que $\pi_{1}[C] = [0,1]$. Además, para cada $x\in[0,1]$, $C[x]$ es un conjunto unitario, digamos $C[x] = \{y_x\}$. Así, si definimos $f:[0,1]\to\mathbb{R}$ como $f(x) = y_x$, entonces $G(f) = C$, y por tanto $f$ es continua.
     Por otro lado, la condición (c) garantiza que $f$ es nunca derivable.
-
 }
 
 %%%%% Capítulo 2 %%%%%
@@ -310,17 +325,15 @@
 \sectionFrame{
     \definitionBlock{
         Decimos que un conjunto $A\subseteq V$ es \textit{denso} en $V$ si para todo abierto no vacío $U\subseteq V$, se cumple que $A\cap U \neq \emptyset$.
-    }
+    }{}
     \vspace{0.3cm}
     O, analíticamente,
     \propositionBlock{
         Sean $(X,\,d)$ un espacio métrico y $D\subseteq X$. $D$ es denso en $X$ si y sólo si se cumple que, para cualesquiera $x\in X$ y $\varepsilon > 0$, $B(x,\varepsilon)\cap D\neq \varnothing$. 
-    }
-}
-\sectionFrame{
+    }{}
     \theoremBlock{
         $\mathcal{ND}[0,1]$ es denso en $C[0,1]$.
-    }
+    }{}
 }
 \sectionFrame{
     Ahora bien, la densidad de un conjunto sobre un espacio solo nos habla de cuán disperso está en este:
@@ -328,7 +341,7 @@
         Sea $X$ un conjunto no vacío equipado con la topología
         \[\tau = \{A\subseteq X\,|\, p\in A\}\cup\{\varnothing\}\]
         donde $p\in X$ es algún punto arbitrario. Observemos que, independientemente de la cardinalidad de $X$, el conjunto unitario $D=\{p\}$ es denso en $(X, \,\tau)$. 
-    }
+    }{}
 }
 
 % Categoría de Baire
@@ -337,34 +350,34 @@
     \definitionBlock{
         Sea $(X, \tau)$ un espacio topológico. Dado $A\subseteq X$, decimos que $A$ es \textit{denso en ninguna parte} si se cumple que
         \[\interior(\cerradura(A)) = \varnothing.\]
-    }
+    }{}
     \propositionBlock{
         Sean $(X, \tau)$  un espacio topológico y $A\subseteq X$. El conjunto $A$ es denso en ninguna parte si y sólo si $X\setminus \cerradura(A)$ es denso en $X$.
-    }
+    }{}
 }
 \sectionFrame{
     \definitionBlock{
         Sean $(X, \tau)$  un espacio topológico y $A\subseteq X$. Decimos que $A$ es \textit{de primera categoría} si es unión numerable de conjuntos densos en ninguna parte. Por el contrario, decimos que $A$ es \textit{de segunda categoría} si no es de primera categoría.
-    }
+    }{}
 }
 \sectionFrame{
     \exampleBlock{
         El conjunto de los números racionales, como subespacio de los reales con la topología euclideana, es de primera categoría. 
-    }
+    }{}
     \observationBlock{
         Sea $(X, \tau)$ un espacio topológico. Si $\{A_{n}\subseteq X\,|\,n\in\mathbb{N}\}$ es una sucesión de conjuntos de primera categoría, entonces $\bigcup_{n\in\mathbb{N}} A_n$ es de primera categoría. 
-    }
+    }{}
 }
 \sectionFrame{
     \lemmaBlock{
         Sea $(X, \tau)$ un espacio topológico. Si toda intersección numerable de abiertos densos resulta en un conjunto denso, entonces $X$ es de segunda categoría. 
-    }
-    \theoremBlock[Baire]{Todo espacio métrico completo es de segunda categoría.}
+    }{}
+    \theoremBlock[Baire]{Todo espacio métrico completo es de segunda categoría.}{}
 }
 \sectionFrame{
     \theoremBlock[Banach-Marzukiewicz]{
         $\mathcal{ND}[0,1]$ es de segunda categoría en $\mathcal{C}[0,1]$. 
-    }
+    }{}
 }
 
 % Prevalencia y timidez
@@ -381,7 +394,7 @@
 
     \observationBlock{
         Sea $\mu$ una medida de borel en $V$ invariante bajo traslaciones. Si $V$ es dimensionalmente infinito y separable, entonces $\mu$ es la constante 0, o todos los abiertos no vacíos en $V$ tienen medida infinita.
-    }
+    }{}
 }
 \sectionFrame{
     Ante la ausencia de una medida de Lebesgue en espacios de Banach infinitamente dimensionales, surge la necesidad de definir una noción alternativa de ``casi todo'' que nos permita trabajar en estos espacios.
@@ -402,44 +415,45 @@
             \item[(1)] Existe un compacto $K\subseteq V$ tal que $0<\mu(K)<\infty$, y
             \item[(2)] $\mu(S + v) = 0$ para todo $v\in V$.  
         \end{enumerate}
-    }
+    }{}
     \definitionBlock[]{
         Decimos que $B\subseteq V$ es \textit{tímido} si existen $S\in \mathcal{B}(V)$ tal que $B\subseteq S$, y una medida $\mu$ transversal a $S$. Por otro lado, decimos que $B$ es \textit{prevalente} si $V\setminus B$ es tímido.
-    }
+    }{}
 }
 \sectionFrame{
     Los conjuntos tímidos serán nuestra generalización de los conjuntos de de medida lebesgue cero. Observemos que, por definición, cumplen la segunda propiedad. Además,
     \propositionBlock[]{
         Si $S\subseteq V$ es tímido, entonces toda traslación de $S$ también es tímida.
-    }
+    }{}
 }
 \sectionFrame{
     \propositionBlock[]{
         Todo conjunto tímido tiene interior vacío.
-    }
+    }{}
     \corollaryBlock[]{
         Todo conjunto prevalente es denso.
-    }
+    }{}
+    Es decir, hasta ahora sabemos que los conjuntos tímidos satisfacen las propiedades (1), (2) y (4).
 }
 \sectionFrame{
     Para poder demostrar la tercer propiedad, antes debemos dar una breve vuelta por resultados sobre medidas en espacios producto.
     \notationBlock[]{
         Sean $(X,\mathcal{A})$, y $(Y,\mathcal{B})$ dos espacios medibles. Definimos la \textit{$\sigma$-álgebra producto} $\mathcal{A}\otimes\mathcal{B}$ como la $\sigma$-álgebra generada por la colección de todos los \textit{rectángulos medibles}, es decir,
         \[\mathcal{A}\otimes\mathcal{B} = \sigma(\{A\times B\,|\,A\in\mathcal{A},\,B\in\mathcal{B}\}).\]
-    }
+    }{}
 }
 \sectionFrame{
     \definitionBlock[]{
         Sea $(X,\mathcal{A},\mu)$ un espacio de medida. Decimos que $\mu$ es \textit{$\sigma$-finita} si existe $\{A_{i}\}_{i\in\mathbb{N}}\subseteq\mathcal{A}$ tal que $\mu(A_i)<\infty$ para todo $i\in\mathbb{N}$, y 
         \[\bigcup_{i\in\mathbb{N}}A_i = X.\] 
-    }
+    }{}
 }
 \sectionFrame{
     \theoremBlock[]{
         Sean $(X,\mathcal{A},\mu)$, y $(Y,\mathcal{B},\nu)$ dos espacios de medida. Si $\mu$ y $\nu$ son $\sigma$-finitas, entonces existe una única medida $\lambda:\mathcal{A}\otimes\mathcal{B}\to[0,\infty]$ tal que 
     \[\lambda(A\times B) = \mu(A)\nu(B).\]
     para cualesquiera $A\in\mathcal{A}$ y $\,B\in\mathcal{B}$. A esta medida la llamaremos la \textit{medida producto} y la denotaremos por $\mu \times \nu$.
-    }
+    }{thm:medida_producto}
 }
 \sectionFrame{
     \theoremBlock[Tonelli]{
@@ -451,45 +465,74 @@
                 \;\int_{X\times Y}f \;\text{d}(\mu\times\nu) = \int_{X}\left(\int_{Y}g_x\; \text{d}\nu\right)\text{d} \mu = \int_{Y}\left(\int_{X}h_y\; \text{d}\mu\right)\text{d} \nu.
             \end{aligned}$ 
         \end{enumerate}
-    }
+    }{}
 }
 \sectionFrame{
     \notationBlock[]{
         Para cada $S\subseteq V$, denotaremos $S^{+} = \{(x,y)\in V\times V\,:\,x+y\in S\}.$
-    }
+    }{}
     Importante notar que, como la función suma de vectores es continua en $V\times V$, para todo boreliano $S\subseteq V$, $S^{+}$ es un boreliano de $V\times V$. 
     \definitionBlock[]{
         Sean $\mu$ y $\nu$ dos medidas de Borel $\sigma$-finitas. Definimos \textit{la convolución} $\mu * \nu: \mathcal{B}(V)\to[0,\infty)$ como:
         \[(\mu * \nu) (S) = (\mu\times\nu)\,(S^{+}).\]
-    }
+    }{}
 }
 \sectionFrame{
     \observationBlock[]{
         Si $\mu$ y $\nu$ son dos medidas de Borel $\sigma$-finitas en $V$, entonces su convolución también es una medida de Borel en $V$. Además, por el segundo inciso del teorema de Tonelli, $\mu * \nu = \nu *\mu$.
-    }
+    }{}
     \definitionBlock[]{
         Decimos que una medida $\mu:\mathcal{A}\to\mathbb{R}$ está \textit{concentrada} en $P\in \mathcal{A}$ si se cumple que, para todo $S\in \mathcal{A}$,
         \[\mu(S) = \mu(S\cap P).\]
-    }
+    }{}
 }
 \sectionFrame{
     \lemmaBlock[]{
         Si $\mu : \mathcal{B}(V) \to [0, \infty)$ es una medida de Borel transversal a $S \in \mathcal{B}(V)$, concentrada en un compacto de medida positiva y finita, entonces para cualquier medida de Borel $\sigma$-finita $\nu : \mathcal{B}(V) \to [0, \infty)$, la convolución $\mu * \nu$ satisface que
         \[(\mu * \nu)(S+z) = 0\]
         para cualquier $z\in V$. Si, además, $\nu$ es finita y no nula, entonces $\mu * \nu$ es transversal a $S$.
-    }
+    }{}
     \corollaryBlock[]{
         Unión finita de conjuntos tímidos es tímida.
-    }
+    }{}
 }
 \sectionFrame{
     \theoremBlock[]{
         Un conjunto $S\subseteq \mathbb{R}^{n}$ es tímido si y sólo si tiene medida de Lebesgue cero.
-    }
+    }{}
     En otras palabras, ser ``tímido'' en $\mathbb{R}^n$ no es una generalización burda de ``tener medida Lebesgue cero'', sino que es una definición equivalente. A partir de este teorema podemos generalizar a los conjuntos de medida de Lebesgue plena:
     \definitionBlock[]{
         Si $A\subseteq V$ es prevalente, entonces decimos que \textit{casi todo elemento de $V$ pertenece a $A$}.
-    }
+    }{}
+}
+\sectionFrame{
+    Existe un último teorema que debemos enunciar antes de demostrar la cuarta propiedad de los conjuntos tímidos. Éste, generalizando al teorema \ref{thm:medida_producto}, nos habla sobre medidas en espacios producto de tamaño arbitario.
+}
+\sectionFrame{
+    \definitionBlock[]{
+        Sean $\mathcal{A} = \{(X_{\alpha},\,\mathcal{B}_{\alpha})\,|\, \alpha\in I\}$ una familia de espacios medibles y $X = \prod_{\alpha \in I}X_{\alpha}$. Decimos que $E\subseteq X$ es un \textit{conjunto elemental} si existe $F\subseteq I$ finito tal que 
+        \[E = \bigcap_{\alpha \in F}\pi_{\alpha}^{-1}[B_{\alpha}],\]
+        en donde $\pi_{\alpha}:X\to X_{\alpha}$ es la proyección sobre $X_{\alpha}$, y $B_\alpha\in\mathcal{B}_\alpha$, para cada $\alpha \in I$.  A la familia de todos estos conjuntos la denotaremos por 
+        \[\mathcal{E}(X) = \{E\subseteq X\,|\, E \text{ es elemental}\}.\]
+    }{}
+}
+\sectionFrame{
+    \theoremBlock[]{
+        Sea $\mathcal{A} = \{(X_{\alpha},\,\mathcal{B}_{\alpha},\,\mu_{\alpha})\,|\, \alpha\in I\}$ una familia de espacios de medida, con $\mu_{\alpha}(X_{\alpha}) = 1$ para todo $\alpha\in I$, y $\mathcal{B}_\alpha$ la $\sigma$-álgebra de Borel en $X_{\alpha}$. 
+        Llamemos 
+        \[X = \prod_{\alpha\in I}X_{\alpha}.\]
+        Entonces existe una única medida $\mu:\sigma(\mathcal{E}(X))\to[0,1]$ tal que, para todo 
+        \[E = \bigcap_{\alpha \in F}\pi_{\alpha}^{-1}[B_{\alpha}]\in\mathcal{E}(X),\]
+        se cumple que
+        \[\mu(E) = \prod_{\alpha \in F} \mu(B_{\alpha}).\]
+    }{}
+    A la medida de este teorema la llamaremos la \textit{medida producto de $X$}.
+}
+\sectionFrame{
+    Y con esto, finalmente podemos demostrar la última propiedad de los conjuntos tímidos:
+    \theoremBlock[]{
+        Unión numerable de conjuntos tímidos es tímido.
+    }{}
 }
 
 
@@ -503,21 +546,21 @@
 \sectionFrame{
     \definitionBlock{
         Sean $P$ un subespacio finito-dimensional de $V$ y $T$ un subconjunto de $V$. Decimos que $P$ es una \textit{sonda} de $T$ si existen una base $A$ para $P$ y un conjunto $B\in \mathcal{B}(V)$ con $V\setminus T \subseteq B$ de tal manera que $\mu_A$ está concentrada en $P$ y es transversal a $B$.
-    }
+    }{}
     O, analíticamente,
-    \propositionBlock{}
+    \propositionBlock{}{}
 }
 
 \sectionFrame{
     \theoremBlock{
         Si $T\subseteq V$ tiene una sonda entonces es prevalente. 
-    }
+    }{}
 }
 
 \sectionFrame{
     \observationBlock{
         Una sonda para un conjunto boreliano $T$ es un subespacio de dimensión finita $P$ que está casi completamente contenido en cualquier traslación de $T$ (respecto a alguna medida de Lebesgue concentrada en $P$).    
-    }
+    }{}
 }
 
 \thesisSection{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}{}
