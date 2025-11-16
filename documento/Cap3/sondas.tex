@@ -95,11 +95,17 @@ A partir de la \cref{def:timido} podemos llegar al siguiente teorema que, como v
     Si $T\subseteq V$ tiene una sonda entonces es prevalente. 
 \end{theorem}
 
+Otra ventaja de usar sondas para demostrar que un conjunto es prevalente radica en que una misma sonda puede demostrar que un conjunto es prevalente en muchos subespacios diferentes, veamos:
+\begin{proposition}
+    Si $\mu$ es transversal a $S$ y el soporte de $\mu$ está contenido en un subespacio $P$ de $V$, entonces $S\cap P$ es tímido en $P$.
+\end{proposition}
+
+Ahora bien, una forma más intuitiva de entender cómo se comportan las sondas de conjuntos borelianos es la siguiente:
 \begin{observation*}
     Una sonda para un conjunto boreliano $T$ es un subespacio de dimensión finita $P$ que está casi completamente contenido en cualquier traslación de $T$ (respecto a alguna medida de Lebesgue concentrada en $P$).    
 \end{observation*}  
 
-Teniendo esto en cuenta, veamos algunos ejemplos que muestran cómo este teorema simplifica la demostración de que un conjunto es prevalente.
+Teniendo esto en cuenta, veamos algunos ejemplos que muestran cómo todo esto simplifica la demostración de que un conjunto es prevalente.
 \begin{example} 
     Si definimos 
     \[L^1[0,1] = \left\{f:[0,1]\to\mathbb{R}\,:\,\int_0^1|f|\;\text{d}\lambda<\infty\right\},\]
