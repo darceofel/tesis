@@ -415,10 +415,10 @@
             \item[(1)] Existe un compacto $K\subseteq V$ tal que $0<\mu(K)<\infty$, y
             \item[(2)] $\mu(S + v) = 0$ para todo $v\in V$.  
         \end{enumerate}
-    }{}
+    }{def:medida_transversal}
     \definitionBlock[]{
         Decimos que $B\subseteq V$ es \textit{tímido} si existen $S\in \mathcal{B}(V)$ tal que $B\subseteq S$, y una medida $\mu$ transversal a $S$. Por otro lado, decimos que $B$ es \textit{prevalente} si $V\setminus B$ es tímido.
-    }{}
+    }{def:conjuntos_timido_y_prevalente}
 }
 \sectionFrame{
     Los conjuntos tímidos serán nuestra generalización de los conjuntos de de medida lebesgue cero. Observemos que, por definición, cumplen la segunda propiedad. Además,
@@ -542,26 +542,34 @@
 \sectionFrame[1]{
     Hasta ahora, demostrar que un conjunto es prevalente presenta un verdadero reto. En esta sección nos enfocamos en encontrar alguna herramienta que nos facilite esta tarea.
 }
-
+\sectionFrame{
+    \definitionBlock[]{
+            Sean $P$ un subespacio dimensionalmente finito de $V$ y $A = \{v_1,\ldots, v_n\}$ una base para $P$. Si $\lambda$ es la medida de Lebesgue en $\mathbb{R}^{n}$ y $p_A : P \to \mathbb{R}^{n}$ es la función determinada mediante 
+    \[p_A(a_1v_1 +\dots+ a_nv_n) = (a_1,\dots,a_n),\] 
+    entonces $\mu_A : \mathcal{B}(V) \to \mathbb{R}$ es la función dada por $$\mu_A(S) = \lambda\left(p_A[S\cap P]\right).$$
+    }{}
+}
+\sectionFrame{
+    Veamos algunas propiedades de $\mu_A$:
+    \propositionBlock[]{
+        Si $P$ es un subespacio dimensionalmente finito de $V$ y $A$ es una base para $P$, entonces $\mu_A$ es una medida de Borel en $V$. Además, si $B$ es una base para $P$, $S\in \mathcal{B}(V)$ y $\mu_A(S) = 0$, entonces $\mu_B(S) = 0$.
+    }{}
+}
 \sectionFrame{
     \definitionBlock{
         Sean $P$ un subespacio finito-dimensional de $V$ y $T$ un subconjunto de $V$. Decimos que $P$ es una \textit{sonda} de $T$ si existen una base $A$ para $P$ y un conjunto $B\in \mathcal{B}(V)$ con $V\setminus T \subseteq B$ de tal manera que $\mu_A$ está concentrada en $P$ y es transversal a $B$.
     }{}
     O, analíticamente,
-    \propositionBlock{}{}
+    \observationBlock[]{
+        Una sonda para un conjunto boreliano $T$ es un subespacio de dimensión finita $P$ que está casi completamente contenido en cualquier traslación de $T$ (respecto a alguna medida de Lebesgue concentrada en $P$). 
+    }{}
 }
-
 \sectionFrame{
     \theoremBlock{
         Si $T\subseteq V$ tiene una sonda entonces es prevalente. 
     }{}
 }
 
-\sectionFrame{
-    \observationBlock{
-        Una sonda para un conjunto boreliano $T$ es un subespacio de dimensión finita $P$ que está casi completamente contenido en cualquier traslación de $T$ (respecto a alguna medida de Lebesgue concentrada en $P$).    
-    }{}
-}
 
 \thesisSection{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}{}
 \sectionFrame[1]{
