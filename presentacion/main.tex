@@ -1,4 +1,5 @@
 \documentclass{beamer}
+\pagenumbering{gobble}
 \usetheme{SimpleDarkBlue}
 
 % ------- Paquetes adicionales -------
@@ -19,7 +20,7 @@
 % ------- Comandos personalizados -------
 \newcommand{\thesisChapter}[1]{%
     \section{#1}
-    \begin{frame}
+    \begin{frame}[plain,noframenumbering]
         \centering
         \Huge
         \begin{tcolorbox}[
@@ -41,7 +42,7 @@
 }{}
 
 \newcommand{\sectionFrame}[2][0]{%
-    \begin{frame}
+    \begin{frame}[plain,noframenumbering]
         \ifnum#1=1
             \frametitle{\SectionTitle}
         \fi
@@ -137,13 +138,13 @@
 \setcounter{subsection}{0}
 \setcounter{blockcounter}{0}
 
-\frame{\titlepage}
+\frame[plain,noframenumbering]{\titlepage}
 
-\begin{frame}{Índice} \tableofcontents \end{frame}
+\begin{frame}[plain,noframenumbering]{Índice} \tableofcontents \end{frame}
 
 %%%%% Introducción %%%%%
 \thesisChapter{Introducción}
-\begin{frame}
+\begin{frame}[plain,noframenumbering]
     \frametitle{Un poco de contexto histórico}
     \begin{itemize}
         \item En el siglo XIX, el análisis matemático empezaba a desarrolarse como lo que conocemos hoy en día.
@@ -153,7 +154,7 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[plain,noframenumbering]
     \centering
     {\usebeamerfont{normal text}
     \rmfamily
