@@ -118,9 +118,8 @@
 \addtobeamertemplate{title page}{\vspace*{-1cm}}{} % adjust the -1cm to move higher/lower
 
 \title{Sobre el espacio de funciones \newline continuas, nunca derivables}
-\author{
-    {\small Presenta:} \\ \normalsize Diego Arceo Félix
-    \vspace{0.2cm} \\
+\author{{\small Presenta:} \\ \normalsize Diego Arceo Félix
+    \vspace{0.3cm} \\
     {\small Director de tesis:} \\ \normalsize Dr. Alejandro Darío Rojas Sánchez 
     \vspace{0.5cm}
 }
@@ -573,7 +572,74 @@
 
 \thesisSection{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}{}
 \sectionFrame[1]{
-
+    En 1936 Stephan Mazurkiewicz probó que $\mathcal{ND}[0,1]$ no es un subconjunto de Borel de $C[0,1]$. Por esta razón, trabajaremos con otro conjunto un poco más fácil de manejar:
+}
+\sectionFrame{
+    \definitionBlock[]{
+        Sea $M>0$. Decimos que una función $f\in C[a,b]$ es \textit{$M$-Lipschitz en $x\in[a,b]$} si para todo $y\in[a,b]$ se cumple que:
+        \[|f(x)-f(y)|\leq M|x-y|.\]
+        Por otro lado, definimos $\mathcal{NL}_M[a,b]$ como el conjunto de todas las funciones nunca $M$-Lipschitz en $[a,b]$, es decir,
+        \[\mathcal{NL}_M[a,b] = \{f\in C[a,b]:\forall x\in[a,b],\; f \text{ no es $M$-Lpischitz en } x\}.\]
+        Finalmente, definimos
+        \[\mathcal{NL}[a,b] = \bigcap_{n\in\mathbb{N}}\mathcal{NL}_n[a,b].\]
+    }{}
+}
+\sectionFrame{
+    \propositionBlock[]{
+        Si $M>0$, entonces
+        \begin{enumerate}
+            \item[(1)] $\mathcal{NL}_M[a,b]$ es abierto en $C[a,b]$,
+            \item[(2)] $\mathcal{NL}[a,b]$ es un conjunto boreliano, y
+            \item[(3)] $\mathcal{NL}[a,b] \subseteq \mathcal{ND}[a,b]$.
+        \end{enumerate}
+    }{}
+}
+\sectionFrame{
+    Considerando el tercer inciso de la proposición anterior, una pregunta que surge naturalmente es la siguiente:
+    \begin{center}
+        ¿Existen funciones continuas y no derivables que sean\\Lipschitz en algún punto de su dominio?
+    \end{center}
+    O, más aún,
+    \begin{center}
+        ¿Existen funciones Lipschitz continuas que no sean derivables?
+    \end{center}
+    \theoremBlock[Rademacher]{
+        Si $U\subseteq\mathbb{R}$ es abierto y $f:U\to\mathbb{R}$ es Lipschitz continua, entonces es derivable en casi todo punto de $U$.
+    }{}
+}
+\sectionFrame{
+    Ahora bien, un ejemplo de una función $T\in\mathcal{ND}[0,1]$ que es Lipschitz en algunos puntos es la siguiente:
+    \theoremBlock[]{
+        La función $T:[0,1]\to\mathbb{R}$ de Waerden-Takagi, definida como 
+        \[T(x) = \sum_{n = 0}^\infty \frac{\text{dist}(2^nx,\mathbb{Z})}{2^n},\]
+        es continua, nunca derivable, y Lipschitz en algunos puntos, es decir,
+        \[T\in\mathcal{ND}[0,1]\setminus\mathcal{NL}[0,1].\]
+    }{}
+}
+\sectionFrame{
+    Con las preguntas anteriores fuera nuestro camino, podemos finalmente abordar la prevalencia de $\mathcal{ND}[0,1]$.
+    \lemmaBlock[]{
+        Sean $m\in \mathbb{N}$ e $I\subseteq [0,1]$ un intervalo cerrado de longitud $2^{-m}$. Entonces, para cualesquiera $f:I\to \mathbb{R}$ continua, $\theta\in[0,2\pi)$, y $j\in\mathbb{N}$,
+        \[\sup f[I] - \inf f[I]\geq 2^m\pi\int_{I}f(x)\cos (2^{m+j}\pi x + \theta)\,\text{d}x.\]
+    }{}
+}
+\sectionFrame{
+    \lemmaBlock[]{
+        Si $g,h:[0,1]\to\mathbb{R}$ están dadas por
+        \[g(x) = \sum_{k = 1}^\infty\frac{1}{k^2}\cos(2^k\pi x)\quad\text{y}\quad
+        h(x) = \sum_{k = 1}^\infty\frac{1}{k^2}\sin(2^k\pi x), \]
+        entonces son continuas y, además, existe $c>0$ tal que, para todo intervalo cerrado $I\subset[0,1]$ de longitud $\varepsilon \leq 1/2$, y para cualesquiera $\alpha, \beta\in\mathbb{R}$ se cumple que:
+        \[\sup_{x\in I}(\alpha g(x) + \beta h(x)) - \inf_{x\in I}(\alpha g(x) + \beta h(x))\geq \frac{c\sqrt{\alpha^2 + \beta^2}}{\log^2(\varepsilon)}.\]
+    }{}
+}
+\sectionFrame{
+    \theoremBlock[]{
+        Existen $g,h\in C[0,1]$ tales que, para toda función $f\in C[0,1]$,
+        \[S_f = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \notin \mathcal{NL}[0,1]\}\]
+        tiene medida de Lebesgue cero.
+    }{}
+    \vspace{0.5cm}
+    Por el lema anterior $P = \langle g,\, h\rangle$ es una sonda de $\mathcal{NL}[0,1]$. Como $\mathcal{NL}[0,1]\subseteq \mathcal{ND}[0,1]$, entonces $\mathcal{ND}[0,1]$ es prevalente. Es decir, casi toda función continua en $[0,1]$ es nunca derivable.
 }
 
 \end{document}
