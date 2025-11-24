@@ -3,12 +3,12 @@
 En esta última sección nos dedicaremos a lograr un solo objetivo: demostrar la prevalencia de $\mathcal{ND}[0,1]$ en $\mathcal{C}[0,1]$. Como se expuso en la sección anterior, existen ejemplos de espacios para los que no es tan difícil encontrar una sonda. Sin embargo, para $\mathcal{ND}[0,1]$ no es el caso, viéndonos así obligados a introducir más notación y algunos resultados bastante técnicos.
 
 
-Complicando aún más nuestro objetivo, en 1936 Stephan Mazurkiewicz probó que $\mathcal{ND}[0,1]$ no es un subconjunto de Borel de $C[0,1]$ (ver \cite{Mauldin_Non_Borel}). Por esta razón, trabajaremos con otro conjunto un poco más fácil de manejar:
+Complicando aún más nuestro objetivo, en 1936 Stephan Mazurkiewicz probó que $\mathcal{ND}[0,1]$ no es un subconjunto de Borel de $\mathcal{C}[0,1]$ (ver \cite{Mauldin_Non_Borel}). Por esta razón, trabajaremos con otro conjunto un poco más fácil de manejar:
 \begin{definition}
-    Sea $M>0$. Decimos que una función $f\in C[a,b]$ es \textit{$M$-Lipschitz en $x\in[a,b]$} si para todo $y\in[a,b]$ se cumple que:
+    Sea $M>0$. Decimos que una función $f\in \mathcal{C}[a,b]$ es \textit{$M$-Lipschitz en $x\in[a,b]$} si para todo $y\in[a,b]$ se cumple que:
     \[|f(x)-f(y)|\leq M|x-y|.\]
     Por otro lado, definimos $\mathcal{NL}_M[a,b]$ como el conjunto de todas las funciones nunca $M$-Lipschitz en $[a,b]$, es decir,
-    \[\mathcal{NL}_M[a,b] = \{f\in C[a,b]:\forall x\in[a,b],\; f \text{ no es $M$-Lpischitz en } x\}.\]
+    \[\mathcal{NL}_M[a,b] = \{f\in \mathcal{C}[a,b]:\forall x\in[a,b],\; f \text{ no es $M$-Lpischitz en } x\}.\]
     Finalmente, definimos
     \[\mathcal{NL}[a,b] = \bigcap_{n\in\mathbb{N}}\mathcal{NL}_n[a,b].\]
 \end{definition}
@@ -20,13 +20,13 @@ Encontremos algunas propiedades de estos espacios:
 \begin{proposition}
     Si $M>0$, entonces
     \begin{enumerate}
-        \item[(1)] $\mathcal{NL}_M[a,b]$ es abierto en $C[a,b]$,
+        \item[(1)] $\mathcal{NL}_M[a,b]$ es abierto en $\mathcal{C}[a,b]$,
         \item[(2)] $\mathcal{NL}[a,b]$ es un conjunto boreliano, y
         \item[(3)] $\mathcal{NL}[a,b] \subseteq \mathcal{ND}[a,b]$.
     \end{enumerate}
 \end{proposition}
 \begin{proof}\mbox{}\\*
-    (1) Llamemos \[F = C[a,b]\setminus \mathcal{NL}_M[a,b]\] y tomemos $f \in \cerradura (F)$. Entonces existe $\{f_n\}_{n\in\mathbb{N}}\subseteq F$ tal que $f_n\xrightarrow{u} f$. Como $f_n\notin \mathcal{NL}_M[a,b]$, entonces para cada $n\in\mathbb{N}$ existe $x_n\in [a,b]$ tal que $f_n$ es $M$-Lipschitz en $x_n$. Es decir, para toda $y\in[a,b]$, 
+    (1) Llamemos \[F = \mathcal{C}[a,b]\setminus \mathcal{NL}_M[a,b]\] y tomemos $f \in \cerradura (F)$. Entonces existe $\{f_n\}_{n\in\mathbb{N}}\subseteq F$ tal que $f_n\xrightarrow{u} f$. Como $f_n\notin \mathcal{NL}_M[a,b]$, entonces para cada $n\in\mathbb{N}$ existe $x_n\in [a,b]$ tal que $f_n$ es $M$-Lipschitz en $x_n$. Es decir, para toda $y\in[a,b]$, 
     \[|f_n(x_n)-f_n (y)|\leq M|x_n-y|.\]
     Ahora, como $\{x_n\}_{n\in\mathbb{N}}\subseteq [a,b]$, entonces, por el teorema de Bolzano-Weierstrass, tiene una subsucesión convergente, digamos $x_{n_k}\to x$. Observemos que, para cualesquiera $k\in \mathbb{N}$ y $y\in[a,b]$,
     \begin{align*}
@@ -146,12 +146,12 @@ Regresando al objetivo de este capítulo, consideremos los siguientes enunciados
 \end{proof}
 
 \begin{theorem}
-    Existen $g,h\in C[0,1]$ tales que, para toda función $f\in C[0,1]$,
+    Existen $g,h\in \mathcal{C}[0,1]$ tales que, para toda función $f\in \mathcal{C}[0,1]$,
     \[S_f = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \notin \mathcal{NL}[0,1]\}\]
     tiene medida de Lebesgue cero.
 \end{theorem}
 \begin{proof}
-    Tomemos $g,h\in C[0,1]$ como en el lema anterior, y $f\in C[0,1]$. Observemos que
+    Tomemos $g,h\in \mathcal{C}[0,1]$ como en el lema anterior, y $f\in \mathcal{C}[0,1]$. Observemos que
     \[S_f = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \text{ es Lipschitz en algún punto } x\in[0,1]\}.\]
     Para cada $M>0$, sea
     \[S_{f,\, M} = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \text{ es $M$-Lipschitz en algún punto } x\in[0,1]\}.\]
