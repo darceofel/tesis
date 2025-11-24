@@ -343,7 +343,15 @@
         donde $p\in X$ es algún punto arbitrario. Observemos que, independientemente de la cardinalidad de $X$, el conjunto unitario $D=\{p\}$ es denso en $(X, \,\tau)$. 
     }{}
 }
-%% AÑADIR OBSERVACION DE DENSIDAD DE LOS POLINOMIOS
+\sectionFrame{
+    Aún en topologías ricas en estructura podemos tener conjuntos densos pequeños:
+    \propositionBlock{
+        El conjunto de polinomios con coeficientes racionales es denso en $\mathcal{C}[0,1]$.
+    }{}
+    \propositionBlock{
+        $\mathcal{C}[0,1]$ es separable.
+    }{}
+}
 
 % Categoría de Baire
 \thesisSection{Categorías de Baire}
@@ -529,7 +537,13 @@
     }{}
     A la medida de este teorema la llamaremos la \textit{medida producto de $X$}.
 }
-%%% AÑADIR PROPOSICION DE NUMERABILIDAD
+\sectionFrame{
+    \propositionBlock[]{
+        Sea $\mathcal{A} = \{(X_{\alpha},, \mathcal{B}_{\alpha}) \mid \alpha \in I\}$ una familia de espacios medibles, donde $\mathcal{B}_\alpha$ es la $\sigma$-álgebra de Borel de $X_\alpha$, y cada $X_\alpha$ es un espacio segundo numerable. Si $|I|\leq \omega$, y \[X = \prod_{\alpha \in I}X_{\alpha}\]
+        está dotado de la topología producto, entonces la $\sigma$-álgebra de Borel en $X$ coincide con la $\sigma$-álgebra generada por los conjuntos elementales, es decir,
+        \[\mathcal{B}(X) = \sigma(\mathcal{E}(X)).\]
+    }{}
+}
 \sectionFrame{
     Y con esto, finalmente podemos demostrar la última propiedad de los conjuntos tímidos:
     \theoremBlock[]{
