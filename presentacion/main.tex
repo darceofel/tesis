@@ -250,7 +250,7 @@
         \[P(t) = \left(\varphi(t), 3\varphi\left(\frac{t}{3}\right)\right).\]
     }{}
     \theoremBlock{
-        $\varphi$ es continua en es continua y nunca derivable.
+        $\varphi$ es continua y nunca derivable. 
     }{}
 }
 
@@ -294,7 +294,7 @@
     Con lo anterior en mente, podemos finalmente abordar la construcción de las funciones de Lynch. La estrategia es la siguiente: construiremos una sucesión de compactos anidados en $\mathbb{R}^{2}$, digamos $\{C_n\}_{n\in\mathbb{N}}$, tales que, para todo $n\in \mathbb{N}$,
     \begin{itemize}\setlength\itemsep{0.2cm}
         \item[(a)]{$\pi_{1}[C_{n}] = [0,1]$,}
-        \item[(b)]{diam$\,C_{n}[x]<1/n$, para todo $x\in[0,1]$, y}
+        \item[(b)]{diam$\,C_{n}[x]<1/n$, para todo $x\in[0,1]$, y} % Fibra de x
         \item[(c)]{para cada $x\in[0,1]$ existe $y\in[0,1]$, con $0<|x-y|<1/n$ tal que si $p\in C_n[x]$ y $q\in C_n[y]$, entonces $|(p-q)/(x-y)|>n$.}
     \end{itemize}
 }
@@ -332,7 +332,7 @@
         Sean $(X,\,d)$ un espacio métrico y $D\subseteq X$. $D$ es denso en $X$ si y sólo si se cumple que, para cualesquiera $x\in X$ y $\varepsilon > 0$, $B(x,\varepsilon)\cap D\neq \varnothing$. 
     }{}
     \theoremBlock{
-        $\mathcal{ND}[0,1]$ es denso en $C[0,1]$.
+        $\mathcal{ND}[0,1]$ es denso en $\mathcal{C}[0,1]$.
     }{}
 }
 \sectionFrame{
@@ -343,6 +343,7 @@
         donde $p\in X$ es algún punto arbitrario. Observemos que, independientemente de la cardinalidad de $X$, el conjunto unitario $D=\{p\}$ es denso en $(X, \,\tau)$. 
     }{}
 }
+%% AÑADIR OBSERVACION DE DENSIDAD DE LOS POLINOMIOS
 
 % Categoría de Baire
 \thesisSection{Categorías de Baire}
@@ -389,7 +390,7 @@
     En esta sección nos intentamos acercar a teoremas de la forma ``casi todo elemento de $V$ tiene la propiedad $P$''. Para esto, antes debemos responder una pregunta fundamental:
     \newline
     \begin{center}
-        ¿Existe alguna medida \textit{util} en $C[0,1]$?
+        ¿Existe alguna medida \textit{util} en $\mathcal{C}[0,1]$?
     \end{center}
 
     \observationBlock{
@@ -524,10 +525,11 @@
         Entonces existe una única medida $\mu:\sigma(\mathcal{E}(X))\to[0,1]$ tal que, para todo 
         \[E = \bigcap_{\alpha \in F}\pi_{\alpha}^{-1}[B_{\alpha}]\in\mathcal{E}(X),\]
         se cumple que
-        \[\mu(E) = \prod_{\alpha \in F} \mu(B_{\alpha}).\]
+        \[\mu(E) = \prod_{\alpha \in F} \mu_{\alpha}(B_{\alpha}).\]
     }{}
     A la medida de este teorema la llamaremos la \textit{medida producto de $X$}.
 }
+%%% AÑADIR PROPOSICION DE NUMERABILIDAD
 \sectionFrame{
     Y con esto, finalmente podemos demostrar la última propiedad de los conjuntos tímidos:
     \theoremBlock[]{
@@ -573,14 +575,14 @@
 
 \thesisSection{Prevalencia de \texorpdfstring{$\mathcal{ND}[0,1]$}{ND[0,1]}}{}
 \sectionFrame[1]{
-    En 1936 Stephan Mazurkiewicz probó que $\mathcal{ND}[0,1]$ no es un subconjunto de Borel de $C[0,1]$. Por esta razón, trabajaremos con otro conjunto un poco más fácil de manejar:
+    En 1936 Stephan Mazurkiewicz probó que $\mathcal{ND}[0,1]$ no es un subconjunto de Borel de $\mathcal{C}[0,1]$. Por esta razón, trabajaremos con otro conjunto un poco más fácil de manejar:
 }
 \sectionFrame{
     \definitionBlock[]{
-        Sea $M>0$. Decimos que una función $f\in C[a,b]$ es \textit{$M$-Lipschitz en $x\in[a,b]$} si para todo $y\in[a,b]$ se cumple que:
+        Sea $M>0$. Decimos que una función $f\in \mathcal{C}[a,b]$ es \textit{$M$-Lipschitz en $x\in[a,b]$} si para todo $y\in[a,b]$ se cumple que:
         \[|f(x)-f(y)|\leq M|x-y|.\]
         Por otro lado, definimos $\mathcal{NL}_M[a,b]$ como el conjunto de todas las funciones nunca $M$-Lipschitz en $[a,b]$, es decir,
-        \[\mathcal{NL}_M[a,b] = \{f\in C[a,b]:\forall x\in[a,b],\; f \text{ no es $M$-Lpischitz en } x\}.\]
+        \[\mathcal{NL}_M[a,b] = \{f\in \mathcal{C}[a,b]:\forall x\in[a,b],\; f \text{ no es $M$-Lpischitz en } x\}.\]
         Finalmente, definimos
         \[\mathcal{NL}[a,b] = \bigcap_{n\in\mathbb{N}}\mathcal{NL}_n[a,b].\]
     }{}
@@ -589,7 +591,7 @@
     \propositionBlock[]{
         Si $M>0$, entonces
         \begin{enumerate}
-            \item[(1)] $\mathcal{NL}_M[a,b]$ es abierto en $C[a,b]$,
+            \item[(1)] $\mathcal{NL}_M[a,b]$ es abierto en $\mathcal{C}[a,b]$,
             \item[(2)] $\mathcal{NL}[a,b]$ es un conjunto boreliano, y
             \item[(3)] $\mathcal{NL}[a,b] \subseteq \mathcal{ND}[a,b]$.
         \end{enumerate}
@@ -635,7 +637,7 @@
 }
 \sectionFrame{
     \theoremBlock[]{
-        Existen $g,h\in C[0,1]$ tales que, para toda función $f\in C[0,1]$,
+        Existen $g,h\in \mathcal{C}[0,1]$ tales que, para toda función $f\in \mathcal{C}[0,1]$,
         \[S_f = \{(a, \, b)\in \mathbb{R}^2\,:\,(f + a g + b h) \notin \mathcal{NL}[0,1]\}\]
         tiene medida de Lebesgue cero.
     }{}
