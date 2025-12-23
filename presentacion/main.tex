@@ -465,6 +465,16 @@
     }{thm:medida_producto}
 }
 \sectionFrame{
+    \notationBlock[]{
+        Para cada $S\subseteq V$, denotaremos $S^{+} = \{(x,y)\in V\times V\,:\,x+y\in S\}.$
+    }{}
+    Importante notar que, como la función suma de vectores es continua en $V\times V$, para todo boreliano $S\subseteq V$, $S^{+}$ es un boreliano de $V\times V$. 
+    \definitionBlock[]{
+        Sean $\mu$ y $\nu$ dos medidas de Borel $\sigma$-finitas. Definimos \textit{la convolución} $\mu * \nu: \mathcal{B}(V)\to[0,\infty)$ como:
+        \[(\mu * \nu) (S) = (\mu\times\nu)\,(S^{+}).\]
+    }{}
+}
+\sectionFrame{
     \theoremBlock[Tonelli]{
         Sean $(X,\mathcal{A},\mu)$, y $(Y,\mathcal{B},\nu)$ dos espacios de medida, en donde $\mu$ y $\nu$ son medidas $\sigma$-finitas. Si $f:X\times Y\to [0,\infty)$ es medible respecto a $\mu\times \nu$, y definimos $g_{x}:Y\to[0,\infty)$ y $h_{y}:X\to[0,\infty)$ como  $g_{x}(y) = f(x,y) = h_{y}(x)$, entonces:
         \begin{enumerate}
@@ -474,16 +484,6 @@
                 \;\int_{X\times Y}f \;\text{d}(\mu\times\nu) = \int_{X}\left(\int_{Y}g_x\; \text{d}\nu\right)\text{d} \mu = \int_{Y}\left(\int_{X}h_y\; \text{d}\mu\right)\text{d} \nu.
             \end{aligned}$ 
         \end{enumerate}
-    }{}
-}
-\sectionFrame{
-    \notationBlock[]{
-        Para cada $S\subseteq V$, denotaremos $S^{+} = \{(x,y)\in V\times V\,:\,x+y\in S\}.$
-    }{}
-    Importante notar que, como la función suma de vectores es continua en $V\times V$, para todo boreliano $S\subseteq V$, $S^{+}$ es un boreliano de $V\times V$. 
-    \definitionBlock[]{
-        Sean $\mu$ y $\nu$ dos medidas de Borel $\sigma$-finitas. Definimos \textit{la convolución} $\mu * \nu: \mathcal{B}(V)\to[0,\infty)$ como:
-        \[(\mu * \nu) (S) = (\mu\times\nu)\,(S^{+}).\]
     }{}
 }
 \sectionFrame{
