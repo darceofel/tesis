@@ -1,0 +1,43 @@
+#!/bin/sh
+# Pre-commit hook: compile LaTeX projects to ensure they build before committing.
+set -e
+
+echo "Running LaTeX build checks..."
+
+if ! command -v latexmk >/dev/null 2>&1; then
+	echo "Warning: latexmk not found in PATH. Skipping LaTeX checks."
+	exit 0
+fi
+
+build() {
+	dir="$1"
+	if [ -f "$dir/main.tex" ]; then
+		echo "Building $dir/main.tex"
+		tmp=$(mktemp /tmp/latexmk.XXXXXX)
+		(cd "$dir" && latexmk -pdf -interaction=nonstopmode -synctex=1 main.tex) >"$tmp" 2>&1 || {
+			echo "\nLaTeX build failed for $dir/main.tex. Output:\n"
+			sed -n '1,200p' "$tmp"
+			rm -f "$tmp"
+			exit 1
+		}
+		rm -f "$tmp"
+	else
+		echo "No main.tex in $dir — skipping."
+	fi
+}
+
+build "documento"
+build "presentacion"
+
+# Only add the PDFs if the commit includes at least one .tex file
+if git diff --cached --name-only --diff-filter=ACMR | grep -q '\.tex$'; then
+	echo "Staged .tex files detected, adding PDFs."
+	git add "**.pdf"
+else
+	echo "No .tex files in this commit, not adding PDFs."
+fi
+
+echo "All LaTeX builds succeeded."
+
+exit 0
+
